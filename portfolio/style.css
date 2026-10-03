@@ -3,7 +3,7 @@
     padding: 0;
     background-color: bisque;
 }
-div{
+.black-line{
     height: 4px;
     width: 100%;
     background-color:black;
@@ -25,18 +25,41 @@ div{
 }
 .hero-main{
     width: 100%;
-    height: 880px;
+    height: 1480px;
     background-color: rgb(239, 222, 175);
 }
+.hero-main-top{
+    width: 100%;
+    height: 480px;
+    background-color: black;
+    float: left;
+}
 .hero-main-left{
-    height: 880px;
-    width: 40%;
-    background-color: antiquewhite;
+    height: 480px;
+    width: 50%;
+    background-color:antiquewhite;
     float: left;
 }
 .hero-main-right{
-    height: 880px;
-    width: 60%;
-    background-color: black;
+    height: 480px;
+    width:50%;
+    background-color: antiquewhite;
     float: left;
+}
+.hero-main-down1{
+    height: 480px;
+    width: 50%;
+    background-color: bisque;
+    float: left;
+}
+.hero-main-down2{
+    height: 480px;
+    width: 50%;
+    background-color: bisque;
+    float: left;
+}
+.main-footer{
+    height: 240px;
+    width: 100%;
+    background-color: black;
 }
