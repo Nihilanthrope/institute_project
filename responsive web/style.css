@@ -37,3 +37,37 @@ html,body{
     top:0;
     right: 0;
 }
+.main-2nd-hero{
+    display: flex;
+}
+.Text-Main{
+    color: crimson;
+    width: 100%;
+    font-family: fantasy;
+    font-style: oblique;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Main-Footer{
+    height: 180px;
+    width: 100%;
+    display: flex;
+
+}
+#one{
+    height: 180px;
+    width: 30%;
+    background-color: blue;
+}
+#sec{
+    height: 180px;
+    width: 30%;
+    background-color: black;
+}
+#trd{
+    height: 180px;
+    width: 30%;
+    background-color: red;
+}
