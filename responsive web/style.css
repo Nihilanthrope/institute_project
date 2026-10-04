@@ -6,26 +6,34 @@ html,body{
     height: 100%;
     width: 100%;
 }
-#main{
-    height: 100%;
+.header-main{
+    height: 100px;
     width: 100%;
-    background-color:  rgb(179, 110, 85);
+    background-color:bisque;
     display: flex;
-    align-items: center;
-    justify-content: space-around;
+    justify-content: center;
 }
-#one{
-    height: 200px;
-    width: 30%;
+.div-main-header{
+   width: 10%;
+    height: 100px;
+    position: absolute;
+    top:0;
+    left: 0;
+}
+.nav-main{
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+.div-main-upper{
+    height: 580px;
+    width: 100%;
     background-color: black;
 }
-#sec{
-    height: 200px;
-    width: 30%;
-    background-color:crimson;
-}
-#trd{
-    height: 200px;
-    width: 30%;
-    background-color: black;
+.left-logo{
+    width: 10%;
+    height: 100px;
+    position: absolute;
+    top:0;
+    right: 0;
 }
