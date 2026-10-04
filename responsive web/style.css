@@ -9,5 +9,23 @@ html,body{
 #main{
     height: 100%;
     width: 100%;
-    background-color:  rgb(240, 67, 4);
+    background-color:  rgb(179, 110, 85);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+#one{
+    height: 200px;
+    width: 30%;
+    background-color: black;
+}
+#sec{
+    height: 200px;
+    width: 30%;
+    background-color:crimson;
+}
+#trd{
+    height: 200px;
+    width: 30%;
+    background-color: black;
 }
