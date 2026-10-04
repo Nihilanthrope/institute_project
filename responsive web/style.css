@@ -1,15 +1,9 @@
 *{
-    margin: 0px;
-    padding: 0px;
-    background-color: rgba(255, 136, 67, 0.638);
-    width: 100vmax;
+    margin: 0;
+    padding: 0;
 }
-div{
-    height: 2vmax;
-    width: 100vmax;
-    background-color: rgb(93, 1, 19);
-}
-h1{
-    font-size: 1vmax;
-    font-size: 1vmax;
+#main{
+    height: 100%;
+    width: 100%;
+    background-color:  rgb(175, 105, 80);
 }
