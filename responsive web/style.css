@@ -58,16 +58,19 @@ html,body{
 }
 #one{
     height: 180px;
-    width: 30%;
+    width: 31%;
     background-color: blue;
+    float: left;
 }
 #sec{
     height: 180px;
-    width: 30%;
+    width: 36%;
     background-color: black;
+    float: left;
 }
 #trd{
+    float: left;
     height: 180px;
-    width: 30%;
+    width: 33%;
     background-color: red;
 }
