@@ -1,0 +1,635 @@
+/*
+  THE SHADOW ARCHIVE
+  Main stylesheet
+  --------------------------------
+  Edit this file for colors, layout,
+  typography, animations, and responsive styles.
+*/
+
+:root {
+  --bg:#070606;
+  --ink:#d9d4cb;
+  --mute:#8a847a;
+  --red:#9b1118;
+  --redh:#d42a2f;
+  --paper:#c9bb9c;
+  --line:#2a2523;
+  --card:#0f0d0d;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px)
+}
+* {
+  box-sizing:border-box;
+  margin:0
+}
+html {
+  scroll-padding-top:70px
+}
+body {
+  background:var(--bg);
+  color:var(--ink);
+  font:16px/1.65 'Work Sans',system-ui,sans-serif;
+  overflow-x:hidden
+}
+body:after {
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.09;
+  z-index:90;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")
+}
+#glow {
+  position:fixed;
+  width:420px;
+  height:420px;
+  margin:-210px;
+  border-radius:50%;
+  background:radial-gradient(#9b111833,transparent 65%);
+  pointer-events:none;
+  z-index:80;
+  left:-500px
+}
+h1,h2,h3,.disp {
+  font-family:'IM Fell DW Pica',serif;
+  font-weight:400;
+  line-height:1.1
+}
+.mono,.tag,label {
+  font-family:'Special Elite',monospace
+}
+a {
+  color:inherit;
+  text-decoration:none
+}
+button {
+  font:inherit;
+  color:inherit;
+  cursor:pointer
+}
+:focus-visible {
+  outline:2px solid var(--redh);
+  outline-offset:2px
+}
+#load {
+  position:fixed;
+  inset:0;
+  background:#000;
+  z-index:200;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  transition:opacity 1s
+}
+#load h1 {
+  font-size:clamp(2rem,8vw,4rem);
+  letter-spacing:.08em
+}
+#load p {
+  font-family:'Special Elite';
+  color:var(--redh);
+  margin-top:1.2rem;
+  min-height:1.6em
+}
+header {
+  position:sticky;
+  top:0;
+  z-index:50;
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  padding:.8rem 5vw;
+  background:#070606ee;
+  border-bottom:1px solid var(--line);
+  backdrop-filter:blur(6px)
+}
+.logo {
+  font-family:'IM Fell DW Pica';
+  font-size:1.3rem;
+  letter-spacing:.06em;
+  display:flex;
+  gap:.6rem;
+  align-items:center;
+  margin-right:auto
+}
+nav {
+  display:flex;
+  gap:1.3rem;
+  font:.78rem 'Special Elite'
+}
+nav a {
+  color:var(--mute);
+  padding:.3rem 0;
+  border-bottom:1px solid transparent
+}
+nav a:hover,nav a.on {
+  color:var(--ink);
+  border-color:var(--red)
+}
+#burger {
+  display:none;
+  background:none;
+  border:1px solid var(--line);
+  padding:.4rem .7rem
+}
+@media(max-width:900px) {
+  #burger {
+    display:block
+  }
+  nav {
+    position:fixed;
+    inset:56px 0 0;
+    background:#050505f7;
+    flex-direction:column;
+    padding:8vw;
+    font-size:1.3rem;
+    gap:1.4rem;
+    transform:translateX(100%);
+    transition:.35s
+  }
+  nav.open {
+    transform:none
+  }
+}
+main {
+  min-height:80vh;
+  animation:fade .6s
+}
+@keyframes fade {
+  from {
+    opacity:0;
+    filter:contrast(2) brightness(1.6)
+  }
+}
+.wrap {
+  max-width:1150px;
+  margin:auto;
+  padding:3rem 5vw
+}
+.hero {
+  min-height:88vh;
+  display:grid;
+  align-content:center;
+  text-align:center;
+  padding:6vw;
+  position:relative;
+  overflow:hidden;
+  background:radial-gradient(ellipse at 50% 85%,#2a1214 0,transparent 60%),linear-gradient(#0a0909,#050505)
+}
+.hero:before {
+  content:"";
+  position:absolute;
+  inset:-20%;
+  background:radial-gradient(ellipse 40% 12% at 30% 80%,#ffffff12,transparent),radial-gradient(ellipse 50% 14% at 70% 70%,#ffffff0d,transparent);
+  animation:fog 22s infinite alternate ease-in-out
+}
+@keyframes fog {
+  to {
+    transform:translateX(12%)
+  }
+}
+.sil {
+  position:absolute;
+  bottom:18%;
+  left:62%;
+  width:14px;
+  height:70px;
+  background:#000;
+  border-radius:7px 7px 2px 2px;
+  box-shadow:0 0 30px #000
+}
+.sil:before {
+  content:"";
+  position:absolute;
+  top:-12px;
+  left:1px;
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:#000
+}
+.hero h1 {
+  font-size:clamp(2.6rem,10vw,7rem);
+  letter-spacing:.04em;
+  animation:flick 7s infinite;
+  position:relative
+}
+@keyframes flick {
+  0%,92%,96%,100% {
+    opacity:1
+  }
+  93% {
+    opacity:.4
+  }
+  95% {
+    opacity:.8
+  }
+}
+.hero p {
+  color:var(--mute);
+  font:italic 1.3rem 'IM Fell DW Pica';
+  margin:1rem 0 2rem;
+  position:relative
+}
+.btn {
+  display:inline-block;
+  border:1px solid var(--red);
+  background:transparent;
+  padding:.8rem 1.5rem;
+  font:.85rem 'Special Elite';
+  margin:.3rem;
+  position:relative;
+  transition:.25s
+}
+.btn:hover,.btn.fill {
+  background:var(--red)
+}
+.btn.fill:hover {
+  background:var(--redh)
+}
+.enter {
+  position:relative;
+  color:var(--mute);
+  font:.75rem 'Special Elite';
+  margin-top:3rem;
+  animation:flick 5s infinite
+}
+h2.sec {
+  font-size:clamp(1.8rem,5vw,3rem);
+  margin-bottom:.4rem
+}
+.sub {
+  color:var(--mute);
+  max-width:60ch;
+  margin-bottom:2rem
+}
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
+  gap:1.4rem
+}
+.card {
+  background:var(--card);
+  border:1px solid var(--line);
+  display:flex;
+  flex-direction:column;
+  transition:.3s;
+  cursor:pointer;
+  overflow:hidden;
+  text-align:left;
+  width:100%
+}
+.card:hover {
+  border-color:var(--red);
+  transform:translateY(-3px)
+}
+.card:hover h3 {
+  animation:glitch .35s
+}
+@keyframes glitch {
+  25% {
+    transform:translate(2px,0);
+    text-shadow:-2px 0 var(--red)
+  }
+  60% {
+    transform:translate(-2px,1px);
+    text-shadow:2px 0 #4aa
+  }
+}
+.img {
+  height:150px;
+  background:var(--g);
+  position:relative;
+  overflow:hidden;
+  transition:.5s
+}
+.card:hover .img {
+  filter:brightness(1.4)
+}
+.img:after {
+  content:attr(data-n);
+  position:absolute;
+  right:.7rem;
+  bottom:.4rem;
+  font:2.6rem 'IM Fell DW Pica';
+  color:#ffffff22
+}
+.cb {
+  padding:1.1rem;
+  display:grid;
+  gap:.5rem
+}
+.cb h3 {
+  font-size:1.5rem
+}
+.cb p {
+  color:var(--mute);
+  font-size:.9rem
+}
+.mono {
+  font-size:.75rem;
+  color:var(--mute)
+}
+.tag {
+  display:inline-block;
+  font-size:.68rem;
+  padding:.1rem .5rem;
+  border:1px solid;
+  margin-right:.3rem
+}
+.DOCUMENTED {
+  color:#8fb996
+}
+.UNEXPLAINED {
+  color:#d9a441
+}
+.FOLKLORE {
+  color:#9aa7d4
+}
+.UNVERIFIED {
+  color:#c98a6a
+}
+.FICTIONAL {
+  color:#b08fd0
+}
+.fear {
+  display:flex;
+  gap:3px;
+  align-items:center
+}
+.fear i {
+  width:9px;
+  height:9px;
+  background:#2b2525
+}
+.fear i.on {
+  background:var(--red)
+}
+.open {
+  color:var(--redh);
+  font:.8rem 'Special Elite'
+}
+.bar {
+  display:flex;
+  flex-wrap:wrap;
+  gap:.7rem;
+  margin-bottom:1.6rem
+}
+.bar input,.bar select {
+  background:#0d0b0b;
+  border:1px solid var(--line);
+  color:var(--ink);
+  padding:.6rem .8rem;
+  font:.85rem 'Special Elite';
+  min-width:150px;
+  flex:1
+}
+.stamp {
+  display:inline-block;
+  border:2px solid var(--red);
+  color:var(--red);
+  font:1.1rem 'Special Elite';
+  padding:.1rem .8rem;
+  transform:rotate(-4deg);
+  margin-bottom:1rem;
+  animation:flick 6s infinite
+}
+.cf h1 {
+  font-size:clamp(2.2rem,7vw,4.6rem)
+}
+.meta {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+  gap:1rem;
+  border-block:1px solid var(--line);
+  padding:1rem 0;
+  margin:1.4rem 0
+}
+.meta b {
+  display:block;
+  color:var(--ink);
+  font-weight:400
+}
+.cf h2 {
+  font-size:2rem;
+  margin:3rem 0 1rem;
+  color:var(--paper);
+  border-bottom:1px solid var(--line);
+  padding-bottom:.4rem
+}
+.cf p.story {
+  max-width:68ch;
+  margin-bottom:1rem
+}
+.hero2 {
+  height:260px;
+  background:var(--g);
+  margin:1.5rem 0;
+  border:1px solid var(--line);
+  display:grid;
+  place-items:end start;
+  padding:1rem
+}
+.tl {
+  border-left:1px solid var(--red);
+  margin-left:.5rem
+}
+.tl div {
+  padding:0 0 1.2rem 1.3rem;
+  position:relative
+}
+.tl div:before {
+  content:"";
+  position:absolute;
+  left:-5px;
+  top:.55rem;
+  width:9px;
+  height:9px;
+  background:var(--red);
+  border-radius:50%
+}
+.tl b {
+  font:.85rem 'Special Elite';
+  color:var(--paper);
+  font-weight:400;
+  display:block
+}
+.paper {
+  background:var(--paper);
+  color:#1b1612;
+  padding:1rem;
+  transform:rotate(var(--r,0deg));
+  box-shadow:0 8px 20px #000a;
+  transition:.3s
+}
+.paper:hover {
+  transform:rotate(0) scale(1.03)
+}
+.paper .mono {
+  color:#5a4d3a
+}
+.paper h3 {
+  font-size:1.2rem;
+  margin:.3rem 0
+}
+.kn {
+  display:flex;
+  gap:.8rem;
+  align-items:baseline;
+  padding:.5rem 0;
+  border-bottom:1px solid var(--line)
+}
+.kn .tag {
+  min-width:105px;
+  text-align:center
+}
+.cred {
+  height:5px;
+  background:#2b2525;
+  margin-top:.6rem
+}
+.cred i {
+  display:block;
+  height:100%;
+  background:var(--red)
+}
+ul.pl {
+  padding-left:1.1rem;
+  color:var(--mute)
+}
+#map {
+  position:relative;
+  background:#0b0909;
+  border:1px solid var(--line);
+  aspect-ratio:2/1;
+  overflow:hidden;
+  background-image:radial-gradient(#ffffff10 1px,transparent 1px);
+  background-size:22px 22px
+}
+.pin {
+  position:absolute;
+  width:16px;
+  height:16px;
+  margin:-8px;
+  border-radius:50%;
+  background:var(--red);
+  border:0;
+  box-shadow:0 0 0 0 #d42a2f88;
+  animation:pulse 2.4s infinite
+}
+@keyframes pulse {
+  70% {
+    box-shadow:0 0 0 14px #d42a2f00
+  }
+}
+#panel {
+  margin-top:1rem;
+  padding:1.3rem;
+  border:1px solid var(--line);
+  background:var(--card)
+}
+.era {
+  margin:2.5rem 0 1rem;
+  font-size:2rem;
+  color:var(--paper)
+}
+.ev {
+  display:flex;
+  gap:1rem;
+  width:100%;
+  background:none;
+  border:0;
+  border-left:1px solid var(--red);
+  padding:.6rem 1rem;
+  text-align:left
+}
+.ev:hover {
+  background:#150e0e
+}
+.ev b {
+  font:.9rem 'Special Elite';
+  min-width:70px;
+  color:var(--redh);
+  font-weight:400
+}
+.board {
+  columns:3 260px;
+  column-gap:1.4rem
+}
+.board .paper {
+  break-inside:avoid;
+  margin-bottom:1.4rem;
+  cursor:pointer
+}
+#sr {
+  position:fixed;
+  inset:0;
+  background:#050505f5;
+  z-index:70;
+  padding:5rem 5vw;
+  overflow:auto;
+  display:none
+}
+#sr.on {
+  display:block
+}
+#sr input {
+  width:100%;
+  background:none;
+  border:0;
+  border-bottom:2px solid var(--red);
+  color:var(--ink);
+  font:2rem 'IM Fell DW Pica';
+  padding:.5rem 0;
+  margin-bottom:1.5rem
+}
+footer {
+  border-top:1px solid var(--line);
+  padding:3rem 5vw;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:2rem;
+  color:var(--mute);
+  font-size:.88rem
+}
+footer a {
+  display:block;
+  padding:.15rem 0
+}
+footer a:hover {
+  color:var(--ink)
+}
+footer .d {
+  grid-column:1/-1;
+  font-style:italic;
+  border-top:1px solid var(--line);
+  padding-top:1rem
+}
+footer input {
+  background:#0d0b0b;
+  border:1px solid var(--line);
+  color:var(--ink);
+  padding:.6rem;
+  width:100%;
+  margin:.5rem 0
+}
+@media(max-width:600px) {
+  .hero2 {
+    height:170px
+  }
+  .kn {
+    flex-direction:column;
+    gap:.2rem
+  }
+  .wrap {
+    padding:2rem 5vw
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  * {
+    animation:none!important;
+    transition:none!important
+  }
+}
