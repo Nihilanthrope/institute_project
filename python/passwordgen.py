@@ -1,0 +1,1 @@
+userpass = int(input("Enter The Char You Want In Pass :h"))
