@@ -1,10 +1,10 @@
-const Her= {
-    Name: "Babita",
-    Age: 18,
-    Marks: 80,
-    Class: "12th",
-    ispass: true,
-}
-Her["Age"] = Her['Age'] -1;
-console.log(Her["Name"])
-console.log(Her.Age)
+const Profile = {
+    UserName:"@Sleepybabita",
+    IsFollow: true,
+    posts: 0,
+    followers: 127,
+    Following:89,
+    Name: "Heart Wala Emoji",
+    bio: "MUJE KYA ME THO BHAGWAAN HU",
+};
+console.log(Profile)
