@@ -15,4 +15,3 @@ else if (StdName >=33){
 else if (StdName <= 33){
     console.log("Failed Baddie Hawwwww")
 }
-h
