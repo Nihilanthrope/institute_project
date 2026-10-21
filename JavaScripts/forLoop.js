@@ -1,6 +1,4 @@
-let sum = 0;
-let n = 10
-for (let i = 1; i<=n; i++){
-    sum = sum+i;
+let i = 6;
+while(i<=7){
+    console.log("I =",i);
 }
-console.log("Sum =",sum)
