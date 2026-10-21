@@ -1,4 +1,6 @@
-for (let count = 1; count <=5; count++) {
-    console.log("hiee")
+let sum = 0;
+let n = 10
+for (let i = 1; i<=n; i++){
+    sum = sum+i;
 }
-console.log ("Has Ended")
+console.log("Sum =",sum)
