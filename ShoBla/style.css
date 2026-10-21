@@ -5,12 +5,47 @@
     background-color: bisque;
 }
 .outer{
-    height: 100vh;
+    height: 17vh;
     width: 80%;
     margin: auto;
     background-color: crimson;
+    text-align: center;
 }
 .top-row{
     
     background-color: crimson;
+}
+.Middle{
+    height: 500px;
+    width: 80%;
+    margin: auto;
+    background-color: rgb(255, 0, 93);
+}
+.img1{
+    height: 100%;
+    margin: auto;
+    width: 25%;
+    background-color: brown;
+    float: left;
+}
+.img2{
+    height: 100%;
+    margin: auto;
+    width: 25%;
+    background-color: rgb(203, 42, 42);
+    float: left;
+}
+.img3{
+    height: 100%;
+    margin: auto;
+    width: 25%;
+    background-color: rgb(193, 38, 38);
+    float: left;
+}
+.img4{
+    height: 100%;
+    margin: auto;
+    width: 25%;
+    background-color: rgb(249, 3, 3);
+    float: left;
 }
