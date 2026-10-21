@@ -1,3 +1,4 @@
-for (let i = 1; i<=5; i+1){
-    console.log("Waoh")
+for (let count = 1; count <=5; count++) {
+    console.log("hiee")
 }
+console.log ("Has Ended")
