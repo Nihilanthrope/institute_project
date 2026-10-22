@@ -19,33 +19,53 @@
     height: 730px;
     width: 80%;
     margin: auto;
-    background-color: rgb(255, 0, 93);
+    background-color: bisque;
 }
 .img1{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 25px;
+    background-image: url(image.png);
     height: 100%;
-    margin: auto;
-    width: 25%;
+    margin-left: 10px;
+    width: 20%;
     background-color: brown;
     float: left;
 }
 .img2{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 25px;
+    background-image: url(image.png);
     height: 100%;
     margin: auto;
-    width: 25%;
+    width: 20%;
     background-color: rgb(203, 42, 42);
     float: left;
 }
 .img3{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 25px;
+    background-image: url(image.png);
     height: 100%;
     margin: auto;
-    width: 25%;
+    width: 20%;
     background-color: rgb(193, 38, 38);
     float: left;
 }
 .img4{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 25px;
+    background-image: url(image.png);
     height: 100%;
     margin: auto;
-    width: 25%;
+    width: 20%;
     background-color: rgb(249, 3, 3);
     float: left;
 }
