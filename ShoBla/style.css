@@ -20,6 +20,7 @@
     width: 80%;
     margin: auto;
     background-color: bisque;
+    
 }
 .img1{
     background-position: center;
@@ -28,8 +29,8 @@
     border-radius: 25px;
     background-image: url(image.png);
     height: 100%;
-    margin-left: 10px;
-    width: 20%;
+    margin: 10px;
+    width: 23%;
     background-color: brown;
     float: left;
 }
@@ -40,8 +41,8 @@
     border-radius: 25px;
     background-image: url(image.png);
     height: 100%;
-    margin: auto;
-    width: 20%;
+    margin: 10px;
+    width: 23%;
     background-color: rgb(203, 42, 42);
     float: left;
 }
@@ -52,8 +53,8 @@
     border-radius: 25px;
     background-image: url(image.png);
     height: 100%;
-    margin: auto;
-    width: 20%;
+    margin: 10PX;
+    width: 23%;
     background-color: rgb(193, 38, 38);
     float: left;
 }
@@ -64,8 +65,8 @@
     border-radius: 25px;
     background-image: url(image.png);
     height: 100%;
-    margin: auto;
-    width: 20%;
+    margin: 10PX;
+    width: 23%;
     background-color: rgb(249, 3, 3);
-    float: left;
+    float: left
 }
