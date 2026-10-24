@@ -38,5 +38,4 @@ async def ask(ctx, *, question):
         f"You asked: **{question}**"
     )
 
-
 bot.run(token)
