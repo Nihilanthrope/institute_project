@@ -226,6 +226,20 @@ INTEREST_OPTIONS = ["Developer", "Web Developer", "AI / ML", "Designer", "Video 
 NOTIFICATION_OPTIONS = ["Announcements", "Event Alerts", "Game Updates", "Giveaways", "Community Updates", "None"]
 
 
+def find_public_text_channel(guild_or_channels, desired_name):
+    channels = getattr(guild_or_channels, "text_channels", guild_or_channels)
+    exact = next((c for c in channels if c.name == desired_name), None)
+    if exact:
+        return exact
+    desired_tail = desired_name.lstrip("・")
+    for channel in channels:
+        name = channel.name
+        tail = name.split("・・", 1)[-1].lstrip("・")
+        if tail == desired_tail:
+            return channel
+    return None
+
+
 PUBLIC_CHANNELS = {
     "welcome": "・𝗪𝗲𝗹𝗰𝗼𝗺𝗲",
     "rules": "・𝗥𝘂𝗹𝗲𝘀",
@@ -235,20 +249,32 @@ PUBLIC_CHANNELS = {
     "faq": "・𝗙𝗔𝗤",
 }
 
-WELCOME = """# 𝗪𝗘𝗟𝗖𝗢𝗠𝗘 𝗧𝗢 𝗥𝗨𝗣𝗭𝗛𝗔
+WELCOME = """<!-- RUPZHA_WELCOME_PANEL_V2 -->
 
-**Gaming • Community • Building**
+✦・𝗪𝗘𝗟𝗖𝗢𝗠𝗘・✦
 
-A clean space to play, meet people, share work, and build something useful.
+**gaming · creators · friends**
 
-**𝗦𝗧𝗔𝗥𝗧 𝗛𝗘𝗥𝗘**
-> Read **𝗥𝘂𝗹𝗲𝘀**
-> Choose your games in **𝗖𝗵𝗼𝗼𝘀𝗲・𝗥𝗼𝗹𝗲𝘀**
-> Check **𝗛𝗼𝘄・𝗜𝘁・𝗪𝗼𝗿𝗸𝘀**
-> Then jump into the community.
+Welcome to **RupZha** — a place to play, meet people, share your work, and build a good community.
 
-Keep it clean. Keep it respectful. Have fun.
-"""
+╭・𝗦𝗧𝗔𝗥𝗧 𝗛𝗘𝗥𝗘
+
+**01 · 𝗥𝗘𝗔𝗗**
+> Read **𝗥𝘂𝗹𝗲𝘀** before jumping in.
+
+**02 · 𝗖𝗛𝗢𝗢𝗦𝗘**
+> Pick your games and interests in **𝗖𝗵𝗼𝗼𝘀𝗲・𝗥𝗼𝗹𝗲𝘀**.
+
+**03 · 𝗝𝗢𝗜𝗡 𝗜𝗡**
+> Find teammates, chat, share projects, join events, and meet people.
+
+**04 · 𝗛𝗔𝗩𝗘 𝗙𝗨𝗡**
+> Keep it respectful, SFW, and chill. Staff have the final say when needed.
+
+╰・𝗥𝗨𝗣𝗭𝗛𝗔
+
+*play • create • connect*"""
+
 
 RULES = """# 𝗥𝗨𝗣𝗭𝗛𝗔 — 𝗥𝗨𝗟𝗘𝗦
 
@@ -430,10 +456,28 @@ class OnboardingView(discord.ui.View):
         except discord.HTTPException:
             await interaction.response.send_message("Discord rejected the role update. Try again in a moment.", ephemeral=True)
 
+async def ensure_welcome_panel(channel):
+    try:
+        async for message in channel.history(limit=50):
+            if message.author == bot.user and "<!-- RUPZHA_WELCOME_PANEL_V2 -->" in message.content:
+                if message.content != WELCOME:
+                    await message.edit(content=WELCOME)
+                if not message.pinned:
+                    await message.pin()
+                return message
+        message = await channel.send(WELCOME)
+        await message.pin()
+        return message
+    except (discord.Forbidden, discord.HTTPException) as exc:
+        print(f"WARN welcome panel #{channel.name}: {exc}")
+        return None
+
 async def seed(channel, content):
     try:
         async for message in channel.history(limit=20):
             if message.author == bot.user:
+                if message.content != content:
+                    await message.edit(content=content)
                 return
         await channel.send(content)
     except (discord.Forbidden, discord.HTTPException) as exc:
@@ -598,6 +642,10 @@ async def setup_server(guild):
         return
 
     channels = {c.name: c for c in start.text_channels}
+    for logical_name in PUBLIC_CHANNELS.values():
+        channel = find_public_text_channel(start, logical_name)
+        if channel:
+            channels.setdefault(logical_name, channel)
     content = {
         PUBLIC_CHANNELS["welcome"]: WELCOME,
         PUBLIC_CHANNELS["rules"]: RULES,
@@ -607,7 +655,12 @@ async def setup_server(guild):
     }
     for name, text in content.items():
         if name in channels:
-            await seed(channels[name], text)
+            if name == PUBLIC_CHANNELS["welcome"]:
+                panel = await ensure_welcome_panel(channels[name])
+                if panel:
+                    print(f"WELCOME PANEL READY · #{channels[name].name} · {panel.id}")
+            else:
+                await seed(channels[name], text)
 
     # Native Discord Community Onboarding is the only onboarding entry point.
     # Do not seed a post-join bot onboarding panel; it would duplicate/conflict with the pre-join flow.
@@ -712,9 +765,9 @@ async def on_member_join(member):
             await member.add_roles(role, reason="Rupzha onboarding")
         except discord.HTTPException as exc:
             print(f"WARN member role: {exc}")
-    welcome = discord.utils.get(member.guild.text_channels, name=PUBLIC_CHANNELS["welcome"])
-    rules = discord.utils.get(member.guild.text_channels, name=PUBLIC_CHANNELS["rules"])
-    roles = discord.utils.get(member.guild.text_channels, name=PUBLIC_CHANNELS["roles"])
+    welcome = find_public_text_channel(member.guild, PUBLIC_CHANNELS["welcome"])
+    rules = find_public_text_channel(member.guild, PUBLIC_CHANNELS["rules"])
+    roles = find_public_text_channel(member.guild, PUBLIC_CHANNELS["roles"])
     if welcome:
         try:
             await welcome.send(embed=build_welcome_embed(member, rules, roles))
@@ -725,7 +778,7 @@ async def on_member_join(member):
 async def on_member_remove(member):
     if member.guild.id != GUILD_ID:
         return
-    channel = discord.utils.get(member.guild.text_channels, name=PUBLIC_CHANNELS["welcome"])
+    channel = find_public_text_channel(member.guild, PUBLIC_CHANNELS["welcome"])
     if channel:
         try:
             await channel.send(f"𝗚𝗢𝗢𝗗𝗕𝗬𝗘 · **{member.display_name}**")
@@ -1174,6 +1227,34 @@ async def on_ready():
         print("Guild not found")
         return
     print(f"Logged in as {bot.user}")
+    # One-time-safe channel emoji pass: preserves names and only adds a useful prefix.
+    import unicodedata
+    emoji_rules = [
+        ("welcome", "👋"), ("rules", "📜"), ("announcement", "📢"), ("update", "📣"),
+        ("choose", "🎯"), ("role", "🎭"), ("general", "💬"), ("chat", "💬"),
+        ("lfg", "🔎"), ("clip", "🎬"), ("build", "🧱"), ("game", "🎮"),
+        ("sales", "💰"), ("finance", "💳"), ("lead", "📈"), ("log", "📋"),
+        ("planning", "🗓️"), ("backup", "💾"), ("ticket", "🎫"), ("dashboard", "📊"),
+        ("activity", "📈"), ("level", "🏆"), ("integration", "🔗"), ("automation", "⚙️"),
+        ("security", "🔐"), ("anti-raid", "🛡️"), ("afk", "💤"), ("voice", "🔊"),
+        ("music", "🎵"), ("media", "🖼️"), ("bot", "🤖"), ("staff", "🛠️"),
+    ]
+    emoji_chars = tuple(e for _, e in emoji_rules)
+    for channel in guild.channels:
+        if isinstance(channel, discord.CategoryChannel):
+            continue
+        if channel.name.startswith(emoji_chars):
+            continue
+        normalized = unicodedata.normalize("NFKC", channel.name).lower().replace("・", " ")
+        emoji = next((e for key, e in emoji_rules if key in normalized), None)
+        if emoji:
+            new_name = f"{emoji}・{channel.name}"
+            print(f"EMOJI CHANNEL · {channel.name} -> {new_name}")
+            try:
+                await channel.edit(name=new_name, reason="Rupzha channel emoji cleanup")
+                await asyncio.sleep(0.7)
+            except discord.HTTPException as exc:
+                print(f"WARN emoji rename {channel.name}: {exc}")
     if reminder_task is None or reminder_task.done():
         reminder_task = asyncio.create_task(reminder_loop())
     await setup_server(guild)

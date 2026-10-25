@@ -3,7 +3,7 @@ from types import SimpleNamespace
 
 import discord
 
-from bot import build_welcome_embed
+from bot import WELCOME, build_welcome_embed, find_public_text_channel
 
 
 class WelcomeEmbedTests(unittest.TestCase):
@@ -44,6 +44,19 @@ class WelcomeEmbedTests(unittest.TestCase):
         self.assertIn(member.display_name, embed.description)
         self.assertIn("#・𝗖𝗵𝗼𝗼𝘀𝗲・𝗥𝗼𝗹𝗲𝘀", embed.description)
         self.assertIn("#・𝗥𝘂𝗹𝗲𝘀", embed.description)
+
+    def test_static_welcome_matches_server_panel_style(self):
+        self.assertIn("<!-- RUPZHA_WELCOME_PANEL_V2 -->", WELCOME)
+        self.assertIn("✦・𝗪𝗘𝗟𝗖𝗢𝗠𝗘・✦", WELCOME)
+        self.assertIn("01 · 𝗥𝗘𝗔𝗗", WELCOME)
+        self.assertIn("02 · 𝗖𝗛𝗢𝗢𝗦𝗘", WELCOME)
+        self.assertIn("03 · 𝗝𝗢𝗜𝗡 𝗜𝗡", WELCOME)
+        self.assertIn("04 · 𝗛𝗔𝗩𝗘 𝗙𝗨𝗡", WELCOME)
+
+    def test_public_channel_lookup_accepts_emoji_prefixed_channel_names(self):
+        desired = "・𝗪𝗲𝗹𝗰𝗼𝗺𝗲"
+        channels = [SimpleNamespace(name="👋・・𝗪𝗲𝗹𝗰𝗼𝗺𝗲", id=99)]
+        self.assertEqual(find_public_text_channel(channels, desired).id, 99)
 
 
 if __name__ == "__main__":
