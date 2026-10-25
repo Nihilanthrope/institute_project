@@ -41,6 +41,37 @@ class C(discord.Client):
   if hasattr(g,'edit_channel_positions'):
    print('REORDERING',len(mapping),'categories')
    await g.edit_channel_positions(positions=mapping,reason='Rupzha professional layout')
+  # Add a single, meaningful emoji to channel names without changing the existing text.
+  EMOJI_RULES = [
+   ('welcome', '👋'), ('rules', '📜'), ('announcement', '📢'), ('update', '📣'),
+   ('choose', '🎯'), ('role', '🎭'), ('general', '💬'), ('chat', '💬'),
+   ('lfg', '🔎'), ('clip', '🎬'), ('build', '🧱'), ('game', '🎮'),
+   ('sales', '💰'), ('finance', '💳'), ('lead', '📈'), ('log', '📋'),
+   ('planning', '🗓️'), ('backup', '💾'), ('ticket', '🎫'), ('dashboard', '📊'),
+   ('activity', '📈'), ('level', '🏆'), ('integration', '🔗'), ('automation', '⚙️'),
+   ('security', '🔐'), ('anti-raid', '🛡️'), ('afk', '💤'), ('voice', '🔊'),
+   ('music', '🎵'), ('media', '🖼️'), ('bot', '🤖'), ('staff', '🛠️'),
+  ]
+  import unicodedata
+  for ch in g.channels:
+   if isinstance(ch, discord.CategoryChannel):
+    if ch.name.startswith('🎮・'):
+     await ch.edit(name=ch.name[3:], reason='Rupzha category cleanup')
+    continue
+   if ch.name.startswith(tuple(e for _, e in EMOJI_RULES)):
+    continue
+   lower = unicodedata.normalize('NFKC', ch.name).lower().replace('・', ' ')
+   emoji = next((e for key, e in EMOJI_RULES if key in lower), None)
+   if emoji:
+    new_name = f'{emoji}・{ch.name}'
+    print('EMOJI', ch.name, '->', new_name)
+    try:
+     await ch.edit(name=new_name, reason='Rupzha emoji channel cleanup')
+     await asyncio.sleep(0.7)
+    except discord.Forbidden:
+     print('SKIP FORBIDDEN', ch.name)
+    except discord.HTTPException as exc:
+     print('SKIP HTTP', ch.name, exc)
   await asyncio.sleep(2)
   await g.fetch_channels()
   cats=sorted(g.categories,key=lambda x:x.position)

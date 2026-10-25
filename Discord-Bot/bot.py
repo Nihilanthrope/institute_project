@@ -114,6 +114,27 @@ CHANNEL_LOCK_POLICY = {
 
 READ_ONLY_STAFF_ROLES = {"Founder", "Co-Founder", "Administrator", "Operations", "Manager", "Moderator", "Support"}
 
+# Third-party utility bots are command-scoped: each bot may send messages and
+# receive application commands only in its dedicated channel.
+THIRD_PARTY_BOT_CHANNELS = {
+    "OwO": "🤖・・𝗢𝘄𝗢",
+    "Pokétwo": "🎮・・𝗣𝗼𝗸𝗲𝘁𝘄𝗼",
+    "Koya": "🌸・・𝗞𝗼𝘆𝗮",
+}
+THIRD_PARTY_BOT_CHANNEL_POLICIES = {
+    bot_name: {"bot_role": bot_name, "channel_name": channel_name}
+    for bot_name, channel_name in THIRD_PARTY_BOT_CHANNELS.items()
+}
+
+
+def build_third_party_bot_overwrite(bot_name: str, own_channel_name: str, channel_name: str):
+    allowed = channel_name == own_channel_name
+    return {
+        "allowed": allowed,
+        "send_messages": allowed,
+        "use_application_commands": allowed,
+    }
+
 
 def build_game_hub_policy(game: str, role_names: list[str] | set[str]):
     roles = set(role_names)
@@ -567,6 +588,30 @@ async def setup_server(guild):
             except discord.HTTPException as exc:
                 print(f"WARN game hub {game}: {exc}")
 
+    # Create dedicated public command channels for third-party utility bots.
+    bot_command_category_name = "╭・𝗕𝗢𝗧・𝗖𝗢𝗠𝗠𝗔𝗡𝗗𝗦"
+    bot_command_category = discord.utils.get(guild.categories, name=bot_command_category_name)
+    if not bot_command_category:
+        try:
+            bot_command_category = await guild.create_category(bot_command_category_name, reason="Rupzha third-party bot command isolation")
+        except discord.HTTPException as exc:
+            print(f"WARN bot command category: {exc}")
+            bot_command_category = None
+    if bot_command_category:
+        for bot_name, channel_name in THIRD_PARTY_BOT_CHANNELS.items():
+            channel = discord.utils.get(guild.text_channels, name=channel_name)
+            if not channel:
+                try:
+                    channel = await guild.create_text_channel(channel_name, category=bot_command_category, reason=f"Dedicated {bot_name} command channel")
+                except discord.HTTPException as exc:
+                    print(f"WARN {bot_name} channel: {exc}")
+                    continue
+            elif channel.category_id != bot_command_category.id:
+                try:
+                    await channel.edit(category=bot_command_category, reason=f"Move {bot_name} to dedicated command category")
+                except discord.HTTPException as exc:
+                    print(f"WARN move {bot_name} channel: {exc}")
+
     # Apply the same strict access model to private workspace and bot sections.
     for category_name, allowed in CATEGORY_ACCESS_POLICY.items():
         category = discord.utils.get(guild.categories, name=category_name)
@@ -584,6 +629,36 @@ async def setup_server(guild):
 
     # Child-channel locks make public documentation read-only and sensitive bot logs write-only for their integration bot.
     for channel in guild.text_channels:
+        # Isolate OwO, Pokétwo and Koya: deny their output/commands everywhere except
+        # their own dedicated public command channel.
+        third_party_overwrites = dict(channel.overwrites)
+        third_party_changed = False
+        for bot_name, policy_spec in THIRD_PARTY_BOT_CHANNEL_POLICIES.items():
+            role = roles.get(policy_spec["bot_role"])
+            if not role:
+                continue
+            desired = build_third_party_bot_overwrite(bot_name, policy_spec["channel_name"], channel.name)
+            current = channel.overwrites_for(role)
+            desired_send = desired["send_messages"]
+            desired_commands = desired["use_application_commands"]
+            if current.send_messages != desired_send or current.use_application_commands != desired_commands:
+                third_party_overwrites[role] = discord.PermissionOverwrite(
+                    view_channel=True,
+                    send_messages=desired_send,
+                    send_messages_in_threads=desired_send,
+                    create_public_threads=False,
+                    create_private_threads=False,
+                    use_application_commands=desired_commands,
+                    read_message_history=True,
+                    embed_links=desired_send,
+                    attach_files=desired_send,
+                )
+                third_party_changed = True
+        if third_party_changed:
+            try:
+                await channel.edit(overwrites=third_party_overwrites, reason="Rupzha third-party bot channel isolation")
+            except discord.HTTPException as exc:
+                print(f"WARN third-party bot isolation #{channel.name}: {exc}")
         policy = CHANNEL_LOCK_POLICY.get(channel.name)
         if not policy:
             continue
@@ -1238,7 +1313,13 @@ async def on_ready():
         ("activity", "📈"), ("level", "🏆"), ("integration", "🔗"), ("automation", "⚙️"),
         ("security", "🔐"), ("anti-raid", "🛡️"), ("afk", "💤"), ("voice", "🔊"),
         ("music", "🎵"), ("media", "🖼️"), ("bot", "🤖"), ("staff", "🛠️"),
+        ("how it works", "❓"), ("faq", "❔"), ("meme", "😂"), ("screenshot", "📸"),
+        ("showcase", "🌟"), ("contact", "📞"), ("event", "🎉"), ("giveaway", "🎁"),
+        ("tournament", "🏆"), ("lounge", "🛋️"), ("chill", "🌙"), ("client help", "🤝"),
+        ("project requests", "📩"), ("project status", "📊"), ("client feedback", "💭"),
+        ("projects", "📁"), ("tasks", "✅"), ("ideas", "💡"), ("wins", "🏅"),
     ]
+    emoji_rules.sort(key=lambda item: len(item[0]), reverse=True)
     emoji_chars = tuple(e for _, e in emoji_rules)
     for channel in guild.channels:
         if isinstance(channel, discord.CategoryChannel):

@@ -106,3 +106,26 @@ def test_onboarding_managed_roles_are_permissionless_policy_roles():
     assert set(bot.ONBOARDING_MANAGED_ROLES) <= set(bot.ROLE_PERMISSION_POLICY)
     for name in bot.ONBOARDING_MANAGED_ROLES:
         assert bot.ROLE_PERMISSION_POLICY[name].value == 0
+
+
+def test_third_party_bot_channels_are_isolated():
+    assert bot.THIRD_PARTY_BOT_CHANNELS == {
+        "OwO": "🤖・・𝗢𝘄𝗢",
+        "Pokétwo": "🎮・・𝗣𝗼𝗸𝗲𝘁𝘄𝗼",
+        "Koya": "🌸・・𝗞𝗼𝘆𝗮",
+    }
+    assert bot.THIRD_PARTY_BOT_CHANNEL_POLICIES["OwO"]["bot_role"] == "OwO"
+    assert bot.THIRD_PARTY_BOT_CHANNEL_POLICIES["Pokétwo"]["bot_role"] == "Pokétwo"
+    assert bot.THIRD_PARTY_BOT_CHANNEL_POLICIES["Koya"]["bot_role"] == "Koya"
+
+
+def test_third_party_bot_channel_access_denies_other_channels():
+    policy = bot.build_third_party_bot_overwrite("OwO", "🤖・・𝗢𝘄𝗢", "📢・・𝗔𝗻𝗻𝗼𝘂𝗻𝗰𝗲𝗺𝗲𝗻𝘁𝘀")
+    assert policy["allowed"] is False
+    assert policy["send_messages"] is False
+    assert policy["use_application_commands"] is False
+
+    own = bot.build_third_party_bot_overwrite("OwO", "🤖・・𝗢𝘄𝗢", "🤖・・𝗢𝘄𝗢")
+    assert own["allowed"] is True
+    assert own["send_messages"] is True
+    assert own["use_application_commands"] is True
