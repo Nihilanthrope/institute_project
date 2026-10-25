@@ -42,6 +42,11 @@ SELF_ASSIGNABLE_ROLE_NAMES = {
     role for role, _, _ in GAME_ROLES + AGE_ROLES + INTEREST_ROLES + NOTIFICATION_ROLES
 } | {"Community"}
 
+ONBOARDING_OPTIONS = [
+    {"role": role, "label": label, "description": description}
+    for role, label, description in GAME_ROLES + AGE_ROLES + INTEREST_ROLES + NOTIFICATION_ROLES
+]
+
 ONBOARDING_COPY = """# 👋 Welcome to Rupzha
 
 ## 🎮 Build your gaming profile

@@ -10,6 +10,7 @@ from moderation import JoinGuard, can_moderate, get_recent_cases, is_staff, log_
 from tickets import TicketService, build_ticket_overwrites
 from community import CommunityService, level_for_xp
 from operations import build_client_status_embed, can_edit_project, can_view_project, create_internal_case, get_project_status, set_project_status
+from verify_full_upgrade import readiness_lines, verify_live_guild
 
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -1041,6 +1042,13 @@ async def on_ready():
     if reminder_task is None or reminder_task.done():
         reminder_task = asyncio.create_task(reminder_loop())
     await setup_server(guild)
+    report = await verify_live_guild(guild)
+    if report["status"] == "PASS":
+        print("STRICT AUDIT PASS · full upgrade contract")
+    else:
+        print("STRICT AUDIT FAIL · " + " | ".join(report["failures"]))
+    for line in readiness_lines():
+        print(line)
     try:
         tree.copy_global_to(guild=guild)
         synced = await tree.sync(guild=guild)
