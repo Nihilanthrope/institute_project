@@ -87,6 +87,41 @@ GAME_DESCRIPTIONS = {
     "BGMI / PUBG": "Unlock the BGMI / PUBG hub.", "Other Games": "Unlock the other-games hub.",
 }
 
+ONBOARDING_MANAGED_ROLES = [
+    "Verified", *GAME_ROLES,
+    "Developer", "Designer", "Content Creator", "Web Developer", "AI / ML",
+    "Video Editor", "Esports", "Tech", "Art", "Music", "Business",
+    "Gaming", "Teammates", "Competitive", "Events", "Networking",
+    "Voice Chat", "Announcements", "Event Alerts", "Giveaways", "Community Updates",
+]
+ONBOARDING_STEPS = ["profile", "purpose", "interests", "games", "notifications", "finish"]
+ONBOARDING_EXTRA_ROLES = ["Announcements", "Event Alerts", "Game Updates", "Giveaways", "Community Updates"]
+ONBOARDING_ROLE_COLOURS = {
+    "Verified": discord.Colour.from_rgb(59, 130, 246),
+    "Gaming": discord.Colour.from_rgb(99, 102, 241), "Teammates": discord.Colour.from_rgb(34, 197, 94),
+    "Competitive": discord.Colour.from_rgb(239, 68, 68), "Events": discord.Colour.from_rgb(245, 158, 11),
+    "Networking": discord.Colour.from_rgb(14, 165, 233), "Voice Chat": discord.Colour.from_rgb(168, 85, 247),
+}
+GAME_ARTWORK = {
+    "Valorant": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Valorant_logo_-_pink_color_version.svg",
+    "Minecraft": "https://upload.wikimedia.org/wikipedia/commons/5/51/Minecraft_cover.png",
+    "GTA V": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Grand_Theft_Auto_V_logo.svg",
+    "CS2": "https://upload.wikimedia.org/wikipedia/commons/6/6c/Counter-Strike_2_logo.svg",
+    "Fortnite": "https://upload.wikimedia.org/wikipedia/commons/0/09/FortniteLogo.svg",
+    "Roblox": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Roblox_Logo_2022.jpg",
+    "Among Us": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Among_Us_logo.svg",
+    "Apex Legends": "https://upload.wikimedia.org/wikipedia/commons/d/db/Apex_legends_Logo.svg",
+    "BGMI / PUBG": "https://upload.wikimedia.org/wikipedia/commons/0/0c/PUBG_logo.svg",
+    "Other Games": "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80",
+}
+PROFILE_OPTIONS = ["Under 13", "13–15", "16–17", "18–20", "21–24", "25+", "Prefer not to say"]
+GENDER_OPTIONS = ["Male", "Female", "Non-binary", "Other", "Prefer not to say"]
+REGION_OPTIONS = ["India", "North America", "Europe", "Middle East", "Southeast Asia", "East Asia", "Other"]
+PURPOSE_OPTIONS = ["Gaming", "Teammates", "Friends", "Competitive", "Content", "Development", "Design", "Events", "Client / Business", "Browsing"]
+INTEREST_OPTIONS = ["Developer", "Web Developer", "AI / ML", "Designer", "Video Editor", "Content Creator", "Music", "Esports", "Tech", "Art", "Business"]
+NOTIFICATION_OPTIONS = ["Announcements", "Event Alerts", "Game Updates", "Giveaways", "Community Updates", "None"]
+
+
 PUBLIC_CHANNELS = {
     "welcome": "・𝗪𝗲𝗹𝗰𝗼𝗺𝗲",
     "rules": "・𝗥𝘂𝗹𝗲𝘀",
@@ -154,51 +189,142 @@ Use the community **𝗟𝗙𝗚** channel or the LFG channel inside a game hub.
 Inside **𝗖𝗟𝗜𝗘𝗡𝗧 𝗛𝗨𝗕**, **𝗧𝗘𝗔𝗠 𝗛𝗤**, and **𝗢𝗣𝗘𝗥𝗔𝗧𝗜𝗢𝗡𝗦**.
 """
 
-class GameSelect(discord.ui.Select):
+def build_onboarding_roles(selections):
+    roles = {"Verified"}
+    roles.update(selections.get("games", []))
+    roles.update(selections.get("interests", []))
+    roles.update(selections.get("purpose", []))
+    roles.update(selections.get("notifications", []))
+    return roles & set(ONBOARDING_MANAGED_ROLES)
+
+
+async def apply_onboarding(member, selections):
+    role_map = {r.name: r for r in member.guild.roles}
+    desired = build_onboarding_roles(selections)
+    managed = [role_map[name] for name in ONBOARDING_MANAGED_ROLES if name in role_map]
+    remove = [r for r in managed if r.name not in desired and r in member.roles]
+    add = [role_map[name] for name in desired if name in role_map and role_map[name] not in member.roles]
+    if remove:
+        await member.remove_roles(*remove, reason="Rupzha onboarding reconciliation")
+    if add:
+        await member.add_roles(*add, reason="Rupzha onboarding")
+    return sorted(desired)
+
+
+class OnboardingEntryView(discord.ui.View):
     def __init__(self):
-        options = [
-            discord.SelectOption(label=name, value=name, description=GAME_DESCRIPTIONS[name])
-            for name in GAME_ROLES
-        ]
+        super().__init__(timeout=None)
+
+    @discord.ui.button(label="Start Onboarding", style=discord.ButtonStyle.primary, custom_id="rupzha:onboarding:start")
+    async def start(self, interaction: discord.Interaction, button: discord.ui.Button):
+        await interaction.response.send_message(
+            embed=discord.Embed(title="𝗥𝗨𝗣𝗭𝗛𝗔 𝗢𝗡𝗕𝗢𝗔𝗥𝗗𝗜𝗡𝗚", description="Let's set up your profile. Your answers stay private to you and are not posted in the server."),
+            view=OnboardingView(), ephemeral=True,
+        )
+
+
+class OnboardingSelect(discord.ui.Select):
+    def __init__(self, key, placeholder, options, max_values=1):
+        self.key = key
         super().__init__(
-            custom_id="rupzha:game_roles",
-            placeholder="𝗖𝗵𝗼𝗼𝘀𝗲 𝘆𝗼𝘂𝗿 𝗴𝗮𝗺𝗲𝘀...",
-            min_values=0,
-            max_values=len(options),
-            options=options,
+            custom_id=f"rupzha:onboarding:{key}",
+            placeholder=placeholder,
+            min_values=1,
+            max_values=max_values,
+            options=[discord.SelectOption(label=o, value=o) for o in options],
         )
 
     async def callback(self, interaction: discord.Interaction):
-        member = interaction.user
-        if not isinstance(member, discord.Member):
-            await interaction.response.send_message("This selector only works inside Rupzha.", ephemeral=True)
+        view = self.view
+        if not isinstance(view, OnboardingView):
             return
+        view.data[self.key] = list(self.values)
+        await interaction.response.edit_message(embed=view.embed_for_current_step(), view=view)
 
-        selected = set(self.values)
-        role_map = {r.name: r for r in member.guild.roles if r.name in GAME_ROLES}
-        remove = [r for name, r in role_map.items() if name not in selected and r in member.roles]
-        add = [role_map[name] for name in selected if name in role_map and role_map[name] not in member.roles]
 
-        try:
-            if remove:
-                await member.remove_roles(*remove, reason="Rupzha game role update")
-            if add:
-                await member.add_roles(*add, reason="Rupzha game role update")
-            if selected:
-                chosen = ", ".join(sorted(selected))
-                msg = f"𝗚𝗔𝗠𝗘 𝗥𝗢𝗟𝗘𝗦 𝗨𝗣𝗗𝗔𝗧𝗘𝗗\n\n{chosen}\n\nYour selected game hubs are now unlocked."
-            else:
-                msg = "𝗚𝗔𝗠𝗘 𝗥𝗢𝗟𝗘𝗦 𝗖𝗟𝗘𝗔𝗥𝗘𝗗\n\nAll game hubs have been removed."
-            await interaction.response.send_message(msg, ephemeral=True)
-        except discord.Forbidden:
-            await interaction.response.send_message("I can't manage one of those roles. Please contact staff.", ephemeral=True)
-        except discord.HTTPException:
-            await interaction.response.send_message("Discord rejected the update temporarily. Try again.", ephemeral=True)
-
-class RolePanel(discord.ui.View):
+class OnboardingView(discord.ui.View):
     def __init__(self):
-        super().__init__(timeout=None)
-        self.add_item(GameSelect())
+        super().__init__(timeout=900)
+        self.step = 0
+        self.data = {"profile": [], "gender": [], "region": [], "purpose": [], "interests": [], "games": [], "notifications": []}
+        self.refresh_items()
+
+    def embed_for_current_step(self):
+        titles = ["𝗔𝗕𝗢𝗨𝗧 𝗬𝗢𝗨", "𝗪𝗛𝗔𝗧 𝗕𝗥𝗜𝗡𝗚𝗦 𝗬𝗢𝗨 𝗛𝗘𝗥𝗘?", "𝗦𝗞𝗜𝗟𝗟𝗦 & 𝗜𝗡𝗧𝗘𝗥𝗘𝗦𝗧𝗦", "𝗬𝗢𝗨𝗥 𝗚𝗔𝗠𝗘𝗦", "𝗡𝗢𝗧𝗜𝗙𝗜𝗖𝗔𝗧𝗜𝗢𝗡𝗦", "𝗙𝗜𝗡𝗜𝗦𝗛"]
+        descriptions = [
+            "Age range is used only for community context. Gender is optional. Region is broad and never used for permissions.",
+            "Pick what you want from RupZha. Choose everything that fits.",
+            "Tell us what you do or are interested in.",
+            "Pick every game you play. Each selected game unlocks its hub. Game artwork is shown below.",
+            "Choose the updates you actually want.",
+            "Review complete. Finish to receive your safe community roles and unlock your selected hubs.",
+        ]
+        embed = discord.Embed(title=f"{titles[self.step]} · {self.step + 1}/6", description=descriptions[self.step])
+        if self.step == 3:
+            chosen = self.data["games"] or ["None yet"]
+            embed.add_field(name="Selected", value=", ".join(chosen), inline=False)
+            embed.set_image(url=GAME_ARTWORK.get(chosen[0]) if chosen[0] in GAME_ARTWORK else GAME_ARTWORK["Other Games"])
+        if self.step == 5:
+            for key, label in (("profile", "Age"), ("gender", "Gender"), ("region", "Region"), ("purpose", "Purpose"), ("interests", "Interests"), ("games", "Games"), ("notifications", "Notifications")):
+                value = self.data[key] or ["Not selected"]
+                embed.add_field(name=label, value=", ".join(value), inline=False)
+        return embed
+
+    def refresh_items(self):
+        self.clear_items()
+        configs = [
+            [("profile", "𝗔𝗴𝗲 𝗿𝗮𝗻𝗴𝗲", PROFILE_OPTIONS, 1), ("gender", "𝗚𝗲𝗻𝗱𝗲𝗿 (optional)", GENDER_OPTIONS, 1), ("region", "𝗕𝗿𝗼𝗮𝗱 𝗿𝗲𝗴𝗶𝗼𝗻", REGION_OPTIONS, 1)],
+            [("purpose", "𝗖𝗵𝗼𝗼𝘀𝗲 𝘄𝗵𝗮𝘁 𝘆𝗼𝘂'𝗿𝗲 𝗵𝗲𝗿𝗲 𝗳𝗼𝗿", PURPOSE_OPTIONS, 10)],
+            [("interests", "𝗦𝗸𝗶𝗹𝗹𝘀 & 𝗶𝗻𝘁𝗲𝗿𝗲𝘀𝘁𝘀", INTEREST_OPTIONS, 10)],
+            [("games", "𝗖𝗵𝗼𝗼𝘀𝗲 𝘆𝗼𝘂𝗿 𝗴𝗮𝗺𝗲𝘀", GAME_ROLES, len(GAME_ROLES))],
+            [("notifications", "𝗡𝗼𝘁𝗶𝗳𝗶𝗰𝗮𝘁𝗶𝗼𝗻𝘀", NOTIFICATION_OPTIONS, 6)],
+            [],
+        ]
+        for key, placeholder, options, maximum in configs[self.step]:
+            current = set(self.data.get(key, []))
+            select = OnboardingSelect(key, placeholder, options, maximum)
+            self.add_item(select)
+        if self.step > 0:
+            back = discord.ui.Button(label="Back", style=discord.ButtonStyle.secondary, custom_id="rupzha:onboarding:back")
+            back.callback = self.back
+            self.add_item(back)
+        if self.step < 5:
+            nxt = discord.ui.Button(label="Next", style=discord.ButtonStyle.primary, custom_id="rupzha:onboarding:next")
+            nxt.callback = self.next
+            self.add_item(nxt)
+        else:
+            finish = discord.ui.Button(label="Finish Setup", style=discord.ButtonStyle.success, custom_id="rupzha:onboarding:finish")
+            finish.callback = self.finish
+            self.add_item(finish)
+
+    async def next(self, interaction):
+        if self.step == 0 and (not self.data["profile"] or not self.data["region"]):
+            await interaction.response.send_message("Pick your age range and broad region first. Gender is optional.", ephemeral=True)
+            return
+        if self.step == 3 and not self.data["games"]:
+            await interaction.response.send_message("Pick at least one game, or choose Other Games.", ephemeral=True)
+            return
+        self.step += 1
+        self.refresh_items()
+        await interaction.response.edit_message(embed=self.embed_for_current_step(), view=self)
+
+    async def back(self, interaction):
+        self.step -= 1
+        self.refresh_items()
+        await interaction.response.edit_message(embed=self.embed_for_current_step(), view=self)
+
+    async def finish(self, interaction):
+        if not isinstance(interaction.user, discord.Member):
+            await interaction.response.send_message("This onboarding only works inside RupZha.", ephemeral=True)
+            return
+        try:
+            selected = await apply_onboarding(interaction.user, self.data)
+            await interaction.response.edit_message(embed=discord.Embed(title="𝗢𝗡𝗕𝗢𝗔𝗥𝗗𝗜𝗡𝗚 𝗖𝗢𝗠𝗣𝗟𝗘𝗧𝗘", description="You're verified. Your selected community, interest, notification, and game roles are now active.\n\nProfile answers were kept private."), view=None)
+            print(f"ONBOARDING COMPLETE · {interaction.user.id} · {', '.join(selected)}")
+        except discord.Forbidden:
+            await interaction.response.send_message("I can't manage one of the onboarding roles. Please contact staff.", ephemeral=True)
+        except discord.HTTPException:
+            await interaction.response.send_message("Discord rejected the role update. Try again in a moment.", ephemeral=True)
 
 async def seed(channel, content):
     try:
@@ -215,6 +341,21 @@ async def setup_server(guild):
     if not me:
         print("WARN: bot member unavailable")
         return
+
+    # Create only the small set of notification roles; game and interest roles already exist.
+    # Never create or elevate staff/client roles here.
+    for role_name in ONBOARDING_EXTRA_ROLES:
+        if role_name not in roles:
+            try:
+                await guild.create_role(
+                    name=role_name,
+                    permissions=discord.Permissions.none(),
+                    colour=ONBOARDING_ROLE_COLOURS.get(role_name, discord.Colour.default()),
+                    reason="Rupzha onboarding role setup",
+                )
+            except discord.HTTPException as exc:
+                print(f"WARN onboarding role {role_name}: {exc}")
+    roles = {r.name: r for r in guild.roles}
 
     # The bot only manages roles below its own role. Role ordering is intentionally not
     # mutated automatically here; Discord's role UI is safer for the final staff hierarchy.
@@ -303,18 +444,30 @@ async def setup_server(guild):
     if roles_channel:
         try:
             found = False
-            async for message in roles_channel.history(limit=20):
-                if message.author == bot.user and message.components:
+            async for message in roles_channel.history(limit=50):
+                if message.author == bot.user and message.embeds and message.embeds[0].title == "𝗥𝗨𝗣𝗭𝗛𝗔 𝗢𝗡𝗕𝗢𝗔𝗥𝗗𝗜𝗡𝗚":
                     found = True
+                    try:
+                        await message.edit(
+                            embed=discord.Embed(
+                                title="𝗥𝗨𝗣𝗭𝗛𝗔 𝗢𝗡𝗕𝗢𝗔𝗥𝗗𝗜𝗡𝗚",
+                                description="Set up your profile, choose your interests, pick your games, and control your notifications.\n\n**Age/gender answers stay private.** Game artwork appears during game selection.\n\nStaff and private-workspace roles can never be self-assigned.",
+                            ),
+                            view=OnboardingEntryView(),
+                        )
+                    except discord.HTTPException:
+                        pass
                     break
             if not found:
-                embed = discord.Embed(
-                    title="𝗖𝗛𝗢𝗢𝗦𝗘 𝗬𝗢𝗨𝗥 𝗚𝗔𝗠𝗘𝗦",
-                    description="Select every game you play. You can change your choices anytime.\n\nYour selections unlock the matching game hubs.",
+                await roles_channel.send(
+                    embed=discord.Embed(
+                        title="𝗥𝗨𝗣𝗭𝗛𝗔 𝗢𝗡𝗕𝗢𝗔𝗥𝗗𝗜𝗡𝗚",
+                        description="Set up your profile, choose your interests, pick your games, and control your notifications.\n\n**Age/gender answers stay private.** Game artwork appears during game selection.\n\nStaff and private-workspace roles can never be self-assigned.",
+                    ),
+                    view=OnboardingEntryView(),
                 )
-                await roles_channel.send(embed=embed, view=RolePanel())
         except (discord.Forbidden, discord.HTTPException) as exc:
-            print(f"WARN role panel: {exc}")
+            print(f"WARN onboarding panel: {exc}")
 
     # Live audit: report only mismatches so permission regressions are visible in logs.
     live_failures = []
@@ -451,7 +604,7 @@ async def announce(interaction: discord.Interaction, message: str):
 
 @bot.event
 async def on_ready():
-    bot.add_view(RolePanel())
+    bot.add_view(OnboardingEntryView())
     guild = bot.get_guild(GUILD_ID)
     if not guild:
         print("Guild not found")
