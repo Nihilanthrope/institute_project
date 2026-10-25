@@ -1,5 +1,6 @@
 import os
 import asyncio
+from datetime import timedelta
 import discord
 from dotenv import load_dotenv
 
@@ -183,19 +184,9 @@ async def setup_server(guild):
         print("WARN: bot member unavailable")
         return
 
-    # Keep the bot's managed roles above our custom roles, then make the custom hierarchy clean.
-    top_position = me.top_role.position
-    if top_position > 1:
-        desired = {}
-        for offset, name in enumerate(reversed(ROLE_ORDER), start=1):
-            role = roles.get(name)
-            if role and not role.managed and role < me.top_role:
-                desired[role] = min(top_position - offset, top_position - 1)
-        if desired:
-            try:
-                await guild.edit_role_positions(positions=desired, reason="Rupzha role hierarchy")
-            except discord.HTTPException as exc:
-                print(f"WARN role ordering: {exc}")
+    # The bot only manages roles below its own role. Role ordering is intentionally not
+    # mutated automatically here; Discord's role UI is safer for the final staff hierarchy.
+    # All functional roles remain below the bot role.
 
     # Conservative permissions: staff roles manage the workspace; public roles remain non-privileged.
     permissions = {
@@ -214,6 +205,49 @@ async def setup_server(guild):
                 await role.edit(permissions=perms, colour=ROLE_COLOURS.get(name, role.colour), reason="Rupzha role permissions")
             except discord.HTTPException as exc:
                 print(f"WARN role {name}: {exc}")
+
+    # Game hubs stay hidden until a member selects the matching game role.
+    for game in GAME_ROLES:
+        role = roles.get(game)
+        if not role:
+            continue
+        category = discord.utils.get(guild.categories, name=f"╭・𝗚𝗔𝗠𝗘・{game.upper()}")
+        if not category:
+            category = discord.utils.find(lambda c: game.lower() in c.name.lower() and "𝗚𝗔𝗠𝗘" in c.name, guild.categories)
+        if category:
+            overwrites = {
+                guild.default_role: discord.PermissionOverwrite(view_channel=False),
+                role: discord.PermissionOverwrite(view_channel=True, send_messages=True, read_message_history=True, connect=True, speak=True),
+            }
+            for staff_name in STAFF_ROLES:
+                staff = roles.get(staff_name)
+                if staff:
+                    overwrites[staff] = discord.PermissionOverwrite(view_channel=True, send_messages=True, read_message_history=True, connect=True, speak=True)
+            try:
+                await category.edit(overwrites=overwrites, reason="Rupzha game hub permissions")
+            except discord.HTTPException as exc:
+                print(f"WARN game hub {game}: {exc}")
+
+    # Business workspace: client-facing area is available to Clients + staff; team/ops stay internal.
+    private_access = {
+        "╭・𝗖𝗟𝗜𝗘𝗡𝗧 𝗛𝗨𝗕": ["Client"] + STAFF_ROLES,
+        "╭・𝗧𝗘𝗔𝗠 𝗛𝗤": ["Developer", "Designer", "Content Creator"] + STAFF_ROLES,
+        "╭・𝗢𝗣𝗘𝗥𝗔𝗧𝗜𝗢𝗡𝗦": STAFF_ROLES,
+        "╭・𝗔𝗣𝗣𝗦 & 𝗧𝗢𝗢𝗟𝗦": STAFF_ROLES,
+    }
+    for category_name, allowed in private_access.items():
+        category = discord.utils.get(guild.categories, name=category_name)
+        if not category:
+            continue
+        overwrites = {guild.default_role: discord.PermissionOverwrite(view_channel=False)}
+        for role_name in allowed:
+            role = roles.get(role_name)
+            if role:
+                overwrites[role] = discord.PermissionOverwrite(view_channel=True, send_messages=True, read_message_history=True, connect=True, speak=True)
+        try:
+            await category.edit(overwrites=overwrites, reason="Rupzha private workspace permissions")
+        except discord.HTTPException as exc:
+            print(f"WARN private category {category_name}: {exc}")
 
     start = discord.utils.get(guild.categories, name="╭・𝗦𝗧𝗔𝗥𝗧 𝗛𝗘𝗥𝗘")
     if not start:
@@ -280,6 +314,65 @@ async def on_member_remove(member):
         except discord.HTTPException:
             pass
 
+tree = discord.app_commands.CommandTree(bot)
+
+@tree.command(name="ping", description="Check Rupzha bot latency.")
+async def ping(interaction: discord.Interaction):
+    await interaction.response.send_message(f"Pong · {round(bot.latency * 1000)}ms", ephemeral=True)
+
+@tree.command(name="clear", description="Delete recent messages in this channel.")
+@discord.app_commands.describe(amount="Number of messages to delete (1-100).")
+@discord.app_commands.default_permissions(manage_messages=True)
+async def clear(interaction: discord.Interaction, amount: discord.app_commands.Range[int, 1, 100]):
+    if not isinstance(interaction.channel, discord.TextChannel):
+        await interaction.response.send_message("This command only works in text channels.", ephemeral=True)
+        return
+    await interaction.response.defer(ephemeral=True)
+    try:
+        deleted = await interaction.channel.purge(limit=amount)
+        await interaction.followup.send(f"Deleted **{len(deleted)}** messages.", ephemeral=True)
+    except discord.Forbidden:
+        await interaction.followup.send("I don't have permission to delete messages here.", ephemeral=True)
+
+@tree.command(name="kick", description="Kick a member from Rupzha.")
+@discord.app_commands.describe(member="Member to kick.", reason="Optional reason.")
+@discord.app_commands.default_permissions(kick_members=True)
+async def kick(interaction: discord.Interaction, member: discord.Member, reason: str = "Rupzha moderation"):
+    if member == interaction.user or member.top_role >= interaction.user.top_role:
+        await interaction.response.send_message("You can't kick that member.", ephemeral=True)
+        return
+    try:
+        await member.kick(reason=f"{interaction.user}: {reason}")
+        await interaction.response.send_message(f"Kicked **{member}**.")
+    except discord.Forbidden:
+        await interaction.response.send_message("I can't kick that member because of role hierarchy/permissions.", ephemeral=True)
+
+@tree.command(name="timeout", description="Timeout a member for up to 28 days.")
+@discord.app_commands.describe(member="Member to timeout.", minutes="Duration in minutes.", reason="Optional reason.")
+@discord.app_commands.default_permissions(moderate_members=True)
+async def timeout(interaction: discord.Interaction, member: discord.Member, minutes: discord.app_commands.Range[int, 1, 40320], reason: str = "Rupzha moderation"):
+    if member == interaction.user or member.top_role >= interaction.user.top_role:
+        await interaction.response.send_message("You can't timeout that member.", ephemeral=True)
+        return
+    try:
+        await member.timeout(discord.utils.utcnow() + timedelta(minutes=minutes), reason=f"{interaction.user}: {reason}")
+        await interaction.response.send_message(f"Timed out **{member}** for **{minutes} minutes**.")
+    except discord.Forbidden:
+        await interaction.response.send_message("I can't timeout that member because of role hierarchy/permissions.", ephemeral=True)
+
+@tree.command(name="announce", description="Post an official announcement in the announcements channel.")
+@discord.app_commands.describe(message="Announcement text.")
+@discord.app_commands.default_permissions(manage_guild=True)
+async def announce(interaction: discord.Interaction, message: str):
+    channel = discord.utils.get(interaction.guild.text_channels, name=PUBLIC_CHANNELS["announcements"]) if interaction.guild else None
+    if not channel:
+        await interaction.response.send_message("Announcements channel not found.", ephemeral=True)
+        return
+    embed = discord.Embed(title="𝗥𝗨𝗣𝗭𝗛𝗔 𝗔𝗡𝗡𝗢𝗨𝗡𝗖𝗘𝗠𝗘𝗡𝗧", description=message)
+    embed.set_footer(text=f"Posted by {interaction.user.display_name}")
+    await channel.send(embed=embed)
+    await interaction.response.send_message("Announcement posted.", ephemeral=True)
+
 @bot.event
 async def on_ready():
     bot.add_view(RolePanel())
@@ -289,6 +382,12 @@ async def on_ready():
         return
     print(f"Logged in as {bot.user}")
     await setup_server(guild)
+    try:
+        tree.copy_global_to(guild=guild)
+        synced = await tree.sync(guild=guild)
+        print(f"SLASH COMMANDS SYNCED · {len(synced)}")
+    except discord.HTTPException as exc:
+        print(f"WARN slash sync: {exc}")
     print("RUPZHA BOT ONLINE")
 
 bot.run(TOKEN)
