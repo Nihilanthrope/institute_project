@@ -56,3 +56,9 @@
 - Run standalone live verification and inspect only safe metadata.
 - Confirm `.env` ignored/untracked without displaying its contents.
 - Do not push/merge.
+
+## Post-audit hardening: game-hub isolation
+- Game categories and their child channels now explicitly deny every other game role.
+- Members only see the game hubs corresponding to their selected game roles; staff moderation roles retain controlled access.
+- Live audit now checks for cross-game visibility leaks.
+- Verified all 10 game hubs and child channels with zero visibility-policy failures.
