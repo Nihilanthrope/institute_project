@@ -83,12 +83,7 @@ CATEGORY_ACCESS_POLICY = {
     "╭・𝗧𝗘𝗔𝗠 𝗛𝗤": {"Developer", "Designer", "Content Creator", "Founder", "Co-Founder", "Administrator", "Operations", "Manager"},
     "╭・𝗢𝗣𝗘𝗥𝗔𝗧𝗜𝗢𝗡𝗦": {"Founder", "Co-Founder", "Administrator", "Operations"},
     "╭・𝗔𝗣𝗣𝗦 & 𝗧𝗢𝗢𝗟𝗦": {"Founder", "Co-Founder", "Administrator", "Operations"},
-    "╭・𝗪𝗜𝗖𝗞": {"Founder", "Co-Founder", "Administrator", "Operations", "Manager", "Moderator"},
-    "╭・𝗧𝗜𝗖𝗞𝗘𝗧・𝗧𝗢𝗢𝗟": {"Founder", "Co-Founder", "Administrator", "Operations", "Manager", "Support"},
-    "╭・𝗦𝗧𝗔𝗧𝗕𝗢𝗧": {"Founder", "Co-Founder", "Administrator", "Operations", "Manager"},
-    "╭・𝗔𝗥𝗖𝗔𝗡𝗘": {"Founder", "Co-Founder", "Administrator", "Operations", "Manager"},
-    "╭・𝗫𝗘𝗡𝗢𝗡": {"Founder", "Co-Founder", "Administrator"},
-    "╭・𝗖𝗔𝗥𝗟・𝗕𝗢𝗧": {"Founder", "Co-Founder", "Administrator", "Operations", "Manager", "Moderator"},
+    "╭・𝗕𝗢𝗧・𝗟𝗢𝗚𝗦": {"Founder", "Co-Founder", "Administrator", "Operations", "Manager", "Moderator", "Support"},
 }
 
 # Utility bots can read public/community channels, but private workspace and
@@ -131,6 +126,60 @@ THIRD_PARTY_BOT_CHANNEL_POLICIES = {
     for bot_name, channel_name in THIRD_PARTY_BOT_CHANNELS.items()
 }
 
+# One canonical public command channel per utility bot. Aliases are reconciled
+# into these names so the setup loop never creates typography duplicates.
+BOT_COMMAND_CHANNELS_BY_BOT = {
+    "Dank Memer": "🤖・・𝗗𝗮𝗻𝗸・𝗠𝗲𝗺𝗲𝗿",
+    "Diva": "🤖・・𝗗𝗶𝘃𝗮",
+    "Freebee": "🤖・・𝗙𝗿𝗲𝗲𝗯𝗲𝗲",
+    "Hazy": "🤖・・𝗛𝗮𝘇𝘆",
+    "Mimu": "🤖・・𝗠𝗶𝗺𝘂",
+    "OwO": "🤖・・𝗢𝘄𝗢",
+    "Poké-Name": "🤖・・𝗣𝗼𝗸𝗲・𝗡𝗮𝗺𝗲",
+    "Pokétwo": "🎮・・𝗣𝗼𝗸𝗲𝘁𝘄𝗼",
+    "Sapphire": "🤖・・𝗦𝗮𝗽𝗽𝗵𝗶𝗿𝗲",
+    "Tune 🌷": "🤖・・𝗧𝘂𝗻𝗲",
+    "Word Chain Bot Indently": "🤖・・𝗪𝗼𝗿𝗱・𝗖𝗵𝗮𝗶𝗻",
+    "Koya": "🌸・・𝗞𝗼𝘆𝗮",
+}
+
+BOT_CHANNEL_ALIASES = {
+    "OwO": {"🤖・・𝘄𝗢", "🤖・・𝗢𝘄𝗢"},
+    "Pokétwo": {"🎮・・𝗣𝗼𝗸𝗲𝘁𝘄𝗼", "🤖・・𝗽𝗼𝗸étwo", "🤖・・okétwo", "🤖・・pokétwo"},
+    "Koya": {"🌸・・𝗞𝗼𝘆𝗮"},
+    "Tune 🌷": {"🤖・・𝘂𝗻𝗲", "🤖・・tune"},
+    "Hazy": {"🤖・・𝗮𝘇𝘆", "🤖・・hazy"},
+    "Word Chain Bot Indently": {"🤖・・𝗼𝗿𝗱・𝗖𝗵𝗮𝗶𝗻", "🤖・・word-chain-bot-indently"},
+    "Diva": {"🤖・・𝗶𝘃𝗮", "🤖・・diva"},
+    "Poké-Name": {"🤖・・𝗼𝗸𝗲・𝗡𝗮𝗺𝗲", "🤖・・poké-name"},
+    "Freebee": {"🤖・・𝗿𝗲𝗲𝗯𝗲𝗲", "🤖・・freebee"},
+    "Sapphire": {"🤖・・𝗮𝗽𝗽𝗵𝗶𝗿𝗲", "🤖・・sapphire"},
+    "Mimu": {"🤖・・𝗠𝗶𝗺𝘂"},
+    "Dank Memer": {"🤖・・𝗗𝗮𝗻𝗸・𝗠𝗲𝗺𝗲𝗿"},
+}
+
+DEDICATED_BOT_CHANNEL_NAMES = {
+    "Dank Memer": "🤖・・𝗗𝗮𝗻𝗸・𝗠𝗲𝗺𝗲𝗿",
+    "Diva": "🤖・・𝗗𝗶𝘃𝗮",
+    "Freebee": "🤖・・𝗙𝗿𝗲𝗲𝗯𝗲𝗲",
+    "Hazy": "🤖・・𝗛𝗮𝘇𝘆",
+    "Mimu": "🤖・・𝗠𝗶𝗺𝘂",
+    "OwO": "🤖・・𝗢𝘄𝗢",
+    "Poke-Name": "🤖・・𝗣𝗼𝗸𝗲・𝗡𝗮𝗺𝗲",
+    "Poké-Name": "🤖・・𝗣𝗼𝗸𝗲・𝗡𝗮𝗺𝗲",
+    "Pokétwo": "🎮・・𝗣𝗼𝗸𝗲𝘁𝘄𝗼",
+    "Sapphire": "🤖・・𝗦𝗮𝗽𝗽𝗵𝗶𝗿𝗲",
+    "Tune 🌷": "🤖・・𝗧𝘂𝗻𝗲",
+    "Word Chain Bot Indently": "🤖・・𝗪𝗼𝗿𝗱・𝗖𝗵𝗮𝗶𝗻",
+}
+
+def dedicated_bot_channel_name(member_name: str, member_id: int) -> str:
+    if member_name in DEDICATED_BOT_CHANNEL_NAMES:
+        return DEDICATED_BOT_CHANNEL_NAMES[member_name]
+    safe_name = "".join(ch for ch in member_name.lower() if ch.isalnum() or ch in "-_ ").strip().replace(" ", "-")
+    return f"🤖・・{safe_name[:80] or str(member_id)}"
+
+
 SPECIAL_BOT_CHANNEL_POLICIES = {
     "Wick": {"📋・・𝗦𝗲𝗰𝘂𝗿𝗶𝘁𝘆・𝗟𝗼𝗴𝘀", "📋・・𝗔𝗻𝘁𝗶𝗥𝗮𝗶𝗱・𝗟𝗼𝗴𝘀"},
     "Ticket Tool": {"🎫・・𝗧𝗶𝗰𝗸𝗲𝘁・𝗣𝗮𝗻𝗲𝗹"},
@@ -139,6 +188,21 @@ SPECIAL_BOT_CHANNEL_POLICIES = {
     "Xenon": {"💾・・𝗕𝗮𝗰𝗸𝘂𝗽𝘀"},
     "carl-bot": {"📋・・𝗖𝗮𝗿𝗹・𝗟𝗼𝗴𝘀"},
 }
+
+
+def bot_allowed_channels_for_member(member_name: str, member_id: int) -> set[str]:
+    """Resolve a bot's allowlist without case-sensitive name bugs or orphan channels."""
+    normalized_name = member_name.casefold()
+    for configured_name, channel_names in SPECIAL_BOT_CHANNEL_POLICIES.items():
+        if configured_name.casefold() == normalized_name:
+            return set(channel_names)
+    for configured_name, channel_name in BOT_COMMAND_CHANNELS_BY_BOT.items():
+        if configured_name.casefold() == normalized_name:
+            return {channel_name}
+    for configured_name, channel_name in DEDICATED_BOT_CHANNEL_NAMES.items():
+        if configured_name.casefold() == normalized_name:
+            return {channel_name}
+    return {dedicated_bot_channel_name(member_name, member_id)}
 
 def build_universal_bot_overwrite(bot_name: str, own_channel_name: str, channel_name: str, is_private: bool = False):
     allowed = channel_name == own_channel_name
@@ -314,7 +378,7 @@ Welcome to **RupZha** — a place to play, meet people, share your work, and bui
 > Read **𝗥𝘂𝗹𝗲𝘀** before jumping in.
 
 **02 · 𝗖𝗛𝗢𝗢𝗦𝗘**
-> Pick your games and interests in **𝗖𝗵𝗼𝗼𝘀𝗲・𝗥𝗼𝗹𝗲𝘀**.
+> Use **Community Onboarding** to choose your games and interests, then open your game hub.
 
 **03 · 𝗝𝗢𝗜𝗡 𝗜𝗡**
 > Find teammates, chat, share projects, join events, and meet people.
@@ -514,9 +578,11 @@ def is_static_welcome_message(message):
     if not embeds:
         return False
     embed = embeds[0]
-    if getattr(embed, "title", None) != "✦・𝗪𝗘𝗟𝗖𝗢𝗠𝗘・✦":
+    title = getattr(embed, "title", None)
+    if title not in {"✦・𝗪𝗘𝗟𝗖𝗢𝗠𝗘・✦", "✦ 𝗪𝗘𝗟𝗖𝗢𝗠𝗘 𝗧𝗢 𝗥𝗨𝗣𝗭𝗛𝗔 ✦"}:
         return False
-    # A personalized join welcome has a member avatar thumbnail and a different title.
+    # Old generic/personalized-looking panels had no real member avatar thumbnail.
+    # A real join welcome always carries the joining member's normal Discord avatar.
     return not getattr(embed, "thumbnail", None)
 
 def build_static_welcome_embed():
@@ -574,12 +640,56 @@ async def seed(channel, content):
     except (discord.Forbidden, discord.HTTPException) as exc:
         print(f"WARN seed #{channel.name}: {exc}")
 
+def harden_third_party_bot_permissions(permissions: discord.Permissions) -> discord.Permissions:
+    """Remove server-wide escalation from a utility bot role while preserving harmless capabilities."""
+    hardened = discord.Permissions(permissions.value)
+    for attr in (
+        "administrator", "manage_guild", "manage_roles", "manage_channels",
+        "manage_webhooks", "kick_members", "ban_members", "moderate_members",
+        "mention_everyone",
+    ):
+        setattr(hardened, attr, False)
+    return hardened
+
+
+async def clear_shared_member_role_overwrites(guild):
+    """Remove stale Member-role overrides while preserving per-user bot overrides.
+
+    Public chat should inherit @everyone permissions. Private categories remain private
+    because their @everyone overwrite denies view_channel, and game hubs remain locked
+    because their @everyone overwrite also denies view_channel.
+    """
+    member_role = discord.utils.get(guild.roles, name="Member")
+    if member_role is None:
+        return 0
+
+    removed = 0
+    for channel in list(guild.channels):
+        if channel.overwrites_for(member_role) == discord.PermissionOverwrite():
+            continue
+        try:
+            await channel.set_permissions(
+                member_role,
+                overwrite=None,
+                reason="RupZha permission repair: restore inherited Member role access",
+            )
+            removed += 1
+        except discord.HTTPException as exc:
+            print(f"WARN Member role overwrite cleanup {channel.name}: {exc}")
+    if removed:
+        print(f"MEMBER ROLE PERMISSION REPAIR · removed {removed} stale channel overrides")
+    return removed
+
+
 async def setup_server(guild):
     roles = {r.name: r for r in guild.roles}
     me = guild.me
     if not me:
         print("WARN: bot member unavailable")
         return
+
+    # Repair stale shared-role denies before reconciling any other channel permissions.
+    await clear_shared_member_role_overwrites(guild)
 
     # Create only purposeful optional/notification roles; optional roles are never auto-assigned.
     for role_name in OPTIONAL_ROLE_POLICY:
@@ -609,18 +719,21 @@ async def setup_server(guild):
     # mutated automatically here; Discord's role UI is safer for the final staff hierarchy.
     # All functional roles remain below the bot role.
 
-    # Strip unexplained dangerous native permissions from custom roles below the bot. Managed integration roles are untouched.
+    # Harden unmanaged bot roles without touching managed integration roles or our explicit staff policy.
+    # Preserve benign permissions (e.g. Manage Messages) and remove only server-wide escalation.
+    bot_member_names = {m.name for m in guild.members if m.bot}
     protected_custom_roles = set(ROLE_PERMISSION_POLICY)
-    dangerous_attrs = ("manage_guild", "manage_roles", "manage_channels", "manage_webhooks", "kick_members", "ban_members", "moderate_members", "mention_everyone", "manage_messages")
     for role in guild.roles:
         if role.is_default() or role.managed or role >= me.top_role or role.name in protected_custom_roles:
             continue
-        if role.permissions.administrator or any(getattr(role.permissions, attr) for attr in dangerous_attrs):
-            try:
-                await role.edit(permissions=discord.Permissions.none(), reason="Rupzha role safety: remove unexplained native power")
-                print(f"ROLE HARDENED {role.name}")
-            except discord.HTTPException as exc:
-                print(f"WARN role safety {role.name}: {exc}")
+        if role.name in bot_member_names:
+            hardened = harden_third_party_bot_permissions(role.permissions)
+            if hardened.value != role.permissions.value:
+                try:
+                    await role.edit(permissions=hardened, reason="Rupzha bot role safety: remove server-wide escalation")
+                    print(f"BOT ROLE HARDENED {role.name}")
+                except discord.HTTPException as exc:
+                    print(f"WARN bot role safety {role.name}: {exc}")
 
     # Strict role permissions: only the explicitly privileged staff roles get power.
     for name, perms in ROLE_PERMISSION_POLICY.items():
@@ -658,7 +771,7 @@ async def setup_server(guild):
             except discord.HTTPException as exc:
                 print(f"WARN game hub {game}: {exc}")
 
-    # Create dedicated public command channels for third-party utility bots.
+    # Reconcile utility bot command channels to one canonical channel per bot.
     bot_command_category_name = "╭・𝗕𝗢𝗧・𝗖𝗢𝗠𝗠𝗔𝗡𝗗𝗦"
     bot_command_category = discord.utils.get(guild.categories, name=bot_command_category_name)
     if not bot_command_category:
@@ -668,19 +781,40 @@ async def setup_server(guild):
             print(f"WARN bot command category: {exc}")
             bot_command_category = None
     if bot_command_category:
-        for bot_name, channel_name in THIRD_PARTY_BOT_CHANNELS.items():
-            channel = discord.utils.get(guild.text_channels, name=channel_name)
-            if not channel:
+        for bot_name, channel_name in BOT_COMMAND_CHANNELS_BY_BOT.items():
+            aliases = BOT_CHANNEL_ALIASES.get(bot_name, set()) | {channel_name}
+            candidates = [c for c in bot_command_category.text_channels if c.name in aliases]
+            if not candidates:
                 try:
                     channel = await guild.create_text_channel(channel_name, category=bot_command_category, reason=f"Dedicated {bot_name} command channel")
+                    print(f"BOT CHANNEL CREATED {bot_name} #{channel.name}")
                 except discord.HTTPException as exc:
                     print(f"WARN {bot_name} channel: {exc}")
-                    continue
-            elif channel.category_id != bot_command_category.id:
+                continue
+            candidates.sort(key=lambda c: c.id)
+            keep = next((c for c in candidates if c.name == channel_name), candidates[0])
+            if keep.name != channel_name:
                 try:
-                    await channel.edit(category=bot_command_category, reason=f"Move {bot_name} to dedicated command category")
+                    await keep.edit(name=channel_name, reason="Rupzha bot command canonical naming")
                 except discord.HTTPException as exc:
-                    print(f"WARN move {bot_name} channel: {exc}")
+                    print(f"WARN rename {bot_name}: {exc}")
+            for duplicate in candidates:
+                if duplicate.id == keep.id:
+                    continue
+                try:
+                    has_history = False
+                    async for _ in duplicate.history(limit=1):
+                        has_history = True
+                        break
+                    if not has_history:
+                        await duplicate.delete(reason=f"Rupzha bot command dedupe: {bot_name}")
+                        print(f"BOT CHANNEL DELETED {bot_name} duplicate={duplicate.id}")
+                    else:
+                        archive_name = f"🗄️・・{duplicate.name}"[:100]
+                        await duplicate.edit(name=archive_name, reason=f"Rupzha bot command history preservation: {bot_name}")
+                        print(f"BOT CHANNEL ARCHIVED {bot_name} duplicate={duplicate.id}")
+                except discord.HTTPException as exc:
+                    print(f"WARN dedupe {bot_name}: {exc}")
 
     # Apply the same strict access model to private workspace and bot sections.
     for category_name, allowed in CATEGORY_ACCESS_POLICY.items():
@@ -812,20 +946,61 @@ async def setup_server(guild):
             print(f"WARN universal bot member fetch: {exc}")
             guild_bots = [m for m in guild.members if m.bot and m.id != bot.user.id]
         for member in guild_bots:
-            allowed_channels = SPECIAL_BOT_CHANNEL_POLICIES.get(member.name)
-            if allowed_channels is None:
-                safe_name = "".join(ch for ch in member.name.lower() if ch.isalnum() or ch in "-_ ").strip().replace(" ", "-")
-                own_name = f"🤖・・{safe_name[:80] or str(member.id)}"
-                channel = discord.utils.get(guild.text_channels, name=own_name)
+            allowed_channels = bot_allowed_channels_for_member(member.name, member.id)
+            for allowed_name in allowed_channels:
+                channel = discord.utils.get(guild.text_channels, name=allowed_name)
                 if not channel:
                     try:
-                        channel = await guild.create_text_channel(own_name, category=bot_command_category, reason=f"Dedicated {member.name} bot channel")
+                        channel = await guild.create_text_channel(
+                            allowed_name,
+                            category=bot_command_category,
+                            reason=f"Dedicated channel for {member.name}",
+                        )
+                        print(f"BOT CHANNEL CREATED {member.name} #{channel.name}")
                     except discord.HTTPException as exc:
                         print(f"WARN create bot channel {member.name}: {exc}")
-                        continue
-                allowed_channels = {channel.name}
             role = member.top_role
             if role.is_default():
+                continue
+            if role.name == "Member":
+                # Utility bots without a dedicated role must never inherit bot-specific
+                # channel rules through the shared human Member role. Use member-level
+                # category rules instead; this keeps humans with Member untouched.
+                for category in guild.categories:
+                    private = category.name in PRIVATE_WORKSPACE_CATEGORIES
+                    desired = discord.PermissionOverwrite(
+                        view_channel=not private,
+                        read_message_history=not private,
+                        send_messages=False if not private else False,
+                        send_messages_in_threads=False,
+                        create_public_threads=False,
+                        create_private_threads=False,
+                        use_application_commands=False,
+                        add_reactions=False,
+                    )
+                    try:
+                        if category.overwrites_for(member) != desired:
+                            await category.set_permissions(member, overwrite=desired, reason="Rupzha bot isolation: member-level category policy")
+                    except discord.HTTPException as exc:
+                        print(f"WARN bot category permissions {member.name} {category.name}: {exc}")
+                for channel in guild.text_channels:
+                    if channel.category is None:
+                        try:
+                            if channel.name in allowed_channels:
+                                desired = discord.PermissionOverwrite(view_channel=True, read_message_history=True, send_messages=True, send_messages_in_threads=True, create_public_threads=True, use_application_commands=True, add_reactions=True, embed_links=True, attach_files=True)
+                            else:
+                                desired = discord.PermissionOverwrite(view_channel=True, read_message_history=True, send_messages=False, send_messages_in_threads=False, create_public_threads=False, use_application_commands=False, add_reactions=False)
+                            if channel.overwrites_for(member) != desired:
+                                await channel.set_permissions(member, overwrite=desired, reason="Rupzha bot isolation: member-level channel policy")
+                        except discord.HTTPException as exc:
+                            print(f"WARN bot permissions {member.name} #{channel.name}: {exc}")
+                    elif channel.name in allowed_channels:
+                        desired = discord.PermissionOverwrite(view_channel=True, read_message_history=True, send_messages=True, send_messages_in_threads=True, create_public_threads=True, use_application_commands=True, add_reactions=True, embed_links=True, attach_files=True)
+                        try:
+                            if channel.overwrites_for(member) != desired:
+                                await channel.set_permissions(member, overwrite=desired, reason="Rupzha bot isolation: dedicated command channel")
+                        except discord.HTTPException as exc:
+                            print(f"WARN bot command permissions {member.name} #{channel.name}: {exc}")
                 continue
             for channel in guild.text_channels:
                 private = bool(channel.category and channel.category.name in PRIVATE_WORKSPACE_CATEGORIES)
@@ -1437,6 +1612,12 @@ async def on_ready():
         print("Guild not found")
         return
     print(f"Logged in as {bot.user}")
+    # Repair the visible welcome board immediately, before the broader channel reconciliation.
+    welcome_channel = find_public_text_channel(guild, PUBLIC_CHANNELS["welcome"])
+    if welcome_channel:
+        panel = await ensure_welcome_panel(welcome_channel)
+        if panel:
+            print(f"WELCOME BOARD REPAIRED · #{welcome_channel.name} · {panel.id}")
     # One-time-safe channel emoji pass: preserves names and only adds a useful prefix.
     import unicodedata
     emoji_rules = [

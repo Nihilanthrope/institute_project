@@ -1,6 +1,7 @@
 import asyncio
 from types import SimpleNamespace
 
+import discord
 import bot
 from verify_full_upgrade import build_report, readiness_lines, read_onboarding_enabled
 
@@ -30,7 +31,7 @@ def test_protected_categories_and_channels_are_in_policy():
         "╭・𝗧𝗘𝗔𝗠 𝗛𝗤",
         "╭・𝗢𝗣𝗘𝗥𝗔𝗧𝗜𝗢𝗡𝗦",
         "╭・𝗔𝗣𝗣𝗦 & 𝗧𝗢𝗢𝗟𝗦",
-        "╭・𝗧𝗜𝗖𝗞𝗘𝗧・𝗧𝗢𝗢𝗟",
+        "╭・𝗕𝗢𝗧・𝗟𝗢𝗚𝗦",
     }
     assert required_categories <= set(bot.CATEGORY_ACCESS_POLICY)
     assert "・𝗥𝘂𝗹𝗲𝘀" in bot.CHANNEL_LOCK_POLICY
@@ -163,6 +164,32 @@ def test_every_non_special_bot_gets_a_private_command_scope_policy():
     assert policy["use_application_commands"] is False
 
 
+
+def test_bot_channel_policy_has_one_canonical_channel_per_bot():
+    assert bot.BOT_COMMAND_CHANNELS_BY_BOT == {
+        "Dank Memer": "🤖・・𝗗𝗮𝗻𝗸・𝗠𝗲𝗺𝗲𝗿",
+        "Diva": "🤖・・𝗗𝗶𝘃𝗮",
+        "Freebee": "🤖・・𝗙𝗿𝗲𝗲𝗯𝗲𝗲",
+        "Hazy": "🤖・・𝗛𝗮𝘇𝘆",
+        "Mimu": "🤖・・𝗠𝗶𝗺𝘂",
+        "OwO": "🤖・・𝗢𝘄𝗢",
+        "Poké-Name": "🤖・・𝗣𝗼𝗸𝗲・𝗡𝗮𝗺𝗲",
+        "Pokétwo": "🎮・・𝗣𝗼𝗸𝗲𝘁𝘄𝗼",
+        "Sapphire": "🤖・・𝗦𝗮𝗽𝗽𝗵𝗶𝗿𝗲",
+        "Tune 🌷": "🤖・・𝗧𝘂𝗻𝗲",
+        "Word Chain Bot Indently": "🤖・・𝗪𝗼𝗿𝗱・𝗖𝗵𝗮𝗶𝗻",
+        "Koya": "🌸・・𝗞𝗼𝘆𝗮",
+    }
+    assert len(set(bot.BOT_COMMAND_CHANNELS_BY_BOT.values())) == len(bot.BOT_COMMAND_CHANNELS_BY_BOT)
+
+
+def test_bot_role_hardening_removes_admin_but_preserves_other_permissions():
+    import discord
+    role = SimpleNamespace(managed=False, permissions=discord.Permissions(administrator=True, manage_messages=True))
+    hardened = bot.harden_third_party_bot_permissions(role.permissions)
+    assert hardened.administrator is False
+    assert hardened.manage_messages is True
+
 def test_every_bot_own_channel_is_fully_operational():
     own = bot.build_universal_bot_overwrite("Mimu", "🤖・・𝗠𝗶𝗺𝘂", "🤖・・𝗠𝗶𝗺𝘂")
     assert all(own[k] is True for k in ("view_channel", "read_message_history", "send_messages", "send_messages_in_threads", "use_application_commands", "add_reactions"))
@@ -171,3 +198,55 @@ def test_every_bot_own_channel_is_fully_operational():
 def test_special_bot_keeps_only_its_functional_channels_writable():
     assert bot.SPECIAL_BOT_CHANNEL_POLICIES["Wick"] == {"📋・・𝗦𝗲𝗰𝘂𝗿𝗶𝘁𝘆・𝗟𝗼𝗴𝘀", "📋・・𝗔𝗻𝘁𝗶𝗥𝗮𝗶𝗱・𝗟𝗼𝗴𝘀"}
     assert bot.SPECIAL_BOT_CHANNEL_POLICIES["Ticket Tool"] == {"🎫・・𝗧𝗶𝗰𝗸𝗲𝘁・𝗣𝗮𝗻𝗲𝗹"}
+
+
+def test_bot_channel_policy_resolves_canonical_names_case_insensitively():
+    assert bot.bot_allowed_channels_for_member("Carl-bot", 1) == bot.SPECIAL_BOT_CHANNEL_POLICIES["carl-bot"]
+    assert bot.bot_allowed_channels_for_member("Koya", 2) == {"🌸・・𝗞𝗼𝘆𝗮"}
+    assert bot.bot_allowed_channels_for_member("Poké-Name", 3) == {"🤖・・𝗣𝗼𝗸𝗲・𝗡𝗮𝗺𝗲"}
+
+
+def test_member_sidebar_has_one_private_integration_category_and_valid_welcome_steps():
+    old_categories = {
+        "╭・𝗪𝗜𝗖𝗞", "╭・𝗧𝗜𝗖𝗞𝗘𝗧・𝗧𝗢𝗢𝗟", "╭・𝗦𝗧𝗔𝗧𝗕𝗢𝗧",
+        "╭・𝗔𝗥𝗖𝗔𝗡𝗘", "╭・𝗫𝗘𝗡𝗢𝗡", "╭・𝗖𝗔𝗥𝗟・𝗕𝗢𝗧",
+    }
+    assert "╭・𝗕𝗢𝗧・𝗟𝗢𝗚𝗦" in bot.CATEGORY_ACCESS_POLICY
+    assert old_categories.isdisjoint(bot.CATEGORY_ACCESS_POLICY)
+    assert "Choose・Roles" not in bot.WELCOME
+    assert "Community Onboarding" in bot.WELCOME
+
+
+def test_shared_member_role_overwrite_cleanup_preserves_member_specific_bot_overwrites():
+    class Target:
+        def __init__(self, name): self.name = name
+
+    member_role = Target("Member")
+    bot_member = Target("Dank Memer")
+    restricted = discord.PermissionOverwrite(view_channel=True, send_messages=False)
+
+    class FakeChannel:
+        def __init__(self, overwrites):
+            self._overwrites = dict(overwrites)
+            self.removals = []
+
+        def overwrites_for(self, target):
+            return self._overwrites.get(target, discord.PermissionOverwrite())
+
+        async def set_permissions(self, target, *, overwrite, reason):
+            self.removals.append((target, overwrite, reason))
+            if overwrite is None:
+                self._overwrites.pop(target, None)
+            else:
+                self._overwrites[target] = overwrite
+
+    channel = FakeChannel({member_role: restricted, bot_member: restricted})
+    clean_channel = FakeChannel({bot_member: restricted})
+    guild = SimpleNamespace(roles=[member_role], channels=[channel, clean_channel])
+
+    removed = asyncio.run(bot.clear_shared_member_role_overwrites(guild))
+
+    assert removed == 1
+    assert member_role not in channel._overwrites
+    assert channel._overwrites[bot_member] == restricted
+    assert clean_channel.removals == []

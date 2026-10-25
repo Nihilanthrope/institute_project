@@ -53,10 +53,10 @@ class WelcomeEmbedTests(unittest.TestCase):
             check=True, capture_output=True, text=True,
         )
         import re
-        match = re.search(r"(\d+)\s+(1200x700)", result.stdout)
+        match = re.search(r"(\d+)\s+(600x338)", result.stdout)
         self.assertIsNotNone(match)
         self.assertGreater(int(match.group(1)), 1)
-        self.assertEqual(match.group(2), "1200x700")
+        self.assertEqual(match.group(2), "600x338")
 
     def test_static_welcome_message_detection_does_not_match_personalized_avatar_message(self):
         static = SimpleNamespace(
@@ -83,6 +83,14 @@ class WelcomeEmbedTests(unittest.TestCase):
         )
         self.assertTrue(is_static_welcome_message(static))
         self.assertFalse(is_static_welcome_message(personalized))
+        legacy_personalized = SimpleNamespace(
+            author=SimpleNamespace(id=1), content="", pinned=False,
+            embeds=[SimpleNamespace(
+                title="✦ 𝗪𝗘𝗟𝗖𝗢𝗠𝗘 𝗧𝗢 𝗥𝗨𝗣𝗭𝗛𝗔 ✦", thumbnail=None,
+                image=SimpleNamespace(url="attachment://rupzha-welcome.gif"),
+            )], attachments=[],
+        )
+        self.assertTrue(is_static_welcome_message(legacy_personalized))
 
     def test_builds_when_optional_channels_are_missing(self):
         member = SimpleNamespace(

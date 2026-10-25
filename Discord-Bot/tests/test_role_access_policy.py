@@ -26,12 +26,13 @@ class StrictRoleAccessTests(unittest.TestCase):
         self.assertEqual(CATEGORY_ACCESS_POLICY["╭・𝗢𝗣𝗘𝗥𝗔𝗧𝗜𝗢𝗡𝗦"], {"Founder", "Co-Founder", "Administrator", "Operations"})
         self.assertEqual(CATEGORY_ACCESS_POLICY["╭・𝗔𝗣𝗣𝗦 & 𝗧𝗢𝗢𝗟𝗦"], {"Founder", "Co-Founder", "Administrator", "Operations"})
 
-    def test_bot_sections_are_restricted(self):
-        self.assertEqual(CATEGORY_ACCESS_POLICY["╭・𝗪𝗜𝗖𝗞"], {"Founder", "Co-Founder", "Administrator", "Operations", "Manager", "Moderator"})
-        self.assertEqual(CATEGORY_ACCESS_POLICY["╭・𝗧𝗜𝗖𝗞𝗘𝗧・𝗧𝗢𝗢𝗟"], {"Founder", "Co-Founder", "Administrator", "Operations", "Manager", "Support"})
-        self.assertEqual(CATEGORY_ACCESS_POLICY["╭・𝗦𝗧𝗔𝗧𝗕𝗢𝗧"], {"Founder", "Co-Founder", "Administrator", "Operations", "Manager"})
-        self.assertEqual(CATEGORY_ACCESS_POLICY["╭・𝗫𝗘𝗡𝗢𝗡"], {"Founder", "Co-Founder", "Administrator"})
-        self.assertEqual(CATEGORY_ACCESS_POLICY["╭・𝗖𝗔𝗥𝗟・𝗕𝗢𝗧"], {"Founder", "Co-Founder", "Administrator", "Operations", "Manager", "Moderator"})
+    def test_bot_sections_are_restricted_and_consolidated(self):
+        self.assertEqual(
+            CATEGORY_ACCESS_POLICY["╭・𝗕𝗢𝗧・𝗟𝗢𝗚𝗦"],
+            {"Founder", "Co-Founder", "Administrator", "Operations", "Manager", "Moderator", "Support"},
+        )
+        old_categories = {"╭・𝗪𝗜𝗖𝗞", "╭・𝗧𝗜𝗖𝗞𝗘𝗧・𝗧𝗢𝗢𝗟", "╭・𝗦𝗧𝗔𝗧𝗕𝗢𝗧", "╭・𝗔𝗥𝗖𝗔𝗡𝗘", "╭・𝗫𝗘𝗡𝗢𝗡", "╭・𝗖𝗔𝗥𝗟・𝗕𝗢𝗧"}
+        self.assertTrue(old_categories.isdisjoint(CATEGORY_ACCESS_POLICY))
 
     def test_read_only_channels_are_explicit(self):
         self.assertEqual(
