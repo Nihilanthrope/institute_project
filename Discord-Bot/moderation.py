@@ -9,6 +9,17 @@ from storage import Database
 DEFAULT_STAFF_ROLES = {"Founder", "Co-Founder", "Administrator", "Operations", "Manager", "Moderator", "Support"}
 DEFAULT_SECURITY_LOG_CHANNEL = "・𝗦𝗲𝗰𝘂𝗿𝗶𝘁𝘆・𝗟𝗼𝗴𝘀"
 
+# Destructive moderation is intentionally narrower than the general staff set.
+# Discord command default_permissions are only a UI/API hint; runtime checks below
+# are the source of truth and fail closed.
+MODERATION_ACTION_ROLES = {
+    "warn": {"Founder", "Co-Founder", "Administrator", "Operations", "Manager", "Moderator"},
+    "warnings": {"Founder", "Co-Founder", "Administrator", "Operations", "Manager", "Moderator"},
+    "kick": {"Founder", "Co-Founder", "Administrator", "Operations", "Moderator"},
+    "timeout": {"Founder", "Co-Founder", "Administrator", "Operations", "Moderator"},
+    "ban": {"Founder", "Co-Founder", "Administrator", "Operations"},
+}
+
 
 def is_staff(member: Any, staff_roles: set[str] | None = None) -> bool:
     allowed = staff_roles or DEFAULT_STAFF_ROLES
@@ -18,9 +29,25 @@ def is_staff(member: Any, staff_roles: set[str] | None = None) -> bool:
 def can_moderate(actor: Any, target: Any) -> bool:
     if actor is target:
         return False
-    actor_top = getattr(getattr(actor, "top_role", None), "position", -1)
-    target_top = getattr(getattr(target, "top_role", None), "position", -1)
+    actor_top_role = getattr(actor, "top_role", None)
+    target_top_role = getattr(target, "top_role", None)
+    actor_top = getattr(actor_top_role, "position", -1)
+    target_top = getattr(target_top_role, "position", -1)
+    if getattr(target_top_role, "managed", False):
+        return False
+    target_guild = getattr(target, "guild", None)
+    if target_guild is not None and getattr(target_guild, "owner_id", None) == getattr(target, "id", None):
+        return False
     return target_top < actor_top
+
+
+def can_execute_moderation(actor: Any, target: Any, action: str) -> bool:
+    """Return whether *actor* may perform the specific moderation action on *target*."""
+    allowed_roles = MODERATION_ACTION_ROLES.get(action)
+    if not allowed_roles or not can_moderate(actor, target):
+        return False
+    actor_roles = {getattr(role, "name", None) for role in getattr(actor, "roles", ())}
+    return bool(actor_roles & allowed_roles)
 
 
 def record_case(db: Database, guild_id: int, target_id: int, actor_id: int, action: str, reason: str) -> int:

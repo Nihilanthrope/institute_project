@@ -54,3 +54,12 @@ class StrictRoleAccessTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+def test_support_cannot_inherit_destructive_moderation_power():
+    from moderation import MODERATION_ACTION_ROLES
+
+    assert "Support" not in MODERATION_ACTION_ROLES["kick"]
+    assert "Support" not in MODERATION_ACTION_ROLES["ban"]
+    assert "Support" not in MODERATION_ACTION_ROLES["timeout"]
+    assert "Support" not in MODERATION_ACTION_ROLES["warn"]

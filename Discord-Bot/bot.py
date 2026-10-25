@@ -1,12 +1,13 @@
 import os
 import asyncio
+import sqlite3
 from datetime import timedelta
 from pathlib import Path
 import discord
 from dotenv import load_dotenv
 
 from storage import Database
-from moderation import JoinGuard, can_moderate, get_recent_cases, is_staff, log_security_event, record_case, security_log_channel_name
+from moderation import JoinGuard, can_execute_moderation, get_recent_cases, is_staff, log_security_event, record_case, security_log_channel_name
 from tickets import TicketService, build_ticket_overwrites
 from community import CommunityService, level_for_xp
 from operations import build_client_status_embed, can_edit_project, can_view_project, create_internal_case, get_project_status, set_project_status
@@ -654,7 +655,24 @@ async def create_ticket_channel(interaction: discord.Interaction, kind: str):
         overwrites=overwrites,
         reason=f"RupZha {kind} ticket opened by {interaction.user}",
     )
-    ticket = ticket_service.create_ticket(guild.id, interaction.user.id, channel.id, kind)
+    try:
+        ticket = ticket_service.create_ticket(guild.id, interaction.user.id, channel.id, kind)
+    except sqlite3.IntegrityError:
+        # Another interaction won the race. Remove this orphan channel and return
+        # the already-persisted ticket instead of creating duplicate support rooms.
+        try:
+            await channel.delete(reason="RupZha duplicate ticket race cleanup")
+        except discord.HTTPException:
+            pass
+        existing = ticket_service.db.fetchone(
+            "SELECT ticket_id FROM tickets WHERE guild_id = ? AND opener_id = ? AND kind = ? AND status = 'open' LIMIT 1",
+            (guild.id, interaction.user.id, kind),
+        )
+        ticket = ticket_service.get_ticket(existing[0]) if existing else None
+        if ticket is None:
+            return None, "Ticket creation raced and could not recover safely; please try again."
+        existing_channel = guild.get_channel(ticket.channel_id)
+        return existing_channel, "You already have an open ticket of this type."
     await channel.send(
         embed=discord.Embed(
             title=f"RupZha · {kind.title()} Ticket",
@@ -854,7 +872,7 @@ async def reminder_loop():
 async def project_status(interaction: discord.Interaction, project_id: str, status: str = "", summary: str = ""):
     role_names = {role.name for role in getattr(interaction.user, "roles", ())}
     if status or summary:
-        if not can_edit_project(role_names):
+        if not bool(role_names & {"Founder", "Co-Founder", "Administrator", "Operations", "Manager"}):
             await interaction.response.send_message("Only Rupzha staff can update project status.", ephemeral=True)
             return
         set_project_status(db, project_id, status, summary)
@@ -872,6 +890,9 @@ async def project_status(interaction: discord.Interaction, project_id: str, stat
 @discord.app_commands.default_permissions(manage_guild=True)
 async def internal_note(interaction: discord.Interaction, note: str):
     role_names = {role.name for role in getattr(interaction.user, "roles", ())}
+    if not bool(role_names & {"Founder", "Co-Founder", "Administrator", "Operations"}):
+        await interaction.response.send_message("Operations staff only.", ephemeral=True)
+        return
     case_id = create_internal_case(db, interaction.user.id, role_names, note)
     if case_id is None:
         await interaction.response.send_message("Operations staff only.", ephemeral=True)
@@ -887,8 +908,8 @@ async def ping(interaction: discord.Interaction):
 @discord.app_commands.describe(amount="Number of messages to delete (1-100).")
 @discord.app_commands.default_permissions(manage_messages=True)
 async def clear(interaction: discord.Interaction, amount: discord.app_commands.Range[int, 1, 100]):
-    if not _staff_check(interaction):
-        await interaction.response.send_message("Staff only.", ephemeral=True)
+    if not _role_check(interaction, {"Founder", "Co-Founder", "Administrator", "Operations", "Manager", "Moderator"}):
+        await interaction.response.send_message("Moderation staff only.", ephemeral=True)
         return
     if not isinstance(interaction.channel, discord.TextChannel):
         await interaction.response.send_message("This command only works in text channels.", ephemeral=True)
@@ -904,8 +925,14 @@ def _staff_check(interaction: discord.Interaction) -> bool:
     return isinstance(interaction.user, discord.Member) and is_staff(interaction.user, set(STAFF_ROLES))
 
 
-def _can_act(interaction: discord.Interaction, target: discord.Member) -> bool:
-    return _staff_check(interaction) and can_moderate(interaction.user, target)
+def _role_check(interaction: discord.Interaction, allowed: set[str]) -> bool:
+    if not isinstance(interaction.user, discord.Member):
+        return False
+    return is_staff(interaction.user, allowed)
+
+
+def _can_act(interaction: discord.Interaction, target: discord.Member, action: str) -> bool:
+    return can_execute_moderation(interaction.user, target, action)
 
 
 async def _record_moderation(interaction: discord.Interaction, target: discord.Member, action: str, reason: str):
@@ -914,9 +941,9 @@ async def _record_moderation(interaction: discord.Interaction, target: discord.M
 
 @tree.command(name="warn", description="Warn a member and record a moderation case.")
 @discord.app_commands.describe(member="Member to warn.", reason="Reason for the warning.")
-@discord.app_commands.default_permissions(moderate_members=True)
+@discord.app_commands.default_permissions(manage_messages=True)
 async def warn(interaction: discord.Interaction, member: discord.Member, reason: str = "Rupzha moderation"):
-    if not _can_act(interaction, member):
+    if not _can_act(interaction, member, "warn"):
         await interaction.response.send_message("You are not allowed to warn that member.", ephemeral=True)
         return
     await _record_moderation(interaction, member, "warn", reason)
@@ -925,10 +952,10 @@ async def warn(interaction: discord.Interaction, member: discord.Member, reason:
 
 @tree.command(name="warnings", description="View recent warnings and moderation cases for a member.")
 @discord.app_commands.describe(member="Member to inspect.")
-@discord.app_commands.default_permissions(moderate_members=True)
+@discord.app_commands.default_permissions(manage_messages=True)
 async def warnings(interaction: discord.Interaction, member: discord.Member):
-    if not _staff_check(interaction):
-        await interaction.response.send_message("Staff only.", ephemeral=True)
+    if not is_staff(interaction.user, {"Founder", "Co-Founder", "Administrator", "Operations", "Manager", "Moderator"}):
+        await interaction.response.send_message("Moderation staff only.", ephemeral=True)
         return
     cases = get_recent_cases(db, interaction.guild.id, member.id)
     if not cases:
@@ -942,7 +969,7 @@ async def warnings(interaction: discord.Interaction, member: discord.Member):
 @discord.app_commands.describe(member="Member to kick.", reason="Optional reason.")
 @discord.app_commands.default_permissions(kick_members=True)
 async def kick(interaction: discord.Interaction, member: discord.Member, reason: str = "Rupzha moderation"):
-    if not _can_act(interaction, member):
+    if not _can_act(interaction, member, "kick"):
         await interaction.response.send_message("You can't kick that member.", ephemeral=True)
         return
     try:
@@ -957,7 +984,7 @@ async def kick(interaction: discord.Interaction, member: discord.Member, reason:
 @discord.app_commands.describe(member="Member to ban.", reason="Optional reason.")
 @discord.app_commands.default_permissions(ban_members=True)
 async def ban(interaction: discord.Interaction, member: discord.Member, reason: str = "Rupzha moderation"):
-    if not _can_act(interaction, member):
+    if not _can_act(interaction, member, "ban"):
         await interaction.response.send_message("You can't ban that member.", ephemeral=True)
         return
     try:
@@ -972,7 +999,7 @@ async def ban(interaction: discord.Interaction, member: discord.Member, reason: 
 @discord.app_commands.describe(member="Member to timeout.", minutes="Duration in minutes.", reason="Optional reason.")
 @discord.app_commands.default_permissions(moderate_members=True)
 async def timeout(interaction: discord.Interaction, member: discord.Member, minutes: discord.app_commands.Range[int, 1, 40320], reason: str = "Rupzha moderation"):
-    if not _can_act(interaction, member):
+    if not _can_act(interaction, member, "timeout"):
         await interaction.response.send_message("You can't timeout that member.", ephemeral=True)
         return
     try:
@@ -987,16 +1014,16 @@ async def timeout(interaction: discord.Interaction, member: discord.Member, minu
 @discord.app_commands.describe(seconds="Slowmode delay from 0 to 21600 seconds.")
 @discord.app_commands.default_permissions(manage_channels=True)
 async def slowmode(interaction: discord.Interaction, seconds: discord.app_commands.Range[int, 0, 21600]):
-    if not _staff_check(interaction) or not isinstance(interaction.channel, discord.TextChannel):
-        await interaction.response.send_message("Staff only, and this must be a text channel.", ephemeral=True)
+    if not _role_check(interaction, {"Founder", "Co-Founder", "Administrator", "Operations", "Manager"}) or not isinstance(interaction.channel, discord.TextChannel):
+        await interaction.response.send_message("Management staff only, and this must be a text channel.", ephemeral=True)
         return
     await interaction.channel.edit(slowmode_delay=seconds, reason=f"Rupzha slowmode by {interaction.user}")
     await interaction.response.send_message(f"Slowmode set to **{seconds}s**.")
 
 
 async def _set_channel_lock(interaction: discord.Interaction, locked: bool):
-    if not _staff_check(interaction) or not isinstance(interaction.channel, discord.TextChannel):
-        await interaction.response.send_message("Staff only, and this must be a text channel.", ephemeral=True)
+    if not _role_check(interaction, {"Founder", "Co-Founder", "Administrator", "Operations", "Manager"}) or not isinstance(interaction.channel, discord.TextChannel):
+        await interaction.response.send_message("Management staff only, and this must be a text channel.", ephemeral=True)
         return
     overwrite = interaction.channel.overwrites_for(interaction.guild.default_role)
     overwrite.send_messages = not locked
@@ -1019,8 +1046,8 @@ async def unlock(interaction: discord.Interaction):
 @discord.app_commands.describe(message="Announcement text.")
 @discord.app_commands.default_permissions(manage_guild=True)
 async def announce(interaction: discord.Interaction, message: str):
-    if not _staff_check(interaction):
-        await interaction.response.send_message("Staff only.", ephemeral=True)
+    if not _role_check(interaction, {"Founder", "Co-Founder", "Administrator", "Operations"}):
+        await interaction.response.send_message("Operations staff only.", ephemeral=True)
         return
     channel = discord.utils.get(interaction.guild.text_channels, name=PUBLIC_CHANNELS["announcements"]) if interaction.guild else None
     if not channel:

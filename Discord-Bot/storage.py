@@ -100,6 +100,11 @@ class Database:
         self.connection.execute("INSERT OR IGNORE INTO schema_migrations(version) VALUES (1)")
         self.connection.execute("INSERT OR IGNORE INTO schema_migrations(version) VALUES (2)")
         self.connection.execute("INSERT OR IGNORE INTO schema_migrations(version) VALUES (3)")
+        self.connection.execute(
+            "CREATE UNIQUE INDEX IF NOT EXISTS idx_tickets_one_open_per_member_kind "
+            "ON tickets(guild_id, opener_id, kind) WHERE status = 'open'"
+        )
+        self.connection.execute("INSERT OR IGNORE INTO schema_migrations(version) VALUES (4)")
         self.connection.commit()
 
     def execute(self, sql: str, parameters: Iterable[Any] = ()) -> sqlite3.Cursor:

@@ -58,3 +58,34 @@ def test_log_security_event_uses_configured_channel_lookup():
     from moderation import security_log_channel_name
 
     assert security_log_channel_name({"security_log_channel": "・𝗦𝗲𝗰𝘂𝗿𝗶𝘁𝘆・𝗟𝗼𝗴𝘀"}) == "・𝗦𝗲𝗰𝘂𝗿𝗶𝘁𝘆・𝗟𝗼𝗴𝘀"
+
+
+def test_action_specific_moderation_roles_fail_closed():
+    from moderation import can_execute_moderation
+
+    support = FakeMember([FakeRole(7, "Support")])
+    moderator = FakeMember([FakeRole(10, "Moderator")])
+    manager = FakeMember([FakeRole(11, "Manager")])
+    target = FakeMember([FakeRole(2, "Member")])
+
+    assert can_execute_moderation(support, target, "kick") is False
+    assert can_execute_moderation(support, target, "ban") is False
+    assert can_execute_moderation(moderator, target, "kick") is True
+    assert can_execute_moderation(moderator, target, "ban") is False
+    assert can_execute_moderation(manager, target, "kick") is False
+    assert can_execute_moderation(manager, target, "ban") is False
+    assert can_execute_moderation(manager, target, "unknown") is False
+
+
+def test_action_specific_moderation_rejects_managed_and_owner_targets():
+    from moderation import can_execute_moderation
+
+    actor = FakeMember([FakeRole(10, "Moderator")])
+    managed = FakeMember([FakeRole(2, "Bot")])
+    managed.roles[0].managed = True
+    target = FakeMember([FakeRole(2, "Member")])
+    target.guild = type("Guild", (), {"owner_id": 99})()
+    target.id = 99
+
+    assert can_execute_moderation(actor, managed, "kick") is False
+    assert can_execute_moderation(actor, target, "kick") is False

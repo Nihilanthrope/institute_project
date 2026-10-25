@@ -52,3 +52,18 @@ def test_client_tickets_require_client_or_staff_role(tmp_path):
     assert service.can_open(FakeMember(10, "Client"), "client") is True
     assert service.can_open(FakeMember(10, "Support"), "client") is True
     assert service.can_open(FakeMember(10, "Member"), "support") is True
+
+
+def test_only_one_open_ticket_per_member_and_kind(tmp_path):
+    import sqlite3
+
+    db = Database(tmp_path / "rupzha.db")
+    db.initialize()
+    service = TicketService(db)
+    service.create_ticket(1, 101, 201, "support")
+    try:
+        service.create_ticket(1, 101, 202, "support")
+    except sqlite3.IntegrityError:
+        pass
+    else:
+        raise AssertionError("duplicate open ticket should be rejected")
