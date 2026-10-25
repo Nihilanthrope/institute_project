@@ -1,0 +1,5783 @@
+[
+  {
+    "id": "1563867987130323044",
+    "type": 4,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "╭・𝗦𝗧𝗔𝗥𝗧 𝗛𝗘𝗥𝗘",
+    "parent_id": null,
+    "position": 0,
+    "permission_overwrites": []
+  },
+  {
+    "id": "1563867989298642944",
+    "type": 4,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "╭・𝗖𝗢𝗠𝗠𝗨𝗡𝗜𝗧𝗬",
+    "parent_id": null,
+    "position": 1,
+    "permission_overwrites": []
+  },
+  {
+    "id": "1563867991504855051",
+    "type": 4,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "╭・𝗖𝗟𝗜𝗘𝗡𝗧 𝗛𝗨𝗕",
+    "parent_id": null,
+    "position": 2,
+    "permission_overwrites": [
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871603979194399",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867976594358322",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ]
+  },
+  {
+    "id": "1563867993820241960",
+    "type": 4,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "╭・𝗧𝗘𝗔𝗠 𝗛𝗤",
+    "parent_id": null,
+    "position": 3,
+    "permission_overwrites": [
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871603979194399",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871611633803284",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871599415795856",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867972177629214",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867974597615726",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ]
+  },
+  {
+    "id": "1563867996013985863",
+    "type": 4,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "╭・𝗢𝗣𝗘𝗥𝗔𝗧𝗜𝗢𝗡𝗦",
+    "parent_id": null,
+    "position": 4,
+    "permission_overwrites": [
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "76800",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "76800",
+        "deny": "0"
+      },
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "76800",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "76800",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "76800",
+        "deny": "0"
+      }
+    ]
+  },
+  {
+    "id": "1563867999864234026",
+    "type": 4,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "╭・𝗔𝗣𝗣𝗦 & 𝗧𝗢𝗢𝗟𝗦",
+    "parent_id": null,
+    "position": 5,
+    "permission_overwrites": [
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871603979194399",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871611633803284",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867972177629214",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ]
+  },
+  {
+    "id": "1563868002473087025",
+    "type": 0,
+    "last_message_id": "1563876339600330774",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗪𝗲𝗹𝗰𝗼𝗺𝗲",
+    "parent_id": "1563867987130323044",
+    "rate_limit_per_user": 0,
+    "topic": "Start here — what Rupzha Core is, what we do, and where to go next.",
+    "position": 0,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563868014367997992",
+    "type": 0,
+    "last_message_id": "1563876351209906267",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗖𝗵𝗼𝗼𝘀𝗲・𝗬𝗼𝘂𝗿・𝗥𝗼𝗹𝗲𝘀",
+    "parent_id": "1563867987130323044",
+    "rate_limit_per_user": 0,
+    "topic": "Community standards, privacy, project conduct, and Discord safety.",
+    "position": 1,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563868026682609729",
+    "type": 0,
+    "last_message_id": "1563868033024397313",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗥𝘂𝗹𝗲𝘀",
+    "parent_id": "1563867987130323044",
+    "rate_limit_per_user": 0,
+    "topic": "Official Rupzha Core news, launches, updates, and important notices.",
+    "position": 2,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563868035905880084",
+    "type": 0,
+    "last_message_id": "1563868041106694356",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗔𝗻𝗻𝗼𝘂𝗻𝗰𝗲𝗺𝗲𝗻𝘁𝘀",
+    "parent_id": "1563867987130323044",
+    "rate_limit_per_user": 0,
+    "topic": "Quick guide: introduce yourself → explore services → submit a request → wait for a response.",
+    "position": 3,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563868043480932372",
+    "type": 0,
+    "last_message_id": "1563876367119032321",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗛𝗼𝘄・𝗜𝘁・𝗪𝗼𝗿𝗸𝘀",
+    "parent_id": "1563867987130323044",
+    "rate_limit_per_user": 0,
+    "topic": "Common questions about projects, services, support, pricing, and communication.",
+    "position": 4,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563868053270438000",
+    "type": 0,
+    "last_message_id": "1563868149299023904",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗚𝗲𝗻𝗲𝗿𝗮𝗹",
+    "parent_id": "1563867989298642944",
+    "rate_limit_per_user": 0,
+    "topic": "Talk, network, share ideas, and meet the Rupzha community.",
+    "position": 5,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563868056911093821",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗚𝗮𝗺𝗶𝗻𝗴・𝗖𝗵𝗮𝘁",
+    "parent_id": "1563867989298642944",
+    "rate_limit_per_user": 0,
+    "topic": "Show your work, projects, designs, builds, and wins.",
+    "position": 6,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563868060744683610",
+    "type": 0,
+    "last_message_id": "1563868066578694155",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗖𝗹𝗶𝗽𝘀・𝗛𝗶𝗴𝗵𝗹𝗶𝗴𝗵𝘁𝘀",
+    "parent_id": "1563867989298642944",
+    "rate_limit_per_user": 0,
+    "topic": "Web, design, development, automation, AI, and digital project services.",
+    "position": 7,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563868068420263959",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗠𝗲𝗺𝗲𝘀",
+    "parent_id": "1563867989298642944",
+    "rate_limit_per_user": 0,
+    "topic": "Useful tools, references, templates, learning material, and community resources.",
+    "position": 8,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563868073596031138",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗦𝗰𝗿𝗲𝗲𝗻𝘀𝗵𝗼𝘁𝘀",
+    "parent_id": "1563867989298642944",
+    "rate_limit_per_user": 0,
+    "topic": "Suggestions and feedback for improving Rupzha Core.",
+    "position": 9,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563868077618102452",
+    "type": 0,
+    "last_message_id": "1563876393933340673",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗟𝗙𝗚",
+    "parent_id": "1563867989298642944",
+    "rate_limit_per_user": 0,
+    "topic": "For serious enquiries, collaborations, partnerships, or project discussions.",
+    "position": 10,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563868085495275672",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗖𝗹𝗶𝗲𝗻𝘁・𝗛𝗲𝗹𝗽",
+    "parent_id": "1563867991504855051",
+    "rate_limit_per_user": 0,
+    "topic": "Client support and questions. Keep sensitive information in private project channels.",
+    "position": 11,
+    "permission_overwrites": [
+      {
+        "id": "1563867969568772187",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "11280",
+        "deny": "0"
+      },
+      {
+        "id": "1563867976594358322",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867972177629214",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867974597615726",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "11280",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563868089265819698",
+    "type": 0,
+    "last_message_id": "1563868095016345641",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗣𝗿𝗼𝗷𝗲𝗰𝘁・𝗥𝗲𝗾𝘂𝗲𝘀𝘁𝘀",
+    "parent_id": "1563867991504855051",
+    "rate_limit_per_user": 0,
+    "topic": "Submit a project idea with goals, scope, budget, timeline, and useful links.",
+    "position": 12,
+    "permission_overwrites": [
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "11280",
+        "deny": "0"
+      },
+      {
+        "id": "1563867969568772187",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867972177629214",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867976594358322",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867974597615726",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "11280",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563868097440649317",
+    "type": 0,
+    "last_message_id": "1563868102544982048",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗥𝗲𝗾𝘂𝗶𝗿𝗲𝗺𝗲𝗻𝘁𝘀",
+    "parent_id": "1563867991504855051",
+    "rate_limit_per_user": 0,
+    "topic": "Project intake checklist: objective, audience, features, references, deadline, budget, assets.",
+    "position": 13,
+    "permission_overwrites": [
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "11280",
+        "deny": "0"
+      },
+      {
+        "id": "1563867969568772187",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867972177629214",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867976594358322",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867974597615726",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "11280",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563868104864309278",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗔𝗰𝘁𝗶𝘃𝗲・𝗣𝗿𝗼𝗷𝗲𝗰𝘁𝘀",
+    "parent_id": "1563867991504855051",
+    "rate_limit_per_user": 0,
+    "topic": "Private project rooms are created here for active clients and delivery work.",
+    "position": 14,
+    "permission_overwrites": [
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "11280",
+        "deny": "0"
+      },
+      {
+        "id": "1563867969568772187",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867976594358322",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867972177629214",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867974597615726",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "11280",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563868109532831835",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗖𝗹𝗶𝗲𝗻𝘁・𝗙𝗲𝗲𝗱𝗯𝗮𝗰𝗸",
+    "parent_id": "1563867991504855051",
+    "rate_limit_per_user": 0,
+    "topic": "Client reviews, approvals, change requests, and delivery feedback.",
+    "position": 15,
+    "permission_overwrites": [
+      {
+        "id": "1563867969568772187",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "11280",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867976594358322",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867972177629214",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867974597615726",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "11280",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563868113458569236",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗧𝗲𝗮𝗺-𝗖𝗵𝗮𝘁",
+    "parent_id": "1563867993820241960",
+    "rate_limit_per_user": 0,
+    "topic": "Internal team communication.",
+    "position": 16,
+    "permission_overwrites": [
+      {
+        "id": "1563867969568772187",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "11264",
+        "deny": "0"
+      },
+      {
+        "id": "1563867972177629214",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867974597615726",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "11264",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563868118218969128",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗣𝗿𝗼𝗷𝗲𝗰𝘁𝘀",
+    "parent_id": "1563867993820241960",
+    "rate_limit_per_user": 0,
+    "topic": "Internal project planning, milestones, ownership, and delivery status.",
+    "position": 17,
+    "permission_overwrites": [
+      {
+        "id": "1563867969568772187",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "11264",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867972177629214",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867974597615726",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "11264",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563868124133204112",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗧𝗮𝘀𝗸𝘀",
+    "parent_id": "1563867993820241960",
+    "rate_limit_per_user": 0,
+    "topic": "Task queue, blockers, assignments, and priorities.",
+    "position": 18,
+    "permission_overwrites": [
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "11264",
+        "deny": "0"
+      },
+      {
+        "id": "1563867969568772187",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867972177629214",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867974597615726",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "11264",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563868128780488734",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗥𝗲𝘀𝗼𝘂𝗿𝗰𝗲𝘀",
+    "parent_id": "1563867993820241960",
+    "rate_limit_per_user": 0,
+    "topic": "Internal references, templates, assets, and SOPs.",
+    "position": 19,
+    "permission_overwrites": [
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "11264",
+        "deny": "0"
+      },
+      {
+        "id": "1563867969568772187",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867972177629214",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867974597615726",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "11264",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563868132559298601",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗜𝗱𝗲𝗮𝘀",
+    "parent_id": "1563867993820241960",
+    "rate_limit_per_user": 0,
+    "topic": "Ideas, experiments, product concepts, and improvements.",
+    "position": 20,
+    "permission_overwrites": [
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "11264",
+        "deny": "0"
+      },
+      {
+        "id": "1563867969568772187",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867972177629214",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867974597615726",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "11264",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563868137429012511",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗪𝗶𝗻𝘀",
+    "parent_id": "1563867993820241960",
+    "rate_limit_per_user": 0,
+    "topic": "Celebrate launches, milestones, client wins, and team achievements.",
+    "position": 21,
+    "permission_overwrites": [
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "11264",
+        "deny": "0"
+      },
+      {
+        "id": "1563867969568772187",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867972177629214",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867974597615726",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "11264",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563868141967384606",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗦𝘁𝗮𝗻𝗱𝘂𝗽",
+    "parent_id": "1563867993820241960",
+    "rate_limit_per_user": 0,
+    "topic": "Daily/weekly status: done, next, blocked.",
+    "position": 22,
+    "permission_overwrites": [
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "11264",
+        "deny": "0"
+      },
+      {
+        "id": "1563867969568772187",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867972177629214",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867974597615726",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "11264",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563868146283323512",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗔𝗱𝗺𝗶𝗻",
+    "parent_id": "1563867996013985863",
+    "rate_limit_per_user": 0,
+    "topic": null,
+    "position": 23,
+    "permission_overwrites": [
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "76800",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "76800",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "76800",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563868148418220052",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗟𝗲𝗮𝗱𝘀",
+    "parent_id": "1563867996013985863",
+    "rate_limit_per_user": 0,
+    "topic": null,
+    "position": 24,
+    "permission_overwrites": [
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "76800",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "76800",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "76800",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563868150729154611",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗦𝗮𝗹𝗲𝘀",
+    "parent_id": "1563867996013985863",
+    "rate_limit_per_user": 0,
+    "topic": null,
+    "position": 25,
+    "permission_overwrites": [
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "76800",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "76800",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "76800",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563868153019240459",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗙𝗶𝗻𝗮𝗻𝗰𝗲",
+    "parent_id": "1563867996013985863",
+    "rate_limit_per_user": 0,
+    "topic": null,
+    "position": 26,
+    "permission_overwrites": [
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "76800",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "76800",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "76800",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563868155317854289",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗟𝗼𝗴𝘀",
+    "parent_id": "1563867996013985863",
+    "rate_limit_per_user": 0,
+    "topic": null,
+    "position": 27,
+    "permission_overwrites": [
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "76800",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "76800",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "76800",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563868157205151899",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗣𝗹𝗮𝗻𝗻𝗶𝗻𝗴",
+    "parent_id": "1563867996013985863",
+    "rate_limit_per_user": 0,
+    "topic": null,
+    "position": 28,
+    "permission_overwrites": [
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "76800",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "76800",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "76800",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563868159721869414",
+    "type": 0,
+    "last_message_id": "1563868163886817452",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗕𝗼𝘁-𝗖𝗼𝗻𝘁𝗿𝗼𝗹",
+    "parent_id": "1563867999864234026",
+    "rate_limit_per_user": 0,
+    "topic": null,
+    "position": 29,
+    "permission_overwrites": [
+      {
+        "id": "1563867969568772187",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867972177629214",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867974597615726",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563868166168510486",
+    "type": 0,
+    "last_message_id": "1563868171843141643",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗔𝗽𝗽𝘀--𝗜𝗻𝘁𝗲𝗴𝗿𝗮𝘁𝗶𝗼𝗻𝘀",
+    "parent_id": "1563867999864234026",
+    "rate_limit_per_user": 0,
+    "topic": null,
+    "position": 30,
+    "permission_overwrites": [
+      {
+        "id": "1563867969568772187",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867972177629214",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867974597615726",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563868173906739280",
+    "type": 0,
+    "last_message_id": "1563868177316843527",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗔𝘂𝘁𝗼𝗺𝗮𝘁𝗶𝗼𝗻",
+    "parent_id": "1563867999864234026",
+    "rate_limit_per_user": 0,
+    "topic": null,
+    "position": 31,
+    "permission_overwrites": [
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867969568772187",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867972177629214",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867974597615726",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563868179724374036",
+    "type": 4,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "╭・𝗖𝗢𝗠𝗠𝗨𝗡𝗜𝗧𝗬 𝗩𝗢𝗜𝗖𝗘",
+    "parent_id": null,
+    "position": 6,
+    "permission_overwrites": []
+  },
+  {
+    "id": "1563868182043689040",
+    "type": 2,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗥𝘂𝗽𝘇𝗵𝗮 𝗟𝗼𝘂𝗻𝗴𝗲",
+    "parent_id": "1563868179724374036",
+    "rate_limit_per_user": 0,
+    "bitrate": 64000,
+    "user_limit": 0,
+    "rtc_region": null,
+    "position": 0,
+    "permission_overwrites": [],
+    "nsfw": false,
+    "application_id": null
+  },
+  {
+    "id": "1563868183650242601",
+    "type": 2,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗧𝗲𝗮𝗺 𝗥𝗼𝗼𝗺",
+    "parent_id": "1563868179724374036",
+    "rate_limit_per_user": 0,
+    "bitrate": 64000,
+    "user_limit": 0,
+    "rtc_region": null,
+    "position": 1,
+    "permission_overwrites": [],
+    "nsfw": false,
+    "application_id": null
+  },
+  {
+    "id": "1563868186032734268",
+    "type": 2,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗖𝗹𝗶𝗲𝗻𝘁 𝗖𝗮𝗹𝗹",
+    "parent_id": "1563868179724374036",
+    "rate_limit_per_user": 0,
+    "bitrate": 64000,
+    "user_limit": 0,
+    "rtc_region": null,
+    "position": 2,
+    "permission_overwrites": [],
+    "nsfw": false,
+    "application_id": null
+  },
+  {
+    "id": "1563868188062646412",
+    "type": 2,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗙𝗼𝗰𝘂𝘀 𝗥𝗼𝗼𝗺",
+    "parent_id": "1563868179724374036",
+    "rate_limit_per_user": 0,
+    "bitrate": 64000,
+    "user_limit": 0,
+    "rtc_region": null,
+    "position": 3,
+    "permission_overwrites": [],
+    "nsfw": false,
+    "application_id": null
+  },
+  {
+    "id": "1563868190092558366",
+    "type": 2,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗔𝗙𝗞",
+    "parent_id": "1563868179724374036",
+    "rate_limit_per_user": 0,
+    "bitrate": 64000,
+    "user_limit": 0,
+    "rtc_region": null,
+    "position": 4,
+    "permission_overwrites": [],
+    "nsfw": false,
+    "application_id": null
+  },
+  {
+    "id": "1563869201649901648",
+    "type": 0,
+    "last_message_id": "1563869207421124759",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗙𝗔𝗤",
+    "parent_id": "1563867987130323044",
+    "rate_limit_per_user": 0,
+    "topic": "Choose the role(s) that describe why you're here. Your choices can be changed later.",
+    "position": 32,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563875014309052540",
+    "type": 4,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "╭・𝗖𝗢𝗠𝗠𝗨𝗡𝗜𝗧𝗬",
+    "parent_id": null,
+    "position": 7,
+    "permission_overwrites": []
+  },
+  {
+    "id": "1563875023826194513",
+    "type": 4,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "╭・𝗔𝗣𝗣𝗦 & 𝗧𝗢𝗢𝗟𝗦",
+    "parent_id": null,
+    "position": 8,
+    "permission_overwrites": [
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871603979194399",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871611633803284",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867972177629214",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ]
+  },
+  {
+    "id": "1563875026195710052",
+    "type": 4,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "╭・𝗩𝗔𝗟𝗢𝗥𝗔𝗡𝗧",
+    "parent_id": null,
+    "position": 9,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874977713754122",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ]
+  },
+  {
+    "id": "1563875028356038756",
+    "type": 0,
+    "last_message_id": "1563875035062603807",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗖𝗵𝗮𝘁",
+    "parent_id": "1563875026195710052",
+    "rate_limit_per_user": 0,
+    "topic": "Valorant community — chat, squads, clips, and LFG.",
+    "position": 33,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874977713754122",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875037126205582",
+    "type": 0,
+    "last_message_id": "1563875042712879216",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗟𝗙𝗚",
+    "parent_id": "1563875026195710052",
+    "rate_limit_per_user": 0,
+    "topic": "Valorant community — chat, squads, clips, and LFG.",
+    "position": 34,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874977713754122",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875045091049554",
+    "type": 0,
+    "last_message_id": "1563875050518478920",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗖𝗹𝗶𝗽𝘀",
+    "parent_id": "1563875026195710052",
+    "rate_limit_per_user": 0,
+    "topic": "Valorant community — chat, squads, clips, and LFG.",
+    "position": 35,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874977713754122",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875052477481052",
+    "type": 2,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗩𝗮𝗹𝗼𝗿𝗮𝗻𝘁 𝗦𝗾𝘂𝗮𝗱",
+    "parent_id": "1563875026195710052",
+    "rate_limit_per_user": 0,
+    "bitrate": 64000,
+    "user_limit": 0,
+    "rtc_region": null,
+    "position": 5,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874977713754122",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false,
+    "application_id": null
+  },
+  {
+    "id": "1563875054373044224",
+    "type": 4,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "╭・𝗠𝗜𝗡𝗘𝗖𝗥𝗔𝗙𝗧",
+    "parent_id": null,
+    "position": 10,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563874979794264156",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ]
+  },
+  {
+    "id": "1563875056420130876",
+    "type": 0,
+    "last_message_id": "1563875061612417196",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗖𝗵𝗮𝘁",
+    "parent_id": "1563875054373044224",
+    "rate_limit_per_user": 0,
+    "topic": "Minecraft community — chat, squads, clips, and LFG.",
+    "position": 36,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874979794264156",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875064078663702",
+    "type": 0,
+    "last_message_id": "1563875071812968463",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗟𝗙𝗚",
+    "parent_id": "1563875054373044224",
+    "rate_limit_per_user": 0,
+    "topic": "Minecraft community — chat, squads, clips, and LFG.",
+    "position": 37,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874979794264156",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875074237534220",
+    "type": 0,
+    "last_message_id": "1563875081288032397",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗕𝘂𝗶𝗹𝗱𝘀",
+    "parent_id": "1563875054373044224",
+    "rate_limit_per_user": 0,
+    "topic": "Minecraft community — chat, squads, clips, and LFG.",
+    "position": 38,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874979794264156",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875083846553620",
+    "type": 2,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗠𝗶𝗻𝗲𝗰𝗿𝗮𝗳𝘁",
+    "parent_id": "1563875054373044224",
+    "rate_limit_per_user": 0,
+    "bitrate": 64000,
+    "user_limit": 0,
+    "rtc_region": null,
+    "position": 6,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563874979794264156",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false,
+    "application_id": null
+  },
+  {
+    "id": "1563875085796774069",
+    "type": 4,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "╭・𝗚𝗧𝗔 𝗩",
+    "parent_id": null,
+    "position": 11,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874981929164910",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ]
+  },
+  {
+    "id": "1563875087713828955",
+    "type": 0,
+    "last_message_id": "1563875094223130625",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗖𝗵𝗮𝘁",
+    "parent_id": "1563875085796774069",
+    "rate_limit_per_user": 0,
+    "topic": "GTA V community — chat, squads, clips, and LFG.",
+    "position": 39,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874981929164910",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875096387522640",
+    "type": 0,
+    "last_message_id": "1563875102951743552",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗟𝗙𝗚",
+    "parent_id": "1563875085796774069",
+    "rate_limit_per_user": 0,
+    "topic": "GTA V community — chat, squads, clips, and LFG.",
+    "position": 40,
+    "permission_overwrites": [
+      {
+        "id": "1563874981929164910",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875106038481028",
+    "type": 0,
+    "last_message_id": "1563875113424781424",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗖𝗹𝗶𝗽𝘀",
+    "parent_id": "1563875085796774069",
+    "rate_limit_per_user": 0,
+    "topic": "GTA V community — chat, squads, clips, and LFG.",
+    "position": 41,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874981929164910",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875116428038164",
+    "type": 2,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗚𝗧𝗔 𝗦𝗾𝘂𝗮𝗱",
+    "parent_id": "1563875085796774069",
+    "rate_limit_per_user": 0,
+    "bitrate": 64000,
+    "user_limit": 0,
+    "rtc_region": null,
+    "position": 7,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874981929164910",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false,
+    "application_id": null
+  },
+  {
+    "id": "1563875119078834266",
+    "type": 4,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "╭・𝗖𝗦𝟮",
+    "parent_id": null,
+    "position": 12,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874984261193728",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ]
+  },
+  {
+    "id": "1563875121158955109",
+    "type": 0,
+    "last_message_id": "1563875126804746265",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗖𝗵𝗮𝘁",
+    "parent_id": "1563875119078834266",
+    "rate_limit_per_user": 0,
+    "topic": "CS2 community — chat, squads, clips, and LFG.",
+    "position": 42,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874984261193728",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875129941827586",
+    "type": 0,
+    "last_message_id": "1563875136497782788",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗟𝗙𝗚",
+    "parent_id": "1563875119078834266",
+    "rate_limit_per_user": 0,
+    "topic": "CS2 community — chat, squads, clips, and LFG.",
+    "position": 43,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563874984261193728",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875139039404062",
+    "type": 0,
+    "last_message_id": "1563875144915624037",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗖𝗹𝗶𝗽𝘀",
+    "parent_id": "1563875119078834266",
+    "rate_limit_per_user": 0,
+    "topic": "CS2 community — chat, squads, clips, and LFG.",
+    "position": 44,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874984261193728",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875147276886086",
+    "type": 2,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・",
+    "parent_id": "1563875119078834266",
+    "rate_limit_per_user": 0,
+    "bitrate": 64000,
+    "user_limit": 0,
+    "rtc_region": null,
+    "position": 8,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874984261193728",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false,
+    "application_id": null
+  },
+  {
+    "id": "1563875149357514894",
+    "type": 4,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "╭・𝗙𝗢𝗥𝗧𝗡𝗜𝗧𝗘",
+    "parent_id": null,
+    "position": 13,
+    "permission_overwrites": [
+      {
+        "id": "1563874986140377099",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ]
+  },
+  {
+    "id": "1563875151584436368",
+    "type": 0,
+    "last_message_id": "1563875158555496562",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗖𝗵𝗮𝘁",
+    "parent_id": "1563875149357514894",
+    "rate_limit_per_user": 0,
+    "topic": "Fortnite community — chat, squads, clips, and LFG.",
+    "position": 45,
+    "permission_overwrites": [
+      {
+        "id": "1563874986140377099",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875160707305553",
+    "type": 0,
+    "last_message_id": "1563875166134599711",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗟𝗙𝗚",
+    "parent_id": "1563875149357514894",
+    "rate_limit_per_user": 0,
+    "topic": "Fortnite community — chat, squads, clips, and LFG.",
+    "position": 46,
+    "permission_overwrites": [
+      {
+        "id": "1563874986140377099",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875168835735683",
+    "type": 0,
+    "last_message_id": "1563875175362072577",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗖𝗹𝗶𝗽𝘀",
+    "parent_id": "1563875149357514894",
+    "rate_limit_per_user": 0,
+    "topic": "Fortnite community — chat, squads, clips, and LFG.",
+    "position": 47,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874986140377099",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875177379532870",
+    "type": 2,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・",
+    "parent_id": "1563875149357514894",
+    "rate_limit_per_user": 0,
+    "bitrate": 64000,
+    "user_limit": 0,
+    "rtc_region": null,
+    "position": 9,
+    "permission_overwrites": [
+      {
+        "id": "1563874986140377099",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false,
+    "application_id": null
+  },
+  {
+    "id": "1563875179849977866",
+    "type": 4,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "╭・𝗥𝗢𝗕𝗟𝗢𝗫",
+    "parent_id": null,
+    "position": 14,
+    "permission_overwrites": [
+      {
+        "id": "1563874988120084521",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ]
+  },
+  {
+    "id": "1563875182202982561",
+    "type": 0,
+    "last_message_id": "1563875188318408747",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗖𝗵𝗮𝘁",
+    "parent_id": "1563875179849977866",
+    "rate_limit_per_user": 0,
+    "topic": "Roblox community — chat, squads, clips, and LFG.",
+    "position": 48,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874988120084521",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875191119937557",
+    "type": 0,
+    "last_message_id": "1563875198166507601",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗟𝗙𝗚",
+    "parent_id": "1563875179849977866",
+    "rate_limit_per_user": 0,
+    "topic": "Roblox community — chat, squads, clips, and LFG.",
+    "position": 49,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874988120084521",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875200490283019",
+    "type": 0,
+    "last_message_id": "1563875210871177237",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗚𝗮𝗺𝗲𝘀",
+    "parent_id": "1563875179849977866",
+    "rate_limit_per_user": 0,
+    "topic": "Roblox community — chat, squads, clips, and LFG.",
+    "position": 50,
+    "permission_overwrites": [
+      {
+        "id": "1563874988120084521",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875215644295209",
+    "type": 2,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・",
+    "parent_id": "1563875179849977866",
+    "rate_limit_per_user": 0,
+    "bitrate": 64000,
+    "user_limit": 0,
+    "rtc_region": null,
+    "position": 10,
+    "permission_overwrites": [
+      {
+        "id": "1563874988120084521",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false,
+    "application_id": null
+  },
+  {
+    "id": "1563875217892315140",
+    "type": 4,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "╭・𝗔𝗠𝗢𝗡𝗚 𝗨𝗦",
+    "parent_id": null,
+    "position": 15,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563874990292471929",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ]
+  },
+  {
+    "id": "1563875220400640000",
+    "type": 0,
+    "last_message_id": "1563875226503221329",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗖𝗵𝗮𝘁",
+    "parent_id": "1563875217892315140",
+    "rate_limit_per_user": 0,
+    "topic": "Among Us community — chat, squads, clips, and LFG.",
+    "position": 51,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874990292471929",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875229284175993",
+    "type": 0,
+    "last_message_id": "1563875236917809153",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・",
+    "parent_id": "1563875217892315140",
+    "rate_limit_per_user": 0,
+    "topic": "Among Us community — chat, squads, clips, and LFG.",
+    "position": 52,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874990292471929",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875240323588177",
+    "type": 0,
+    "last_message_id": "1563875246652788758",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗚𝗮𝗺𝗲𝘀",
+    "parent_id": "1563875217892315140",
+    "rate_limit_per_user": 0,
+    "topic": "Among Us community — chat, squads, clips, and LFG.",
+    "position": 53,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874990292471929",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875249114845194",
+    "type": 2,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗔𝗺𝗼𝗻𝗴 𝗨𝘀 𝗟𝗼𝗯𝗯𝘆",
+    "parent_id": "1563875217892315140",
+    "rate_limit_per_user": 0,
+    "bitrate": 64000,
+    "user_limit": 0,
+    "rtc_region": null,
+    "position": 11,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874990292471929",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false,
+    "application_id": null
+  },
+  {
+    "id": "1563875251748601978",
+    "type": 4,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "╭・𝗔𝗣𝗘𝗫 𝗟𝗘𝗚𝗘𝗡𝗗𝗦",
+    "parent_id": null,
+    "position": 16,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874992180043826",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ]
+  },
+  {
+    "id": "1563875254487486575",
+    "type": 0,
+    "last_message_id": "1563875259776499803",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗖𝗵𝗮𝘁",
+    "parent_id": "1563875251748601978",
+    "rate_limit_per_user": 0,
+    "topic": "Apex Legends community — chat, squads, clips, and LFG.",
+    "position": 54,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563874992180043826",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875262079434792",
+    "type": 0,
+    "last_message_id": "1563875268886667355",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗟𝗙𝗚",
+    "parent_id": "1563875251748601978",
+    "rate_limit_per_user": 0,
+    "topic": "Apex Legends community — chat, squads, clips, and LFG.",
+    "position": 55,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563874992180043826",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875271805902959",
+    "type": 0,
+    "last_message_id": "1563875279758164098",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗖𝗹𝗶𝗽𝘀",
+    "parent_id": "1563875251748601978",
+    "rate_limit_per_user": 0,
+    "topic": "Apex Legends community — chat, squads, clips, and LFG.",
+    "position": 56,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874992180043826",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875282115493939",
+    "type": 2,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗔𝗽𝗲𝘅 𝗦𝗾𝘂𝗮𝗱",
+    "parent_id": "1563875251748601978",
+    "rate_limit_per_user": 0,
+    "bitrate": 64000,
+    "user_limit": 0,
+    "rtc_region": null,
+    "position": 12,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874992180043826",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false,
+    "application_id": null
+  },
+  {
+    "id": "1563875285068414996",
+    "type": 4,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "╭・𝗖𝗦𝟮",
+    "parent_id": null,
+    "position": 17,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874994172207164",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ]
+  },
+  {
+    "id": "1563875288440639588",
+    "type": 0,
+    "last_message_id": "1563875293943300107",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗖𝗵𝗮𝘁",
+    "parent_id": "1563875285068414996",
+    "rate_limit_per_user": 0,
+    "topic": "BGMI / PUBG community — chat, squads, clips, and LFG.",
+    "position": 57,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874994172207164",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875296086728846",
+    "type": 0,
+    "last_message_id": "1563875302386569287",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・",
+    "parent_id": "1563875285068414996",
+    "rate_limit_per_user": 0,
+    "topic": "BGMI / PUBG community — chat, squads, clips, and LFG.",
+    "position": 58,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874994172207164",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875304454226024",
+    "type": 0,
+    "last_message_id": "1563875310100025356",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗖𝗹𝗶𝗽𝘀",
+    "parent_id": "1563875285068414996",
+    "rate_limit_per_user": 0,
+    "topic": "BGMI / PUBG community — chat, squads, clips, and LFG.",
+    "position": 59,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874994172207164",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875312301908079",
+    "type": 2,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗕𝗚𝗠𝗜 / 𝗣𝗨𝗕𝗚 𝗦𝗾𝘂𝗮𝗱",
+    "parent_id": "1563875285068414996",
+    "rate_limit_per_user": 0,
+    "bitrate": 64000,
+    "user_limit": 0,
+    "rtc_region": null,
+    "position": 13,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874994172207164",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false,
+    "application_id": null
+  },
+  {
+    "id": "1563875314319360101",
+    "type": 4,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "╭・𝗢𝗧𝗛𝗘𝗥 𝗚𝗔𝗠𝗘𝗦",
+    "parent_id": null,
+    "position": 18,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874996357566546",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ]
+  },
+  {
+    "id": "1563875316668305451",
+    "type": 0,
+    "last_message_id": "1563875322804441200",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗖𝗵𝗮𝘁",
+    "parent_id": "1563875314319360101",
+    "rate_limit_per_user": 0,
+    "topic": "Other Games community — chat, squads, clips, and LFG.",
+    "position": 60,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874996357566546",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875325278949537",
+    "type": 0,
+    "last_message_id": "1563875331465674813",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗟𝗙𝗚",
+    "parent_id": "1563875314319360101",
+    "rate_limit_per_user": 0,
+    "topic": "Other Games community — chat, squads, clips, and LFG.",
+    "position": 61,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874996357566546",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875341729144955",
+    "type": 0,
+    "last_message_id": "1563875347873669211",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗚𝗮𝗺𝗲-𝗥𝗲𝗰𝗼𝗺𝗺𝗲𝗻𝗱𝗮𝘁𝗶𝗼𝗻𝘀",
+    "parent_id": "1563875314319360101",
+    "rate_limit_per_user": 0,
+    "topic": "Other Games community — chat, squads, clips, and LFG.",
+    "position": 62,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874996357566546",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875350038052955",
+    "type": 2,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗢𝘁𝗵𝗲𝗿 𝗚𝗮𝗺𝗲𝘀",
+    "parent_id": "1563875314319360101",
+    "rate_limit_per_user": 0,
+    "bitrate": 64000,
+    "user_limit": 0,
+    "rtc_region": null,
+    "position": 14,
+    "permission_overwrites": [
+      {
+        "id": "1563871591098621993",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871592776466484",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563874996357566546",
+        "type": 0,
+        "allow": "3214336",
+        "deny": "0"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false,
+    "application_id": null
+  },
+  {
+    "id": "1563875354534223976",
+    "type": 0,
+    "last_message_id": "1563876343752695840",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗩𝗲𝗿𝗶𝗳𝗶𝗲𝗱",
+    "parent_id": "1563867987130323044",
+    "rate_limit_per_user": 0,
+    "topic": null,
+    "position": 63,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563875369008762972",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・",
+    "parent_id": "1563875014309052540",
+    "rate_limit_per_user": 0,
+    "topic": "Talk, network, share ideas, and meet the Rupzha community.",
+    "position": 64,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563875374897569882",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・",
+    "parent_id": "1563875014309052540",
+    "rate_limit_per_user": 0,
+    "topic": null,
+    "position": 65,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563875377007296553",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗖𝗹𝗶𝗽𝘀--𝗛𝗶𝗴𝗵𝗹𝗶𝗴𝗵𝘁𝘀",
+    "parent_id": "1563875014309052540",
+    "rate_limit_per_user": 0,
+    "topic": null,
+    "position": 66,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563875378999595048",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・",
+    "parent_id": "1563875014309052540",
+    "rate_limit_per_user": 0,
+    "topic": null,
+    "position": 67,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563875380463411301",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗦𝗰𝗿𝗲𝗲𝗻𝘀𝗵𝗼𝘁𝘀",
+    "parent_id": "1563875014309052540",
+    "rate_limit_per_user": 0,
+    "topic": null,
+    "position": 68,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563875383177125888",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・",
+    "parent_id": "1563875014309052540",
+    "rate_limit_per_user": 0,
+    "topic": null,
+    "position": 69,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563875385723330601",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗘𝘃𝗲𝗻𝘁𝘀",
+    "parent_id": "1563875014309052540",
+    "rate_limit_per_user": 0,
+    "topic": null,
+    "position": 70,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563875387904102531",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗚𝗶𝘃𝗲𝗮𝘄𝗮𝘆𝘀",
+    "parent_id": "1563875014309052540",
+    "rate_limit_per_user": 0,
+    "topic": null,
+    "position": 71,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563875389888008325",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗦𝗵𝗼𝘄𝗰𝗮𝘀𝗲",
+    "parent_id": "1563875014309052540",
+    "rate_limit_per_user": 0,
+    "topic": "Show your work, projects, designs, builds, and wins.",
+    "position": 72,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563875393830916096",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗥𝗲𝘀𝗼𝘂𝗿𝗰𝗲𝘀",
+    "parent_id": "1563875014309052540",
+    "rate_limit_per_user": 0,
+    "topic": "Useful tools, references, templates, learning material, and community resources.",
+    "position": 73,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563875397815369738",
+    "type": 0,
+    "last_message_id": "1563875403074899979",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗖𝗼𝗻𝘁𝗮𝗰𝘁",
+    "parent_id": "1563875014309052540",
+    "rate_limit_per_user": 0,
+    "topic": "For serious enquiries, collaborations, partnerships, or project discussions.",
+    "position": 74,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563875408900792452",
+    "type": 0,
+    "last_message_id": "1563875412675919941",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗕𝗼𝘁-𝗖𝗼𝗻𝘁𝗿𝗼𝗹",
+    "parent_id": "1563875023826194513",
+    "rate_limit_per_user": 0,
+    "topic": null,
+    "position": 75,
+    "permission_overwrites": [
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871603979194399",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871611633803284",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867972177629214",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875414835855492",
+    "type": 0,
+    "last_message_id": "1563875419764170794",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗔𝗽𝗽𝘀--𝗜𝗻𝘁𝗲𝗴𝗿𝗮𝘁𝗶𝗼𝗻𝘀",
+    "parent_id": "1563875023826194513",
+    "rate_limit_per_user": 0,
+    "topic": null,
+    "position": 76,
+    "permission_overwrites": [
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871603979194399",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867972177629214",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871611633803284",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875422301589564",
+    "type": 0,
+    "last_message_id": "1563875425510494340",
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗔𝘂𝘁𝗼𝗺𝗮𝘁𝗶𝗼𝗻",
+    "parent_id": "1563875023826194513",
+    "rate_limit_per_user": 0,
+    "topic": null,
+    "position": 77,
+    "permission_overwrites": [
+      {
+        "id": "1563871588565393489",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867965068288062",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871603979194399",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1554830636454514708",
+        "type": 0,
+        "allow": "0",
+        "deny": "1024"
+      },
+      {
+        "id": "1563871611633803284",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871585083981915",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563871597365035050",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867972177629214",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867967115239424",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      },
+      {
+        "id": "1563867963088572506",
+        "type": 0,
+        "allow": "68608",
+        "deny": "0"
+      }
+    ],
+    "nsfw": false
+  },
+  {
+    "id": "1563875427951575071",
+    "type": 4,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "╭・𝗖𝗢𝗠𝗠𝗨𝗡𝗜𝗧𝗬 𝗩𝗢𝗜𝗖𝗘",
+    "parent_id": null,
+    "position": 19,
+    "permission_overwrites": []
+  },
+  {
+    "id": "1563875430778278011",
+    "type": 2,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・",
+    "parent_id": "1563875427951575071",
+    "rate_limit_per_user": 0,
+    "bitrate": 64000,
+    "user_limit": 0,
+    "rtc_region": null,
+    "position": 15,
+    "permission_overwrites": [],
+    "nsfw": false,
+    "application_id": null
+  },
+  {
+    "id": "1563875433580335234",
+    "type": 2,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗚𝗮𝗺𝗲 𝗡𝗶𝗴𝗵𝘁",
+    "parent_id": "1563875427951575071",
+    "rate_limit_per_user": 0,
+    "bitrate": 64000,
+    "user_limit": 0,
+    "rtc_region": null,
+    "position": 16,
+    "permission_overwrites": [],
+    "nsfw": false,
+    "application_id": null
+  },
+  {
+    "id": "1563875435836866650",
+    "type": 2,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗧𝗼𝘂𝗿𝗻𝗮𝗺𝗲𝗻𝘁 𝗥𝗼𝗼𝗺",
+    "parent_id": "1563875427951575071",
+    "rate_limit_per_user": 0,
+    "bitrate": 64000,
+    "user_limit": 0,
+    "rtc_region": null,
+    "position": 17,
+    "permission_overwrites": [],
+    "nsfw": false,
+    "application_id": null
+  },
+  {
+    "id": "1563875438604849152",
+    "type": 2,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗖𝗵𝗶𝗹𝗹 𝗥𝗼𝗼𝗺",
+    "parent_id": "1563875427951575071",
+    "rate_limit_per_user": 0,
+    "bitrate": 64000,
+    "user_limit": 0,
+    "rtc_region": null,
+    "position": 18,
+    "permission_overwrites": [],
+    "nsfw": false,
+    "application_id": null
+  },
+  {
+    "id": "1563875440630693908",
+    "type": 2,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗔𝗙𝗞",
+    "parent_id": "1563875427951575071",
+    "rate_limit_per_user": 0,
+    "bitrate": 64000,
+    "user_limit": 0,
+    "rtc_region": null,
+    "position": 19,
+    "permission_overwrites": [],
+    "nsfw": false,
+    "application_id": null
+  },
+  {
+    "id": "1563876371091030087",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗘𝘃𝗲𝗻𝘁𝘀",
+    "parent_id": "1563867989298642944",
+    "rate_limit_per_user": 0,
+    "topic": null,
+    "position": 78,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563876373662142595",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗚𝗶𝘃𝗲𝗮𝘄𝗮𝘆𝘀",
+    "parent_id": "1563867989298642944",
+    "rate_limit_per_user": 0,
+    "topic": null,
+    "position": 79,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563876376082251816",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗦𝗵𝗼𝘄𝗰𝗮𝘀𝗲",
+    "parent_id": "1563867989298642944",
+    "rate_limit_per_user": 0,
+    "topic": null,
+    "position": 80,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563876378573537351",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗥𝗲𝘀𝗼𝘂𝗿𝗰𝗲𝘀",
+    "parent_id": "1563867989298642944",
+    "rate_limit_per_user": 0,
+    "topic": null,
+    "position": 81,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563876380985528340",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗖𝗼𝗻𝘁𝗮𝗰𝘁",
+    "parent_id": "1563867989298642944",
+    "rate_limit_per_user": 0,
+    "topic": null,
+    "position": 82,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563876383112040581",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗦𝘂𝗴𝗴𝗲𝘀𝘁𝗶𝗼𝗻𝘀",
+    "parent_id": "1563867989298642944",
+    "rate_limit_per_user": 0,
+    "topic": null,
+    "position": 83,
+    "permission_overwrites": [],
+    "nsfw": false
+  },
+  {
+    "id": "1563876385058070644",
+    "type": 0,
+    "last_message_id": null,
+    "flags": 0,
+    "guild_id": "1554830636454514708",
+    "name": "・𝗖𝗿𝗲𝗮𝘁𝗼𝗿・𝗛𝘂𝗯",
+    "parent_id": "1563867989298642944",
+    "rate_limit_per_user": 0,
+    "topic": null,
+    "position": 84,
+    "permission_overwrites": [],
+    "nsfw": false
+  }
+]
