@@ -3,7 +3,7 @@ from types import SimpleNamespace
 
 import discord
 
-from bot import WELCOME, build_welcome_embed, find_public_text_channel
+from bot import WELCOME, WELCOME_GIF_PATH, build_welcome_embed, build_static_welcome_embed, find_public_text_channel, welcome_panel_file
 
 
 class WelcomeEmbedTests(unittest.TestCase):
@@ -30,6 +30,24 @@ class WelcomeEmbedTests(unittest.TestCase):
         self.assertEqual(field_names, ["01 · 𝗦𝗧𝗔𝗥𝗧 𝗛𝗘𝗥𝗘", "02 · 𝗣𝗜𝗖𝗞 𝗬𝗢𝗨𝗥 𝗥𝗢𝗟𝗘𝗦", "03 · 𝗠𝗘𝗘𝗧 𝗧𝗛𝗘 𝗖𝗢𝗠𝗠𝗨𝗡𝗜𝗧𝗬", "04 · 𝗛𝗔𝗩𝗘 𝗙𝗨𝗡"])
         self.assertIn("your space to play", embed.footer.text)
 
+    def test_member_welcome_uses_static_gif_and_normal_avatar(self):
+        member = SimpleNamespace(
+            id=789,
+            mention="<@789>",
+            display_name="New Member",
+            guild=SimpleNamespace(member_count=43),
+            display_avatar=SimpleNamespace(url="https://cdn.discordapp.com/avatars/789/test.png"),
+        )
+
+        embed = build_welcome_embed(member)
+
+        self.assertEqual(embed.image.url, "attachment://rupzha-welcome.gif")
+        self.assertEqual(embed.thumbnail.url, "https://cdn.discordapp.com/avatars/789/test.png")
+
+    def test_rupzha_welcome_gif_asset_exists(self):
+        self.assertTrue(WELCOME_GIF_PATH.is_file())
+        self.assertGreater(WELCOME_GIF_PATH.stat().st_size, 100_000)
+
     def test_builds_when_optional_channels_are_missing(self):
         member = SimpleNamespace(
             mention="<@456>",
@@ -44,6 +62,15 @@ class WelcomeEmbedTests(unittest.TestCase):
         self.assertIn(member.display_name, embed.description)
         self.assertIn("#・𝗖𝗵𝗼𝗼𝘀𝗲・𝗥𝗼𝗹𝗲𝘀", embed.description)
         self.assertIn("#・𝗥𝘂𝗹𝗲𝘀", embed.description)
+
+    def test_static_welcome_panel_embed_displays_graphical_gif(self):
+        embed = build_static_welcome_embed()
+        self.assertEqual(embed.image.url, "attachment://rupzha-welcome.gif")
+        self.assertEqual(embed.color.value, 0xFF1F3D)
+
+    def test_static_welcome_panel_uses_graphical_gif_asset(self):
+        welcome_file = welcome_panel_file()
+        self.assertEqual(welcome_file.filename, "rupzha-welcome.gif")
 
     def test_static_welcome_matches_server_panel_style(self):
         self.assertIn("<!-- RUPZHA_WELCOME_PANEL_V2 -->", WELCOME)

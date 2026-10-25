@@ -30,6 +30,7 @@ bot = discord.Client(
 )
 
 DB_PATH = Path(os.getenv("RUPZHA_DB_PATH", Path(__file__).with_name("rupzha.db")))
+WELCOME_GIF_PATH = Path(__file__).with_name("assets") / "rupzha-welcome.gif"
 db = Database(DB_PATH)
 db.initialize()
 join_guard = JoinGuard(window_seconds=10.0, threshold=8)
@@ -90,6 +91,10 @@ CATEGORY_ACCESS_POLICY = {
     "╭・𝗖𝗔𝗥𝗟・𝗕𝗢𝗧": {"Founder", "Co-Founder", "Administrator", "Operations", "Manager", "Moderator"},
 }
 
+# Utility bots can read public/community channels, but private workspace and
+# integration areas stay hidden unless their own policy explicitly permits them.
+PRIVATE_WORKSPACE_CATEGORIES = set(CATEGORY_ACCESS_POLICY)
+
 # Child-channel locks tighten category permissions without changing the category model.
 # Modes: public_read_only, public_read_only_bot_write, client_read_only,
 # restricted_read_only, restricted_bot_write.
@@ -127,12 +132,19 @@ THIRD_PARTY_BOT_CHANNEL_POLICIES = {
 }
 
 
-def build_third_party_bot_overwrite(bot_name: str, own_channel_name: str, channel_name: str):
+def build_third_party_bot_overwrite(bot_name: str, own_channel_name: str, channel_name: str, is_private: bool = False):
     allowed = channel_name == own_channel_name
+    visible = not is_private or allowed
     return {
         "allowed": allowed,
+        "view_channel": visible,
+        "read_message_history": visible,
         "send_messages": allowed,
+        "send_messages_in_threads": allowed,
+        "create_public_threads": allowed,
+        "create_private_threads": False,
         "use_application_commands": allowed,
+        "add_reactions": allowed,
     }
 
 
@@ -477,16 +489,45 @@ class OnboardingView(discord.ui.View):
         except discord.HTTPException:
             await interaction.response.send_message("Discord rejected the role update. Try again in a moment.", ephemeral=True)
 
+def build_static_welcome_embed():
+    embed = discord.Embed(
+        title="✦・𝗪𝗘𝗟𝗖𝗢𝗠𝗘・✦",
+        description=(
+            "**gaming · creators · friends**\n\n"
+            "Welcome to **RupZha** — a place to play, meet people, share your work, and build a good community.\n\n"
+            "**01 · 𝗥𝗘𝗔𝗗** → Rules\n"
+            "**02 · 𝗖𝗛𝗢𝗢𝗦𝗘** → Pick your games and interests\n"
+            "**03 · 𝗝𝗢𝗜𝗡 𝗜𝗡** → Chat, find teammates, share projects, join events\n"
+            "**04 · 𝗛𝗔𝗩𝗘 𝗙𝗨𝗡** → Keep it respectful, SFW, and chill"
+        ),
+        color=discord.Color(0xFF1F3D),
+    )
+    embed.set_image(url="attachment://rupzha-welcome.gif")
+    embed.set_footer(text="RupZha · play • create • connect")
+    return embed
+
+
+def welcome_panel_file():
+    if not WELCOME_GIF_PATH.is_file():
+        raise FileNotFoundError(f"Missing welcome asset: {WELCOME_GIF_PATH}")
+    return discord.File(WELCOME_GIF_PATH, filename="rupzha-welcome.gif")
+
+
 async def ensure_welcome_panel(channel):
     try:
         async for message in channel.history(limit=50):
             if message.author == bot.user and "<!-- RUPZHA_WELCOME_PANEL_V2 -->" in message.content:
-                if message.content != WELCOME:
-                    await message.edit(content=WELCOME)
-                if not message.pinned:
-                    await message.pin()
-                return message
-        message = await channel.send(WELCOME)
+                has_graphic = any(getattr(attachment, "filename", "") == "rupzha-welcome.gif" for attachment in message.attachments)
+                is_graphical_embed = bool(message.embeds and message.embeds[0].image.url == "attachment://rupzha-welcome.gif")
+                if message.content != "" or not has_graphic or not is_graphical_embed:
+                    await message.delete()
+                    message = None
+                else:
+                    if not message.pinned:
+                        await message.pin()
+                    return message
+                break
+        message = await channel.send(embed=build_static_welcome_embed(), file=welcome_panel_file())
         await message.pin()
         return message
     except (discord.Forbidden, discord.HTTPException) as exc:
@@ -637,19 +678,35 @@ async def setup_server(guild):
             role = roles.get(policy_spec["bot_role"])
             if not role:
                 continue
-            desired = build_third_party_bot_overwrite(bot_name, policy_spec["channel_name"], channel.name)
+            is_private = channel.category and channel.category.name in PRIVATE_WORKSPACE_CATEGORIES
+            desired = build_third_party_bot_overwrite(
+                bot_name,
+                policy_spec["channel_name"],
+                channel.name,
+                is_private=is_private,
+            )
             current = channel.overwrites_for(role)
             desired_send = desired["send_messages"]
             desired_commands = desired["use_application_commands"]
-            if current.send_messages != desired_send or current.use_application_commands != desired_commands:
+            desired_view = desired["view_channel"]
+            desired_read = desired["read_message_history"]
+            if (
+                current.view_channel != desired_view
+                or current.read_message_history != desired_read
+                or current.send_messages != desired_send
+                or current.use_application_commands != desired_commands
+                or current.send_messages_in_threads != desired["send_messages_in_threads"]
+                or current.add_reactions != desired["add_reactions"]
+            ):
                 third_party_overwrites[role] = discord.PermissionOverwrite(
-                    view_channel=True,
+                    view_channel=desired_view,
                     send_messages=desired_send,
-                    send_messages_in_threads=desired_send,
-                    create_public_threads=False,
-                    create_private_threads=False,
+                    send_messages_in_threads=desired["send_messages_in_threads"],
+                    create_public_threads=desired["create_public_threads"],
+                    create_private_threads=desired["create_private_threads"],
                     use_application_commands=desired_commands,
-                    read_message_history=True,
+                    read_message_history=desired_read,
+                    add_reactions=desired["add_reactions"],
                     embed_links=desired_send,
                     attach_files=desired_send,
                 )
@@ -814,6 +871,11 @@ def build_welcome_embed(member, rules_channel=None, roles_channel=None):
         value="Keep it respectful, SFW, and chill. That’s it.",
         inline=False,
     )
+    avatar = getattr(member, "display_avatar", None)
+    avatar_url = getattr(avatar, "url", None)
+    if avatar_url:
+        embed.set_thumbnail(url=str(avatar_url))
+    embed.set_image(url="attachment://rupzha-welcome.gif")
     embed.set_footer(text="RupZha · your space to play • create • connect")
     return embed
 
@@ -845,8 +907,11 @@ async def on_member_join(member):
     roles = find_public_text_channel(member.guild, PUBLIC_CHANNELS["roles"])
     if welcome:
         try:
-            await welcome.send(embed=build_welcome_embed(member, rules, roles))
-        except discord.HTTPException as exc:
+            await welcome.send(
+                embed=build_welcome_embed(member, rules, roles),
+                file=welcome_panel_file(),
+            )
+        except (FileNotFoundError, discord.HTTPException) as exc:
             print(f"WARN welcome message: {exc}")
 
 @bot.event

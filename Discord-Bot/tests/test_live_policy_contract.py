@@ -119,13 +119,35 @@ def test_third_party_bot_channels_are_isolated():
     assert bot.THIRD_PARTY_BOT_CHANNEL_POLICIES["Koya"]["bot_role"] == "Koya"
 
 
-def test_third_party_bot_channel_access_denies_other_channels():
+def test_third_party_bot_channel_access_reads_public_but_cannot_write_elsewhere():
     policy = bot.build_third_party_bot_overwrite("OwO", "🤖・・𝗢𝘄𝗢", "📢・・𝗔𝗻𝗻𝗼𝘂𝗻𝗰𝗲𝗺𝗲𝗻𝘁𝘀")
     assert policy["allowed"] is False
+    assert policy["view_channel"] is True
+    assert policy["read_message_history"] is True
     assert policy["send_messages"] is False
+    assert policy["send_messages_in_threads"] is False
+    assert policy["create_public_threads"] is False
+    assert policy["create_private_threads"] is False
     assert policy["use_application_commands"] is False
+    assert policy["add_reactions"] is False
 
+
+def test_third_party_bot_own_channel_is_fully_operational():
     own = bot.build_third_party_bot_overwrite("OwO", "🤖・・𝗢𝘄𝗢", "🤖・・𝗢𝘄𝗢")
     assert own["allowed"] is True
+    assert own["view_channel"] is True
+    assert own["read_message_history"] is True
     assert own["send_messages"] is True
+    assert own["send_messages_in_threads"] is True
     assert own["use_application_commands"] is True
+    assert own["add_reactions"] is True
+
+
+def test_third_party_bot_private_channels_are_hidden():
+    policy = bot.build_third_party_bot_overwrite(
+        "OwO", "🤖・・𝗢𝘄𝗢", "📋・・𝗦𝗲𝗰𝘂𝗿𝗶𝘁𝘆・𝗟𝗼𝗴𝘀", is_private=True
+    )
+    assert policy["view_channel"] is False
+    assert policy["read_message_history"] is False
+    assert policy["send_messages"] is False
+    assert policy["use_application_commands"] is False
