@@ -656,18 +656,37 @@ def build_welcome_embed(member, rules_channel=None, roles_channel=None):
     roles = roles_channel.mention if roles_channel else "#・𝗖𝗵𝗼𝗼𝘀𝗲・𝗥𝗼𝗹𝗲𝘀"
 
     embed = discord.Embed(
-        title="𝗪𝗘𝗟𝗖𝗢𝗠𝗘 𝗧𝗢 𝗥𝗨𝗣𝗭𝗛𝗔",
+        title="✦ 𝗪𝗘𝗟𝗖𝗢𝗠𝗘 𝗧𝗢 𝗥𝗨𝗣𝗭𝗛𝗔 ✦",
         description=(
             f"{member.mention} **you’re officially in.**\n\n"
-            f"Welcome, **{member.display_name}**. You’re member **#{member_count}** of the community.\n\n"
-            f"Gaming • Community • Building\n\n"
-            f"Start with {rules} → choose games in {roles}."
+            f"Welcome, **{member.display_name}** — member **#{member_count}**.\n\n"
+            "**gaming · creators · friends**\n\n"
+            "A place to play, meet people, share your work, and build a community.\n\n"
+            f"Start with {rules} → choose your games in {roles}."
         ),
+        color=discord.Color(0xFF4F6D),
     )
-    embed.add_field(name="01 · 𝗥𝗘𝗔𝗗", value=f"Start with {rules}", inline=False)
-    embed.add_field(name="02 · 𝗖𝗛𝗢𝗢𝗦𝗘", value=f"Pick your games in {roles}", inline=False)
-    embed.add_field(name="03 · 𝗝𝗢𝗜𝗡 𝗜𝗡", value="Jump into the community, find teammates, and have fun.", inline=False)
-    embed.set_footer(text="RupZha • Gaming • Community • Building")
+    embed.add_field(
+        name="01 · 𝗦𝗧𝗔𝗥𝗧 𝗛𝗘𝗥𝗘",
+        value=f"Read {rules} and get familiar with the server.",
+        inline=False,
+    )
+    embed.add_field(
+        name="02 · 𝗣𝗜𝗖𝗞 𝗬𝗢𝗨𝗥 𝗥𝗢𝗟𝗘𝗦",
+        value=f"Choose your games and interests in {roles}.",
+        inline=False,
+    )
+    embed.add_field(
+        name="03 · 𝗠𝗘𝗘𝗧 𝗧𝗛𝗘 𝗖𝗢𝗠𝗠𝗨𝗡𝗜𝗧𝗬",
+        value="Chat, find teammates, share projects, join events, and make friends.",
+        inline=False,
+    )
+    embed.add_field(
+        name="04 · 𝗛𝗔𝗩𝗘 𝗙𝗨𝗡",
+        value="Keep it respectful, SFW, and chill. That’s it.",
+        inline=False,
+    )
+    embed.set_footer(text="RupZha · your space to play • create • connect")
     return embed
 
 
