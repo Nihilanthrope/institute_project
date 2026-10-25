@@ -31,6 +31,38 @@ ROLE_ORDER = [
 GAME_ROLES = ROLE_ORDER[13:]
 STAFF_ROLES = ROLE_ORDER[:7]
 
+# Strict role policy: permissions represent power; category overwrites represent access.
+ROLE_PERMISSION_POLICY = {
+    "Founder": discord.Permissions(administrator=True),
+    "Co-Founder": discord.Permissions(administrator=True),
+    "Administrator": discord.Permissions(administrator=True),
+    "Operations": discord.Permissions(manage_guild=True, manage_channels=True, manage_messages=True, view_audit_log=True, kick_members=True, ban_members=True),
+    "Manager": discord.Permissions(manage_messages=True, manage_threads=True, view_audit_log=True),
+    "Moderator": discord.Permissions(manage_messages=True, manage_threads=True, moderate_members=True, kick_members=True),
+    "Support": discord.Permissions(manage_threads=True),
+    "Developer": discord.Permissions.none(),
+    "Designer": discord.Permissions.none(),
+    "Content Creator": discord.Permissions.none(),
+    "Client": discord.Permissions.none(),
+    "Verified": discord.Permissions.none(),
+    "Member": discord.Permissions.none(),
+}
+for _game_role in GAME_ROLES:
+    ROLE_PERMISSION_POLICY[_game_role] = discord.Permissions.none()
+
+CATEGORY_ACCESS_POLICY = {
+    "╭・𝗖𝗟𝗜𝗘𝗡𝗧 𝗛𝗨𝗕": {"Client", "Founder", "Co-Founder", "Administrator", "Operations", "Manager", "Support"},
+    "╭・𝗧𝗘𝗔𝗠 𝗛𝗤": {"Developer", "Designer", "Content Creator", "Founder", "Co-Founder", "Administrator", "Operations", "Manager"},
+    "╭・𝗢𝗣𝗘𝗥𝗔𝗧𝗜𝗢𝗡𝗦": {"Founder", "Co-Founder", "Administrator", "Operations"},
+    "╭・𝗔𝗣𝗣𝗦 & 𝗧𝗢𝗢𝗟𝗦": {"Founder", "Co-Founder", "Administrator", "Operations"},
+    "╭・𝗪𝗜𝗖𝗞": {"Founder", "Co-Founder", "Administrator", "Operations", "Manager", "Moderator"},
+    "╭・𝗧𝗜𝗖𝗞𝗘𝗧・𝗧𝗢𝗢𝗟": {"Founder", "Co-Founder", "Administrator", "Operations", "Manager", "Support"},
+    "╭・𝗦𝗧𝗔𝗧𝗕𝗢𝗧": {"Founder", "Co-Founder", "Administrator", "Operations", "Manager"},
+    "╭・𝗔𝗥𝗖𝗔𝗡𝗘": {"Founder", "Co-Founder", "Administrator", "Operations", "Manager"},
+    "╭・𝗫𝗘𝗡𝗢𝗡": {"Founder", "Co-Founder", "Administrator"},
+    "╭・𝗖𝗔𝗥𝗟・𝗕𝗢𝗧": {"Founder", "Co-Founder", "Administrator", "Operations", "Manager", "Moderator"},
+}
+
 ROLE_COLOURS = {
     "Founder": discord.Colour.from_rgb(232, 184, 74),
     "Co-Founder": discord.Colour.from_rgb(245, 158, 11),
@@ -188,17 +220,8 @@ async def setup_server(guild):
     # mutated automatically here; Discord's role UI is safer for the final staff hierarchy.
     # All functional roles remain below the bot role.
 
-    # Conservative permissions: staff roles manage the workspace; public roles remain non-privileged.
-    permissions = {
-        "Founder": discord.Permissions(administrator=True),
-        "Co-Founder": discord.Permissions(administrator=True),
-        "Administrator": discord.Permissions(administrator=True),
-        "Operations": discord.Permissions(manage_guild=True, manage_channels=True, manage_messages=True, view_audit_log=True, kick_members=True, ban_members=True),
-        "Manager": discord.Permissions(manage_messages=True, manage_threads=True, view_audit_log=True),
-        "Moderator": discord.Permissions(manage_messages=True, manage_threads=True, moderate_members=True, kick_members=True),
-        "Support": discord.Permissions(manage_threads=True),
-    }
-    for name, perms in permissions.items():
+    # Strict role permissions: only the explicitly privileged staff roles get power.
+    for name, perms in ROLE_PERMISSION_POLICY.items():
         role = roles.get(name)
         if role and role < me.top_role:
             try:
@@ -219,7 +242,8 @@ async def setup_server(guild):
                 guild.default_role: discord.PermissionOverwrite(view_channel=False),
                 role: discord.PermissionOverwrite(view_channel=True, send_messages=True, read_message_history=True, connect=True, speak=True),
             }
-            for staff_name in STAFF_ROLES:
+            # Only management/moderation staff need every game hub; Support and business roles stay out.
+            for staff_name in ("Founder", "Co-Founder", "Administrator", "Operations", "Manager", "Moderator"):
                 staff = roles.get(staff_name)
                 if staff:
                     overwrites[staff] = discord.PermissionOverwrite(view_channel=True, send_messages=True, read_message_history=True, connect=True, speak=True)
@@ -228,14 +252,8 @@ async def setup_server(guild):
             except discord.HTTPException as exc:
                 print(f"WARN game hub {game}: {exc}")
 
-    # Business workspace: client-facing area is available to Clients + staff; team/ops stay internal.
-    private_access = {
-        "╭・𝗖𝗟𝗜𝗘𝗡𝗧 𝗛𝗨𝗕": ["Client"] + STAFF_ROLES,
-        "╭・𝗧𝗘𝗔𝗠 𝗛𝗤": ["Developer", "Designer", "Content Creator"] + STAFF_ROLES,
-        "╭・𝗢𝗣𝗘𝗥𝗔𝗧𝗜𝗢𝗡𝗦": STAFF_ROLES,
-        "╭・𝗔𝗣𝗣𝗦 & 𝗧𝗢𝗢𝗟𝗦": STAFF_ROLES,
-    }
-    for category_name, allowed in private_access.items():
+    # Apply the same strict access model to private workspace and bot sections.
+    for category_name, allowed in CATEGORY_ACCESS_POLICY.items():
         category = discord.utils.get(guild.categories, name=category_name)
         if not category:
             continue
@@ -245,9 +263,24 @@ async def setup_server(guild):
             if role:
                 overwrites[role] = discord.PermissionOverwrite(view_channel=True, send_messages=True, read_message_history=True, connect=True, speak=True)
         try:
-            await category.edit(overwrites=overwrites, reason="Rupzha private workspace permissions")
+            await category.edit(overwrites=overwrites, reason="Rupzha strict role access")
         except discord.HTTPException as exc:
-            print(f"WARN private category {category_name}: {exc}")
+            print(f"WARN restricted category {category_name}: {exc}")
+
+    # Ticket panel and Arcane level-ups are intentionally public surfaces; management remains restricted.
+    public_bot_channels = {
+        "・𝗧𝗶𝗰𝗸𝗲𝘁・𝗣𝗮𝗻𝗲𝗹",
+        "・𝗟𝗲𝘃𝗲𝗹・𝗨𝗽𝘀",
+    }
+    for channel in guild.text_channels:
+        if channel.name not in public_bot_channels:
+            continue
+        try:
+            overwrites = dict(channel.overwrites)
+            overwrites[guild.default_role] = discord.PermissionOverwrite(view_channel=True, send_messages=True, read_message_history=True)
+            await channel.edit(overwrites=overwrites, reason="Rupzha public bot surface")
+        except discord.HTTPException as exc:
+            print(f"WARN public bot channel {channel.name}: {exc}")
 
     start = discord.utils.get(guild.categories, name="╭・𝗦𝗧𝗔𝗥𝗧 𝗛𝗘𝗥𝗘")
     if not start:
@@ -283,7 +316,49 @@ async def setup_server(guild):
         except (discord.Forbidden, discord.HTTPException) as exc:
             print(f"WARN role panel: {exc}")
 
+    # Live audit: report only mismatches so permission regressions are visible in logs.
+    live_failures = []
+    for name, expected in ROLE_PERMISSION_POLICY.items():
+        role = roles.get(name)
+        if role and role.permissions.value != expected.value:
+            live_failures.append(f"role:{name}")
+    for category_name, allowed in CATEGORY_ACCESS_POLICY.items():
+        category = discord.utils.get(guild.categories, name=category_name)
+        if not category:
+            live_failures.append(f"category:{category_name}:missing")
+            continue
+        if category.overwrites_for(guild.default_role).view_channel is not False:
+            live_failures.append(f"category:{category_name}:everyone")
+        for role_name in allowed:
+            role = roles.get(role_name)
+            if role and category.overwrites_for(role).view_channel is not True:
+                live_failures.append(f"access:{category_name}->{role_name}")
+    if live_failures:
+        print("STRICT AUDIT FAIL · " + " | ".join(live_failures))
+    else:
+        print("STRICT AUDIT PASS · role permissions + restricted category access")
     print(f"READY · {guild.name} · {len(guild.roles)} roles · {len(guild.channels)} channels")
+
+def build_welcome_embed(member, rules_channel=None, roles_channel=None):
+    member_count = member.guild.member_count or "—"
+    rules = rules_channel.mention if rules_channel else "#・𝗥𝘂𝗹𝗲𝘀"
+    roles = roles_channel.mention if roles_channel else "#・𝗖𝗵𝗼𝗼𝘀𝗲・𝗥𝗼𝗹𝗲𝘀"
+
+    embed = discord.Embed(
+        title="𝗪𝗘𝗟𝗖𝗢𝗠𝗘 𝗧𝗢 𝗥𝗨𝗣𝗭𝗛𝗔",
+        description=(
+            f"{member.mention} **you’re officially in.**\n\n"
+            f"Welcome, **{member.display_name}**. You’re member **#{member_count}** of the community.\n\n"
+            f"Gaming • Community • Building\n\n"
+            f"Start with {rules} → choose games in {roles}."
+        ),
+    )
+    embed.add_field(name="01 · 𝗥𝗘𝗔𝗗", value=f"Start with {rules}", inline=False)
+    embed.add_field(name="02 · 𝗖𝗛𝗢𝗢𝗦𝗘", value=f"Pick your games in {roles}", inline=False)
+    embed.add_field(name="03 · 𝗝𝗢𝗜𝗡 𝗜𝗡", value="Jump into the community, find teammates, and have fun.", inline=False)
+    embed.set_footer(text="RupZha • Gaming • Community • Building")
+    return embed
+
 
 @bot.event
 async def on_member_join(member):
@@ -296,12 +371,13 @@ async def on_member_join(member):
         except discord.HTTPException as exc:
             print(f"WARN member role: {exc}")
     welcome = discord.utils.get(member.guild.text_channels, name=PUBLIC_CHANNELS["welcome"])
+    rules = discord.utils.get(member.guild.text_channels, name=PUBLIC_CHANNELS["rules"])
     roles = discord.utils.get(member.guild.text_channels, name=PUBLIC_CHANNELS["roles"])
     if welcome:
         try:
-            await welcome.send(f"𝗪𝗘𝗟𝗖𝗢𝗠𝗘 {member.mention} · Start in {roles.mention if roles else '𝗖𝗵𝗼𝗼𝘀𝗲・𝗥𝗼𝗹𝗲𝘀'}.")
-        except discord.HTTPException:
-            pass
+            await welcome.send(embed=build_welcome_embed(member, rules, roles))
+        except discord.HTTPException as exc:
+            print(f"WARN welcome message: {exc}")
 
 @bot.event
 async def on_member_remove(member):
@@ -390,4 +466,5 @@ async def on_ready():
         print(f"WARN slash sync: {exc}")
     print("RUPZHA BOT ONLINE")
 
-bot.run(TOKEN)
+if __name__ == "__main__":
+    bot.run(TOKEN)
