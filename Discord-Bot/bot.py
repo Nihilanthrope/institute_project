@@ -1,8 +1,11 @@
 import os
 import asyncio
 from datetime import timedelta
+from pathlib import Path
 import discord
 from dotenv import load_dotenv
+
+from storage import Database
 
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -19,6 +22,10 @@ bot = discord.Client(
     guild_ready_timeout=10.0,
     chunk_guilds_at_startup=False,
 )
+
+DB_PATH = Path(os.getenv("RUPZHA_DB_PATH", Path(__file__).with_name("rupzha.db")))
+db = Database(DB_PATH)
+db.initialize()
 
 ROLE_ORDER = [
     "Founder", "Co-Founder", "Administrator", "Operations", "Manager",
@@ -62,6 +69,30 @@ CATEGORY_ACCESS_POLICY = {
     "╭・𝗫𝗘𝗡𝗢𝗡": {"Founder", "Co-Founder", "Administrator"},
     "╭・𝗖𝗔𝗥𝗟・𝗕𝗢𝗧": {"Founder", "Co-Founder", "Administrator", "Operations", "Manager", "Moderator"},
 }
+
+# Child-channel locks tighten category permissions without changing the category model.
+# Modes: public_read_only, public_read_only_bot_write, client_read_only,
+# restricted_read_only, restricted_bot_write.
+CHANNEL_LOCK_POLICY = {
+    "・𝗪𝗲𝗹𝗰𝗼𝗺𝗲": {"mode": "public_read_only"},
+    "・𝗥𝘂𝗹𝗲𝘀": {"mode": "public_read_only"},
+    "・𝗔𝗻𝗻𝗼𝘂𝗻𝗰𝗲𝗺𝗲𝗻𝘁𝘀": {"mode": "public_read_only"},
+    "・𝗖𝗵𝗼𝗼𝘀𝗲・𝗥𝗼𝗹𝗲𝘀": {"mode": "public_read_only"},
+    "・𝗛𝗼𝘄・𝗜𝘁・𝗪𝗼𝗿𝗸𝘀": {"mode": "public_read_only"},
+    "・𝗙𝗔𝗤": {"mode": "public_read_only"},
+    "・𝗣𝗿𝗼𝗷𝗲𝗰𝘁・𝗦𝘁𝗮𝘁𝘂𝘀": {"mode": "client_read_only"},
+    "・𝗟𝗼𝗴𝘀": {"mode": "restricted_read_only"},
+    "・𝗦𝗲𝗰𝘂𝗿𝗶𝘁𝘆・𝗟𝗼𝗴𝘀": {"mode": "restricted_bot_write", "bot_roles": ["Wick"]},
+    "・𝗔𝗻𝘁𝗶𝗥𝗮𝗶𝗱・𝗟𝗼𝗴𝘀": {"mode": "restricted_bot_write", "bot_roles": ["Wick"]},
+    "・𝗧𝗶𝗰𝗸𝗲𝘁・𝗣𝗮𝗻𝗲𝗹": {"mode": "public_read_only_bot_write", "bot_roles": ["Ticket Tool"]},
+    "・𝗦𝘁𝗮𝘁𝘀・𝗗𝗮𝘀𝗵𝗯𝗼𝗮𝗿𝗱": {"mode": "restricted_bot_write", "bot_roles": ["Statbot"]},
+    "・𝗔𝗰𝘁𝗶𝘃𝗶𝘁𝘆・𝗦𝘁𝗮𝘁𝘀": {"mode": "restricted_bot_write", "bot_roles": ["Statbot"]},
+    "・𝗟𝗲𝘃𝗲𝗹・𝗨𝗽𝘀": {"mode": "public_read_only_bot_write", "bot_roles": ["Arcane"]},
+    "・𝗕𝗮𝗰𝗸𝘂𝗽𝘀": {"mode": "restricted_bot_write", "bot_roles": ["Xenon"]},
+    "・𝗖𝗮𝗿𝗹・𝗟𝗼𝗴𝘀": {"mode": "restricted_bot_write", "bot_roles": ["carl-bot"]},
+}
+
+READ_ONLY_STAFF_ROLES = {"Founder", "Co-Founder", "Administrator", "Operations", "Manager", "Moderator", "Support"}
 
 ROLE_COLOURS = {
     "Founder": discord.Colour.from_rgb(232, 184, 74),
@@ -408,20 +439,59 @@ async def setup_server(guild):
         except discord.HTTPException as exc:
             print(f"WARN restricted category {category_name}: {exc}")
 
-    # Ticket panel and Arcane level-ups are intentionally public surfaces; management remains restricted.
-    public_bot_channels = {
-        "・𝗧𝗶𝗰𝗸𝗲𝘁・𝗣𝗮𝗻𝗲𝗹",
-        "・𝗟𝗲𝘃𝗲𝗹・𝗨𝗽𝘀",
-    }
+    # Child-channel locks make public documentation read-only and sensitive bot logs write-only for their integration bot.
     for channel in guild.text_channels:
-        if channel.name not in public_bot_channels:
+        policy = CHANNEL_LOCK_POLICY.get(channel.name)
+        if not policy:
             continue
+        mode = policy["mode"]
         try:
             overwrites = dict(channel.overwrites)
-            overwrites[guild.default_role] = discord.PermissionOverwrite(view_channel=True, send_messages=True, read_message_history=True)
-            await channel.edit(overwrites=overwrites, reason="Rupzha public bot surface")
+            if mode == "public_read_only":
+                overwrites[guild.default_role] = discord.PermissionOverwrite(view_channel=True, send_messages=False, add_reactions=False, create_public_threads=False, create_private_threads=False, send_messages_in_threads=False)
+                for role_name in READ_ONLY_STAFF_ROLES:
+                    role = roles.get(role_name)
+                    if role:
+                        overwrites[role] = discord.PermissionOverwrite(view_channel=True, send_messages=True, read_message_history=True)
+            elif mode == "public_read_only_bot_write":
+                overwrites[guild.default_role] = discord.PermissionOverwrite(view_channel=True, send_messages=False, add_reactions=False, create_public_threads=False, create_private_threads=False, send_messages_in_threads=False)
+                for role_name in READ_ONLY_STAFF_ROLES:
+                    role = roles.get(role_name)
+                    if role:
+                        overwrites[role] = discord.PermissionOverwrite(view_channel=True, send_messages=True, read_message_history=True)
+                for bot_role_name in policy.get("bot_roles", []):
+                    role = roles.get(bot_role_name)
+                    if role:
+                        overwrites[role] = discord.PermissionOverwrite(view_channel=True, send_messages=True, read_message_history=True, embed_links=True, attach_files=True, manage_messages=True)
+            elif mode == "client_read_only":
+                overwrites[guild.default_role] = discord.PermissionOverwrite(view_channel=False)
+                for role_name in CATEGORY_ACCESS_POLICY["╭・𝗖𝗟𝗜𝗘𝗡𝗧 𝗛𝗨𝗕"]:
+                    role = roles.get(role_name)
+                    if role:
+                        overwrites[role] = discord.PermissionOverwrite(view_channel=True, send_messages=False, read_message_history=True)
+                for role_name in READ_ONLY_STAFF_ROLES:
+                    role = roles.get(role_name)
+                    if role:
+                        overwrites[role] = discord.PermissionOverwrite(view_channel=True, send_messages=True, read_message_history=True)
+            elif mode == "restricted_read_only":
+                overwrites[guild.default_role] = discord.PermissionOverwrite(view_channel=False)
+                for role_name in CATEGORY_ACCESS_POLICY["╭・𝗢𝗣𝗘𝗥𝗔𝗧𝗜𝗢𝗡𝗦"] | READ_ONLY_STAFF_ROLES:
+                    role = roles.get(role_name)
+                    if role:
+                        overwrites[role] = discord.PermissionOverwrite(view_channel=True, send_messages=True, read_message_history=True)
+            elif mode == "restricted_bot_write":
+                overwrites[guild.default_role] = discord.PermissionOverwrite(view_channel=False)
+                for role_name in CATEGORY_ACCESS_POLICY.get(channel.category.name if channel.category else "", set()) | READ_ONLY_STAFF_ROLES:
+                    role = roles.get(role_name)
+                    if role:
+                        overwrites[role] = discord.PermissionOverwrite(view_channel=True, send_messages=True, read_message_history=True)
+                for bot_role_name in policy.get("bot_roles", []):
+                    role = roles.get(bot_role_name)
+                    if role:
+                        overwrites[role] = discord.PermissionOverwrite(view_channel=True, send_messages=True, read_message_history=True, embed_links=True, attach_files=True, manage_messages=True)
+            await channel.edit(overwrites=overwrites, reason="Rupzha channel lock policy")
         except discord.HTTPException as exc:
-            print(f"WARN public bot channel {channel.name}: {exc}")
+            print(f"WARN channel lock {channel.name}: {exc}")
 
     start = discord.utils.get(guild.categories, name="╭・𝗦𝗧𝗔𝗥𝗧 𝗛𝗘𝗥𝗘")
     if not start:
@@ -440,34 +510,8 @@ async def setup_server(guild):
         if name in channels:
             await seed(channels[name], text)
 
-    roles_channel = channels.get(PUBLIC_CHANNELS["roles"])
-    if roles_channel:
-        try:
-            found = False
-            async for message in roles_channel.history(limit=50):
-                if message.author == bot.user and message.embeds and message.embeds[0].title == "𝗥𝗨𝗣𝗭𝗛𝗔 𝗢𝗡𝗕𝗢𝗔𝗥𝗗𝗜𝗡𝗚":
-                    found = True
-                    try:
-                        await message.edit(
-                            embed=discord.Embed(
-                                title="𝗥𝗨𝗣𝗭𝗛𝗔 𝗢𝗡𝗕𝗢𝗔𝗥𝗗𝗜𝗡𝗚",
-                                description="Set up your profile, choose your interests, pick your games, and control your notifications.\n\n**Age/gender answers stay private.** Game artwork appears during game selection.\n\nStaff and private-workspace roles can never be self-assigned.",
-                            ),
-                            view=OnboardingEntryView(),
-                        )
-                    except discord.HTTPException:
-                        pass
-                    break
-            if not found:
-                await roles_channel.send(
-                    embed=discord.Embed(
-                        title="𝗥𝗨𝗣𝗭𝗛𝗔 𝗢𝗡𝗕𝗢𝗔𝗥𝗗𝗜𝗡𝗚",
-                        description="Set up your profile, choose your interests, pick your games, and control your notifications.\n\n**Age/gender answers stay private.** Game artwork appears during game selection.\n\nStaff and private-workspace roles can never be self-assigned.",
-                    ),
-                    view=OnboardingEntryView(),
-                )
-        except (discord.Forbidden, discord.HTTPException) as exc:
-            print(f"WARN onboarding panel: {exc}")
+    # Native Discord Community Onboarding is the only onboarding entry point.
+    # Do not seed a post-join bot onboarding panel; it would duplicate/conflict with the pre-join flow.
 
     # Live audit: report only mismatches so permission regressions are visible in logs.
     live_failures = []
@@ -486,6 +530,21 @@ async def setup_server(guild):
             role = roles.get(role_name)
             if role and category.overwrites_for(role).view_channel is not True:
                 live_failures.append(f"access:{category_name}->{role_name}")
+    for channel_name, policy in CHANNEL_LOCK_POLICY.items():
+        channel = discord.utils.get(guild.text_channels, name=channel_name)
+        if not channel:
+            live_failures.append(f"channel:{channel_name}:missing")
+            continue
+        everyone = channel.overwrites_for(guild.default_role)
+        if policy["mode"] in {"public_read_only", "public_read_only_bot_write"}:
+            if everyone.view_channel is not True or everyone.send_messages is not False:
+                live_failures.append(f"lock:{channel_name}:public")
+        elif everyone.view_channel is not False:
+            live_failures.append(f"lock:{channel_name}:private")
+        for bot_role_name in policy.get("bot_roles", []):
+            bot_role = roles.get(bot_role_name)
+            if bot_role and channel.overwrites_for(bot_role).send_messages is not True:
+                live_failures.append(f"bot-write:{channel_name}->{bot_role_name}")
     if live_failures:
         print("STRICT AUDIT FAIL · " + " | ".join(live_failures))
     else:
@@ -604,7 +663,6 @@ async def announce(interaction: discord.Interaction, message: str):
 
 @bot.event
 async def on_ready():
-    bot.add_view(OnboardingEntryView())
     guild = bot.get_guild(GUILD_ID)
     if not guild:
         print("Guild not found")

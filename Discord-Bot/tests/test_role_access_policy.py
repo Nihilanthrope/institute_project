@@ -1,6 +1,6 @@
 import unittest
 
-from bot import ROLE_PERMISSION_POLICY, CATEGORY_ACCESS_POLICY, GAME_ROLES
+from bot import ROLE_PERMISSION_POLICY, CATEGORY_ACCESS_POLICY, GAME_ROLES, CHANNEL_LOCK_POLICY
 
 
 class StrictRoleAccessTests(unittest.TestCase):
@@ -32,6 +32,24 @@ class StrictRoleAccessTests(unittest.TestCase):
         self.assertEqual(CATEGORY_ACCESS_POLICY["╭・𝗦𝗧𝗔𝗧𝗕𝗢𝗧"], {"Founder", "Co-Founder", "Administrator", "Operations", "Manager"})
         self.assertEqual(CATEGORY_ACCESS_POLICY["╭・𝗫𝗘𝗡𝗢𝗡"], {"Founder", "Co-Founder", "Administrator"})
         self.assertEqual(CATEGORY_ACCESS_POLICY["╭・𝗖𝗔𝗥𝗟・𝗕𝗢𝗧"], {"Founder", "Co-Founder", "Administrator", "Operations", "Manager", "Moderator"})
+
+    def test_read_only_channels_are_explicit(self):
+        self.assertEqual(
+            CHANNEL_LOCK_POLICY["・𝗥𝘂𝗹𝗲𝘀"]["mode"],
+            "public_read_only",
+        )
+        self.assertEqual(
+            CHANNEL_LOCK_POLICY["・𝗔𝗻𝗻𝗼𝘂𝗻𝗰𝗲𝗺𝗲𝗻𝘁𝘀"]["mode"],
+            "public_read_only",
+        )
+        self.assertEqual(
+            CHANNEL_LOCK_POLICY["・𝗧𝗶𝗰𝗸𝗲𝘁・𝗣𝗮𝗻𝗲𝗹"]["mode"],
+            "public_read_only_bot_write",
+        )
+
+    def test_sensitive_logs_are_bot_write_only(self):
+        for name in ["・𝗦𝗲𝗰𝘂𝗿𝗶𝘁𝘆・𝗟𝗼𝗴𝘀", "・𝗔𝗻𝘁𝗶𝗥𝗮𝗶𝗱・𝗟𝗼𝗴𝘀", "・𝗖𝗮𝗿𝗹・𝗟𝗼𝗴𝘀", "・𝗕𝗮𝗰𝗸𝘂𝗽𝘀"]:
+            self.assertEqual(CHANNEL_LOCK_POLICY[name]["mode"], "restricted_bot_write")
 
 
 if __name__ == "__main__":
