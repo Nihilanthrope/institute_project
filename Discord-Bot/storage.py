@@ -41,6 +41,30 @@ CREATE TABLE IF NOT EXISTS settings (
     key TEXT PRIMARY KEY,
     value TEXT NOT NULL
 );
+CREATE TABLE IF NOT EXISTS member_activity (
+    member_id INTEGER PRIMARY KEY REFERENCES members(member_id) ON DELETE CASCADE,
+    last_xp_at REAL
+);
+CREATE TABLE IF NOT EXISTS suggestions (
+    suggestion_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    author_id INTEGER NOT NULL,
+    content TEXT NOT NULL,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXISTS community_events (
+    event_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    creator_id INTEGER NOT NULL,
+    title TEXT NOT NULL,
+    starts_at TEXT NOT NULL,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXISTS reminders (
+    reminder_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    member_id INTEGER NOT NULL,
+    message TEXT NOT NULL,
+    remind_at TEXT NOT NULL,
+    sent INTEGER NOT NULL DEFAULT 0
+);
 """
 
 
@@ -62,6 +86,7 @@ class Database:
     def initialize(self) -> None:
         self.connection.executescript(SCHEMA)
         self.connection.execute("INSERT OR IGNORE INTO schema_migrations(version) VALUES (1)")
+        self.connection.execute("INSERT OR IGNORE INTO schema_migrations(version) VALUES (2)")
         self.connection.commit()
 
     def execute(self, sql: str, parameters: Iterable[Any] = ()) -> sqlite3.Cursor:

@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 from storage import Database
 from moderation import JoinGuard, can_moderate, get_recent_cases, is_staff, log_security_event, record_case, security_log_channel_name
 from tickets import TicketService, build_ticket_overwrites
+from community import CommunityService, level_for_xp
 
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -30,6 +31,8 @@ db = Database(DB_PATH)
 db.initialize()
 join_guard = JoinGuard(window_seconds=10.0, threshold=8)
 ticket_service = TicketService(db)
+community_service = CommunityService(db)
+reminder_task = None
 
 ROLE_ORDER = [
     "Founder", "Co-Founder", "Administrator", "Operations", "Manager",
@@ -750,6 +753,100 @@ async def ticket_reopen(interaction: discord.Interaction):
 
 bot.add_view(TicketPanelView())
 
+
+@tree.command(name="profile", description="Show your Rupzha XP and level profile.")
+async def profile(interaction: discord.Interaction):
+    data = community_service.get_profile(interaction.user.id)
+    await interaction.response.send_message(
+        embed=discord.Embed(
+            title=f"RupZha · {interaction.user.display_name}",
+            description=f"**Level {data['level']}**\n**{data['xp']} XP**",
+        ),
+        ephemeral=True,
+    )
+
+
+@tree.command(name="suggest", description="Submit a community suggestion.")
+@discord.app_commands.describe(content="Your suggestion.")
+async def suggest(interaction: discord.Interaction, content: str):
+    suggestion_id = community_service.create_suggestion(interaction.user.id, content)
+    await interaction.response.send_message(f"Suggestion **#{suggestion_id}** submitted. Thanks for the idea.", ephemeral=True)
+
+
+@tree.command(name="poll", description="Create a simple community poll.")
+@discord.app_commands.describe(question="Poll question.", option1="First option.", option2="Second option.", option3="Optional third option.")
+async def poll(interaction: discord.Interaction, question: str, option1: str, option2: str, option3: str = ""):
+    options = [option1, option2] + ([option3] if option3.strip() else [])
+    embed = discord.Embed(title="RupZha · Community Poll", description=question)
+    embed.add_field(name="Options", value="\n".join(f"{i}️⃣ {option}" for i, option in enumerate(options, 1)), inline=False)
+    await interaction.response.send_message(embed=embed)
+    message = await interaction.original_response()
+    for emoji in ("1️⃣", "2️⃣", "3️⃣")[:len(options)]:
+        await message.add_reaction(emoji)
+
+
+@tree.command(name="event", description="Create a community event announcement.")
+@discord.app_commands.describe(title="Event title.", starts_at="Start time in ISO format, e.g. 2026-11-01T20:00:00+05:30.")
+async def event(interaction: discord.Interaction, title: str, starts_at: str):
+    if not _staff_check(interaction):
+        await interaction.response.send_message("Staff only.", ephemeral=True)
+        return
+    event_id = community_service.create_event(interaction.user.id, title, starts_at)
+    channel = discord.utils.find(lambda c: c.name in {"・𝗘𝘃𝗲𝗻𝘁𝘀", "・Events"}, interaction.guild.text_channels)
+    target = channel or interaction.channel
+    await target.send(embed=discord.Embed(title=f"RupZha · {title}", description=f"Event **#{event_id}**\nStarts: **{starts_at}**"))
+    await interaction.response.send_message(f"Event **#{event_id}** created.", ephemeral=True)
+
+
+@tree.command(name="remind", description="Create a reminder that will be delivered by DM.")
+@discord.app_commands.describe(minutes="Minutes from now.", message="Reminder text.")
+async def remind(interaction: discord.Interaction, minutes: discord.app_commands.Range[int, 1, 10080], message: str):
+    from datetime import datetime, timezone
+
+    remind_at = datetime.now(timezone.utc) + timedelta(minutes=minutes)
+    reminder_id = community_service.create_reminder(interaction.user.id, message, remind_at.isoformat())
+    await interaction.response.send_message(f"Reminder **#{reminder_id}** set for **{minutes} minutes** from now.", ephemeral=True)
+
+
+@tree.command(name="lfg", description="Find teammates for a game.")
+@discord.app_commands.describe(game="Game name.", details="What you are looking for.")
+async def lfg(interaction: discord.Interaction, game: str, details: str):
+    await interaction.response.send_message(
+        embed=discord.Embed(title=f"RupZha · LFG · {game}", description=f"{interaction.user.mention} is looking for teammates.\n\n{details}")
+    )
+
+
+@bot.event
+async def on_message(message: discord.Message):
+    if message.guild is None or message.guild.id != GUILD_ID or message.author.bot:
+        return
+    before = community_service.get_profile(message.author.id)
+    gained = community_service.record_message(message.author.id)
+    if gained:
+        after = community_service.get_profile(message.author.id)
+        if after["level"] > before["level"]:
+            try:
+                await message.channel.send(f"🎉 {message.author.mention} reached **Level {after['level']}**!")
+            except discord.HTTPException:
+                pass
+
+
+async def reminder_loop():
+    from datetime import datetime, timezone
+
+    while not bot.is_closed():
+        now = datetime.now(timezone.utc).isoformat()
+        due = db.fetchall("SELECT reminder_id, member_id, message FROM reminders WHERE sent = 0 AND remind_at <= ?", (now,))
+        for row in due:
+            user = bot.get_user(row["member_id"]) or await bot.fetch_user(row["member_id"])
+            try:
+                await user.send(f"RupZha reminder: {row['message']}")
+                db.execute("UPDATE reminders SET sent = 1 WHERE reminder_id = ?", (row["reminder_id"],))
+            except (discord.HTTPException, discord.NotFound):
+                db.execute("UPDATE reminders SET sent = 1 WHERE reminder_id = ?", (row["reminder_id"],))
+        await asyncio.sleep(30)
+
+
 @tree.command(name="ping", description="Check Rupzha bot latency.")
 async def ping(interaction: discord.Interaction):
     await interaction.response.send_message(f"Pong · {round(bot.latency * 1000)}ms", ephemeral=True)
@@ -904,11 +1001,14 @@ async def announce(interaction: discord.Interaction, message: str):
 
 @bot.event
 async def on_ready():
+    global reminder_task
     guild = bot.get_guild(GUILD_ID)
     if not guild:
         print("Guild not found")
         return
     print(f"Logged in as {bot.user}")
+    if reminder_task is None or reminder_task.done():
+        reminder_task = asyncio.create_task(reminder_loop())
     await setup_server(guild)
     try:
         tree.copy_global_to(guild=guild)
