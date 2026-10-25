@@ -52,3 +52,25 @@ def test_native_onboarding_is_not_replaced_by_bot_onboarding_wall():
     assert "Native Discord Community Onboarding is the only onboarding entry point." in source
     assert "class OnboardingEntryView" in source
     assert "@bot.event\nasync def on_member_join" in source
+
+
+def test_game_hub_policy_requires_matching_role_and_hides_other_game_roles():
+    from types import SimpleNamespace
+    from verify_full_upgrade import check_game_hub_policy
+
+    class Overwrite:
+        def __init__(self, view): self.view_channel = view
+
+    class Category:
+        def __init__(self): self.overrides = {}
+        def overwrites_for(self, role): return self.overrides.get(role, Overwrite(None))
+
+    everyone = object(); valorant = object(); minecraft = object()
+    category = Category()
+    category.overrides[everyone] = Overwrite(False)
+    category.overrides[valorant] = Overwrite(True)
+    category.overrides[minecraft] = Overwrite(False)
+    roles = {"Valorant": valorant, "Minecraft": minecraft}
+    categories = {"╭・𝗚𝗔𝗠𝗘・VALORANT": category}
+    failures = check_game_hub_policy(everyone, roles, categories, ["Valorant", "Minecraft"])
+    assert failures == []

@@ -104,6 +104,38 @@ CHANNEL_LOCK_POLICY = {
 
 READ_ONLY_STAFF_ROLES = {"Founder", "Co-Founder", "Administrator", "Operations", "Manager", "Moderator", "Support"}
 
+
+def build_game_hub_policy(game: str, role_names: list[str] | set[str]):
+    roles = set(role_names)
+    return {
+        "everyone_view": False,
+        "allowed_game_role": game,
+        "blocked_game_roles": set(GAME_ROLES) - {game} & roles,
+        "blocked_non_game_roles": (roles - set(GAME_ROLES) - set(READ_ONLY_STAFF_ROLES)) | {"Member"} if "Member" in roles else (roles - set(GAME_ROLES) - set(READ_ONLY_STAFF_ROLES)),
+    }
+
+
+def build_game_hub_overwrites(everyone, game_role, other_game_roles, staff_roles):
+    overwrites = {
+        everyone: discord.PermissionOverwrite(view_channel=False),
+        game_role: discord.PermissionOverwrite(view_channel=True, send_messages=True, read_message_history=True, connect=True, speak=True),
+    }
+    for role in other_game_roles:
+        overwrites[role] = discord.PermissionOverwrite(view_channel=False, send_messages=False, connect=False, speak=False)
+    for role in staff_roles:
+        overwrites[role] = discord.PermissionOverwrite(view_channel=True, send_messages=True, read_message_history=True, connect=True, speak=True)
+    return overwrites
+
+
+def build_game_hub_channel_policy(game: str, game_roles: list[str] | set[str]):
+    return {
+        "everyone_view": False,
+        "game_role_view": True,
+        "other_game_roles_view": False,
+        "game": game,
+        "other_games": set(game_roles) - {game},
+    }
+
 ROLE_COLOURS = {
     "Founder": discord.Colour.from_rgb(232, 184, 74),
     "Co-Founder": discord.Colour.from_rgb(245, 158, 11),
@@ -420,17 +452,14 @@ async def setup_server(guild):
         if not category:
             category = discord.utils.find(lambda c: game.lower() in c.name.lower() and "𝗚𝗔𝗠𝗘" in c.name, guild.categories)
         if category:
-            overwrites = {
-                guild.default_role: discord.PermissionOverwrite(view_channel=False),
-                role: discord.PermissionOverwrite(view_channel=True, send_messages=True, read_message_history=True, connect=True, speak=True),
-            }
-            # Only management/moderation staff need every game hub; Support and business roles stay out.
-            for staff_name in ("Founder", "Co-Founder", "Administrator", "Operations", "Manager", "Moderator"):
-                staff = roles.get(staff_name)
-                if staff:
-                    overwrites[staff] = discord.PermissionOverwrite(view_channel=True, send_messages=True, read_message_history=True, connect=True, speak=True)
+            other_game_roles = {r for r in roles.values() if r.name in GAME_ROLES and r.name != game}
+            staff_roles = {roles[name] for name in ("Founder", "Co-Founder", "Administrator", "Operations", "Manager", "Moderator") if roles.get(name)}
+            overwrites = build_game_hub_overwrites(guild.default_role, role, other_game_roles, staff_roles)
             try:
                 await category.edit(overwrites=overwrites, reason="Rupzha game hub permissions")
+                for child in category.channels:
+                    if isinstance(child, (discord.TextChannel, discord.VoiceChannel, discord.StageChannel)):
+                        await child.edit(overwrites=overwrites, reason="Rupzha game channel permissions")
             except discord.HTTPException as exc:
                 print(f"WARN game hub {game}: {exc}")
 

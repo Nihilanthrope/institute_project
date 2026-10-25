@@ -23,6 +23,25 @@ async def read_onboarding_enabled(guild) -> bool:
     return bool(getattr(onboarding, "enabled", False))
 
 
+def check_game_hub_policy(everyone_role, roles, categories, game_roles):
+    failures = []
+    for game in game_roles:
+        category = categories.get(f"╭・𝗚𝗔𝗠𝗘・{game.upper()}")
+        if category is None:
+            continue
+        if category.overwrites_for(everyone_role).view_channel is not False:
+            failures.append(f"game:{game}:everyone")
+        game_role = roles.get(game)
+        if game_role and category.overwrites_for(game_role).view_channel is not True:
+            failures.append(f"game:{game}:role")
+        for other in game_roles:
+            if other == game:
+                continue
+            other_role = roles.get(other)
+            if other_role and category.overwrites_for(other_role).view_channel is not False:
+                failures.append(f"game:{game}:leak:{other}")
+    return failures
+
 def build_report(guild, *, onboarding_enabled: bool | None = None) -> dict:
     import bot
 
@@ -53,6 +72,8 @@ def build_report(guild, *, onboarding_enabled: bool | None = None) -> dict:
 
     if onboarding_enabled is False:
         failures.append("onboarding:disabled")
+
+    failures.extend(check_game_hub_policy(guild.default_role, roles, categories, bot.GAME_ROLES))
 
     command_names = {command.name for command in bot.tree.get_commands()}
     required_commands = {"warn", "ban", "timeout", "ticket", "profile", "project-status"}

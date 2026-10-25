@@ -63,3 +63,36 @@ def test_support_cannot_inherit_destructive_moderation_power():
     assert "Support" not in MODERATION_ACTION_ROLES["ban"]
     assert "Support" not in MODERATION_ACTION_ROLES["timeout"]
     assert "Support" not in MODERATION_ACTION_ROLES["warn"]
+
+
+def test_game_hubs_are_role_exclusive():
+    from bot import build_game_hub_policy
+
+    policy = build_game_hub_policy("Valorant", ["Valorant", "Minecraft", "Member", "Moderator"])
+    assert policy["everyone_view"] is False
+    assert policy["allowed_game_role"] == "Valorant"
+    assert policy["blocked_game_roles"] == {"Minecraft"}
+    assert "Member" in policy["blocked_non_game_roles"]
+    assert "Moderator" not in policy["blocked_non_game_roles"]
+
+
+def test_game_hub_channel_policy_matches_category_policy():
+    from bot import build_game_hub_channel_policy
+
+    policy = build_game_hub_channel_policy("Valorant", ["Valorant", "Minecraft"])
+    assert policy["everyone_view"] is False
+    assert policy["game_role_view"] is True
+    assert policy["other_game_roles_view"] is False
+
+
+def test_game_hub_overwrites_are_explicitly_role_scoped():
+    import discord
+    from bot import build_game_hub_overwrites
+
+    everyone = discord.Object(id=1)
+    valorant = discord.Object(id=2)
+    minecraft = discord.Object(id=3)
+    overwrites = build_game_hub_overwrites(everyone, valorant, {minecraft}, set())
+    assert overwrites[everyone].view_channel is False
+    assert overwrites[valorant].view_channel is True
+    assert overwrites[minecraft].view_channel is False
