@@ -1,2 +1,8 @@
 Discord-Bot/.env
 Discord-Bot/.env.save
+Discord-Bot/rupzha.db
+Discord-Bot/rupzha.db-wal
+Discord-Bot/rupzha.db-shm
+Discord-Bot/__pycache__/
+Discord-Bot/tests/__pycache__/
+Discord-Bot/.pytest_cache/
