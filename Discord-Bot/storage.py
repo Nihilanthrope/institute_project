@@ -65,6 +65,18 @@ CREATE TABLE IF NOT EXISTS reminders (
     remind_at TEXT NOT NULL,
     sent INTEGER NOT NULL DEFAULT 0
 );
+CREATE TABLE IF NOT EXISTS projects (
+    project_id TEXT PRIMARY KEY,
+    status TEXT NOT NULL,
+    summary TEXT NOT NULL,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXISTS internal_cases (
+    case_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    creator_id INTEGER NOT NULL,
+    note TEXT NOT NULL,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
 """
 
 
@@ -87,6 +99,7 @@ class Database:
         self.connection.executescript(SCHEMA)
         self.connection.execute("INSERT OR IGNORE INTO schema_migrations(version) VALUES (1)")
         self.connection.execute("INSERT OR IGNORE INTO schema_migrations(version) VALUES (2)")
+        self.connection.execute("INSERT OR IGNORE INTO schema_migrations(version) VALUES (3)")
         self.connection.commit()
 
     def execute(self, sql: str, parameters: Iterable[Any] = ()) -> sqlite3.Cursor:

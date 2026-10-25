@@ -9,6 +9,7 @@ from storage import Database
 from moderation import JoinGuard, can_moderate, get_recent_cases, is_staff, log_security_event, record_case, security_log_channel_name
 from tickets import TicketService, build_ticket_overwrites
 from community import CommunityService, level_for_xp
+from operations import build_client_status_embed, can_edit_project, can_view_project, create_internal_case, get_project_status, set_project_status
 
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -845,6 +846,36 @@ async def reminder_loop():
             except (discord.HTTPException, discord.NotFound):
                 db.execute("UPDATE reminders SET sent = 1 WHERE reminder_id = ?", (row["reminder_id"],))
         await asyncio.sleep(30)
+
+
+@tree.command(name="project-status", description="View or update a Rupzha project status.")
+@discord.app_commands.describe(project_id="Project identifier.", status="New status (staff only).", summary="Client-safe status summary (staff only).")
+async def project_status(interaction: discord.Interaction, project_id: str, status: str = "", summary: str = ""):
+    role_names = {role.name for role in getattr(interaction.user, "roles", ())}
+    if status or summary:
+        if not can_edit_project(role_names):
+            await interaction.response.send_message("Only Rupzha staff can update project status.", ephemeral=True)
+            return
+        set_project_status(db, project_id, status, summary)
+        await interaction.response.send_message(f"Project **{project_id}** updated.", ephemeral=True)
+        return
+    if not can_view_project(role_names):
+        await interaction.response.send_message("You don't have access to this project.", ephemeral=True)
+        return
+    embed = build_client_status_embed(db, project_id, role_names)
+    await interaction.response.send_message(embed=embed, ephemeral=True)
+
+
+@tree.command(name="internal-note", description="Record a private internal operations note.")
+@discord.app_commands.describe(note="Private note; never posted publicly.")
+@discord.app_commands.default_permissions(manage_guild=True)
+async def internal_note(interaction: discord.Interaction, note: str):
+    role_names = {role.name for role in getattr(interaction.user, "roles", ())}
+    case_id = create_internal_case(db, interaction.user.id, role_names, note)
+    if case_id is None:
+        await interaction.response.send_message("Operations staff only.", ephemeral=True)
+        return
+    await interaction.response.send_message(f"Internal case **#{case_id}** recorded privately.", ephemeral=True)
 
 
 @tree.command(name="ping", description="Check Rupzha bot latency.")
