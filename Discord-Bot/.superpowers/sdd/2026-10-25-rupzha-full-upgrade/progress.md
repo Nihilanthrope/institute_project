@@ -9,4 +9,4 @@ Ruling: use the existing checkout rather than creating another worktree — the 
 - [x] Task 3 tickets — commit b25e2b7; ticket tests 4/4, combined regression suite 26/26, compile passed, command registration smoke test passed.
 - [x] Task 4 community/progression — commit ac7b220; community tests 5/5, combined regression suite 31/31, compile passed, command registration smoke test passed.
 - [x] Task 5 client/team/operations — commit 27dab05; operations tests 4/4, combined regression suite 35/35, compile passed, full command registration smoke test passed.
-- [ ] Task 6 live verification
+- [x] Task 6 live verification — commit c80386d; live restart reached STRICT AUDIT PASS, full-upgrade contract PASS, all subsystem readiness lines, 22 slash commands synced, and standalone live verification PASS. Final suite 43/43 and compile passed.
