@@ -42,6 +42,15 @@ def check_game_hub_policy(everyone_role, roles, categories, game_roles):
                 failures.append(f"game:{game}:leak:{other}")
     return failures
 
+def dangerous_permission_names(role) -> list[str]:
+    attrs = ("administrator", "manage_guild", "manage_roles", "manage_channels", "manage_webhooks", "kick_members", "ban_members", "moderate_members", "mention_everyone", "manage_messages")
+    return [name for name in attrs if getattr(role.permissions, name, False)]
+
+
+def should_reconcile_role(role) -> bool:
+    return not getattr(role, "managed", False)
+
+
 def build_report(guild, *, onboarding_enabled: bool | None = None) -> dict:
     import bot
 
@@ -52,6 +61,12 @@ def build_report(guild, *, onboarding_enabled: bool | None = None) -> dict:
     roles = {role.name: role for role in guild.roles}
     channels = {channel.name: channel for channel in guild.text_channels}
     categories = {category.name: category for category in guild.categories}
+
+    for role in guild.roles:
+        if role.is_default() or role.managed or role.name in bot.ROLE_PERMISSION_POLICY:
+            continue
+        if dangerous_permission_names(role):
+            failures.append(f"role:unexpected-power:{role.name}")
 
     for role_name, expected in bot.ROLE_PERMISSION_POLICY.items():
         role = roles.get(role_name)

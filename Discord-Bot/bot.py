@@ -49,6 +49,14 @@ GAME_ROLES = ROLE_ORDER[13:]
 STAFF_ROLES = ROLE_ORDER[:7]
 
 # Strict role policy: permissions represent power; category overwrites represent access.
+OPTIONAL_ROLE_POLICY = {
+    "Trial Moderator": {"permissions": 0, "auto_assign": False},
+    "Event Host": {"permissions": 0, "auto_assign": False},
+    "QA / Tester": {"permissions": 0, "auto_assign": False},
+    "Partner": {"permissions": 0, "auto_assign": False},
+    "Community Helper": {"permissions": 0, "auto_assign": False},
+}
+
 ROLE_PERMISSION_POLICY = {
     "Founder": discord.Permissions(administrator=True),
     "Co-Founder": discord.Permissions(administrator=True),
@@ -66,6 +74,8 @@ ROLE_PERMISSION_POLICY = {
 }
 for _game_role in GAME_ROLES:
     ROLE_PERMISSION_POLICY[_game_role] = discord.Permissions.none()
+for _optional_role in OPTIONAL_ROLE_POLICY:
+    ROLE_PERMISSION_POLICY[_optional_role] = discord.Permissions.none()
 
 CATEGORY_ACCESS_POLICY = {
     "╭・𝗖𝗟𝗜𝗘𝗡𝗧 𝗛𝗨𝗕": {"Client", "Founder", "Co-Founder", "Administrator", "Operations", "Manager", "Support"},
@@ -150,6 +160,24 @@ ROLE_COLOURS = {
     "Client": discord.Colour.from_rgb(245, 158, 11),
     "Verified": discord.Colour.from_rgb(59, 130, 246),
     "Member": discord.Colour.from_rgb(100, 116, 139),
+    "Valorant": discord.Colour.from_rgb(239, 68, 68), "Minecraft": discord.Colour.from_rgb(34, 197, 94),
+    "GTA V": discord.Colour.from_rgb(234, 179, 8), "CS2": discord.Colour.from_rgb(14, 165, 233),
+    "Fortnite": discord.Colour.from_rgb(99, 102, 241), "Roblox": discord.Colour.from_rgb(168, 85, 247),
+    "Among Us": discord.Colour.from_rgb(244, 63, 94), "Apex Legends": discord.Colour.from_rgb(249, 115, 22),
+    "BGMI / PUBG": discord.Colour.from_rgb(16, 185, 129), "Other Games": discord.Colour.from_rgb(100, 116, 139),
+    "Web Developer": discord.Colour.from_rgb(6, 182, 212), "AI / ML": discord.Colour.from_rgb(124, 58, 237),
+    "Video Editor": discord.Colour.from_rgb(217, 70, 239), "Esports": discord.Colour.from_rgb(220, 38, 127),
+    "Tech": discord.Colour.from_rgb(59, 130, 246), "Art": discord.Colour.from_rgb(236, 72, 153),
+    "Music": discord.Colour.from_rgb(168, 85, 247), "Business": discord.Colour.from_rgb(245, 158, 11),
+    "Gaming": discord.Colour.from_rgb(99, 102, 241), "Teammates": discord.Colour.from_rgb(34, 197, 94),
+    "Competitive": discord.Colour.from_rgb(239, 68, 68), "Events": discord.Colour.from_rgb(245, 158, 11),
+    "Networking": discord.Colour.from_rgb(14, 165, 233), "Voice Chat": discord.Colour.from_rgb(168, 85, 247),
+    "Announcements": discord.Colour.from_rgb(59, 130, 246), "Event Alerts": discord.Colour.from_rgb(245, 158, 11),
+    "Giveaways": discord.Colour.from_rgb(236, 72, 153), "Community Updates": discord.Colour.from_rgb(34, 197, 94),
+    "Game Updates": discord.Colour.from_rgb(99, 102, 241),
+    "Trial Moderator": discord.Colour.from_rgb(251, 146, 60), "Event Host": discord.Colour.from_rgb(245, 158, 11),
+    "QA / Tester": discord.Colour.from_rgb(6, 182, 212), "Partner": discord.Colour.from_rgb(20, 184, 166),
+    "Community Helper": discord.Colour.from_rgb(34, 197, 94),
 }
 
 GAME_DESCRIPTIONS = {
@@ -165,9 +193,12 @@ ONBOARDING_MANAGED_ROLES = [
     "Developer", "Designer", "Content Creator", "Web Developer", "AI / ML",
     "Video Editor", "Esports", "Tech", "Art", "Music", "Business",
     "Gaming", "Teammates", "Competitive", "Events", "Networking",
-    "Voice Chat", "Announcements", "Event Alerts", "Giveaways", "Community Updates",
+    "Voice Chat", "Announcements", "Event Alerts", "Giveaways", "Community Updates", "Game Updates",
 ]
 ONBOARDING_STEPS = ["profile", "purpose", "interests", "games", "notifications", "finish"]
+
+for _onboarding_role in ONBOARDING_MANAGED_ROLES:
+    ROLE_PERMISSION_POLICY.setdefault(_onboarding_role, discord.Permissions.none())
 ONBOARDING_EXTRA_ROLES = ["Announcements", "Event Alerts", "Game Updates", "Giveaways", "Community Updates"]
 ONBOARDING_ROLE_COLOURS = {
     "Verified": discord.Colour.from_rgb(59, 130, 246),
@@ -415,6 +446,15 @@ async def setup_server(guild):
         print("WARN: bot member unavailable")
         return
 
+    # Create only purposeful optional/notification roles; optional roles are never auto-assigned.
+    for role_name in OPTIONAL_ROLE_POLICY:
+        if role_name not in roles:
+            try:
+                await guild.create_role(name=role_name, permissions=discord.Permissions.none(), colour=ROLE_COLOURS[role_name], reason="Rupzha optional role setup")
+            except discord.HTTPException as exc:
+                print(f"WARN optional role {role_name}: {exc}")
+    roles = {r.name: r for r in guild.roles}
+
     # Create only the small set of notification roles; game and interest roles already exist.
     # Never create or elevate staff/client roles here.
     for role_name in ONBOARDING_EXTRA_ROLES:
@@ -434,14 +474,34 @@ async def setup_server(guild):
     # mutated automatically here; Discord's role UI is safer for the final staff hierarchy.
     # All functional roles remain below the bot role.
 
+    # Strip unexplained dangerous native permissions from custom roles below the bot. Managed integration roles are untouched.
+    protected_custom_roles = set(ROLE_PERMISSION_POLICY)
+    dangerous_attrs = ("manage_guild", "manage_roles", "manage_channels", "manage_webhooks", "kick_members", "ban_members", "moderate_members", "mention_everyone", "manage_messages")
+    for role in guild.roles:
+        if role.is_default() or role.managed or role >= me.top_role or role.name in protected_custom_roles:
+            continue
+        if role.permissions.administrator or any(getattr(role.permissions, attr) for attr in dangerous_attrs):
+            try:
+                await role.edit(permissions=discord.Permissions.none(), reason="Rupzha role safety: remove unexplained native power")
+                print(f"ROLE HARDENED {role.name}")
+            except discord.HTTPException as exc:
+                print(f"WARN role safety {role.name}: {exc}")
+
     # Strict role permissions: only the explicitly privileged staff roles get power.
     for name, perms in ROLE_PERMISSION_POLICY.items():
         role = roles.get(name)
         if role and role < me.top_role:
+            expected_colour = ROLE_COLOURS.get(name, role.colour)
+            if role.permissions.value == perms.value and role.colour.value == expected_colour.value:
+                continue
             try:
-                await role.edit(permissions=perms, colour=ROLE_COLOURS.get(name, role.colour), reason="Rupzha role permissions")
+                await role.edit(permissions=perms, colour=expected_colour, reason="Rupzha role permissions")
             except discord.HTTPException as exc:
                 print(f"WARN role {name}: {exc}")
+
+    if os.getenv("RUPZHA_ROLE_ONLY") == "1":
+        print("ROLE-ONLY RECONCILE COMPLETE")
+        return
 
     # Game hubs stay hidden until a member selects the matching game role.
     for game in GAME_ROLES:

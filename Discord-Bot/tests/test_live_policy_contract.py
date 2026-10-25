@@ -74,3 +74,35 @@ def test_game_hub_policy_requires_matching_role_and_hides_other_game_roles():
     categories = {"╭・𝗚𝗔𝗠𝗘・VALORANT": category}
     failures = check_game_hub_policy(everyone, roles, categories, ["Valorant", "Minecraft"])
     assert failures == []
+
+
+def test_optional_roles_are_purposeful_and_permissionless():
+    assert set(bot.OPTIONAL_ROLE_POLICY) == {"Trial Moderator", "Event Host", "QA / Tester", "Partner", "Community Helper"}
+    for name, spec in bot.OPTIONAL_ROLE_POLICY.items():
+        assert spec["permissions"] == 0
+        assert spec["auto_assign"] is False
+        assert bot.ROLE_COLOURS[name].value != 0
+
+
+def test_unknown_custom_role_with_native_power_is_flagged():
+    from verify_full_upgrade import dangerous_permission_names
+    import discord
+    role = SimpleNamespace(name="OMEN", managed=False, permissions=discord.Permissions(administrator=True))
+    assert "administrator" in dangerous_permission_names(role)
+
+
+def test_managed_integration_roles_are_never_reconciled():
+    from verify_full_upgrade import should_reconcile_role
+    managed = SimpleNamespace(name="Arcane", managed=True)
+    assert should_reconcile_role(managed) is False
+
+
+def test_role_colors_cover_game_and_optional_roles():
+    assert all(bot.ROLE_COLOURS[name].value != 0 for name in bot.GAME_ROLES)
+    assert all(bot.ROLE_COLOURS[name].value != 0 for name in bot.OPTIONAL_ROLE_POLICY)
+
+
+def test_onboarding_managed_roles_are_permissionless_policy_roles():
+    assert set(bot.ONBOARDING_MANAGED_ROLES) <= set(bot.ROLE_PERMISSION_POLICY)
+    for name in bot.ONBOARDING_MANAGED_ROLES:
+        assert bot.ROLE_PERMISSION_POLICY[name].value == 0
