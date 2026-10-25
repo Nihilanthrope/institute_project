@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 
 from storage import Database
 from moderation import JoinGuard, can_moderate, get_recent_cases, is_staff, log_security_event, record_case, security_log_channel_name
+from tickets import TicketService, build_ticket_overwrites
 
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -28,6 +29,7 @@ DB_PATH = Path(os.getenv("RUPZHA_DB_PATH", Path(__file__).with_name("rupzha.db")
 db = Database(DB_PATH)
 db.initialize()
 join_guard = JoinGuard(window_seconds=10.0, threshold=8)
+ticket_service = TicketService(db)
 
 ROLE_ORDER = [
     "Founder", "Co-Founder", "Administrator", "Operations", "Manager",
@@ -617,6 +619,136 @@ async def on_member_remove(member):
             pass
 
 tree = discord.app_commands.CommandTree(bot)
+
+
+async def create_ticket_channel(interaction: discord.Interaction, kind: str):
+    guild = interaction.guild
+    if guild is None or not isinstance(interaction.user, discord.Member):
+        return None, "This command can only be used inside Rupzha."
+    if not ticket_service.can_open(interaction.user, kind):
+        return None, "Client tickets require the **Client** role or staff access."
+    category = discord.utils.get(guild.categories, name="╭・𝗧𝗜𝗖𝗞𝗘𝗧・𝗧𝗢𝗢𝗟")
+    if category is None:
+        return None, "The existing ticket category is unavailable; no new category was created."
+    existing = ticket_service.db.fetchone(
+        "SELECT ticket_id FROM tickets WHERE guild_id = ? AND opener_id = ? AND kind = ? AND status = 'open' LIMIT 1",
+        (guild.id, interaction.user.id, kind),
+    )
+    if existing:
+        ticket = ticket_service.get_ticket(existing[0])
+        channel = guild.get_channel(ticket.channel_id) if ticket else None
+        return channel, "You already have an open ticket of this type."
+
+    ticket_id = ticket_service._next_id()
+    support_role = discord.utils.get(guild.roles, name="Support")
+    if support_role is None:
+        return None, "Support role is missing; ticket creation was not attempted."
+    overwrites = build_ticket_overwrites(guild.default_role, interaction.user, support_role, guild.me)
+    channel = await category.create_text_channel(
+        name=f"ticket-{ticket_id.lower()}",
+        overwrites=overwrites,
+        reason=f"RupZha {kind} ticket opened by {interaction.user}",
+    )
+    ticket = ticket_service.create_ticket(guild.id, interaction.user.id, channel.id, kind)
+    await channel.send(
+        embed=discord.Embed(
+            title=f"RupZha · {kind.title()} Ticket",
+            description=f"Ticket **{ticket.ticket_id}**\n\nSupport will be with you shortly. Keep sensitive information inside this private channel.",
+        )
+    )
+    return channel, None
+
+
+class TicketPanelView(discord.ui.View):
+    def __init__(self):
+        super().__init__(timeout=None)
+
+    async def _open(self, interaction: discord.Interaction, kind: str):
+        await interaction.response.defer(ephemeral=True)
+        try:
+            channel, error = await create_ticket_channel(interaction, kind)
+        except discord.Forbidden:
+            await interaction.followup.send("I can't create the private ticket channel with my current permissions.", ephemeral=True)
+            return
+        if error:
+            if channel:
+                await interaction.followup.send(f"{error} {channel.mention}", ephemeral=True)
+            else:
+                await interaction.followup.send(error, ephemeral=True)
+            return
+        await interaction.followup.send(f"Ticket created: {channel.mention}", ephemeral=True)
+
+    @discord.ui.button(label="Support", style=discord.ButtonStyle.primary, custom_id="rupzha:tickets:support")
+    async def support(self, interaction: discord.Interaction, button: discord.ui.Button):
+        await self._open(interaction, "support")
+
+    @discord.ui.button(label="Report", style=discord.ButtonStyle.secondary, custom_id="rupzha:tickets:report")
+    async def report(self, interaction: discord.Interaction, button: discord.ui.Button):
+        await self._open(interaction, "report")
+
+    @discord.ui.button(label="Client", style=discord.ButtonStyle.success, custom_id="rupzha:tickets:client")
+    async def client(self, interaction: discord.Interaction, button: discord.ui.Button):
+        await self._open(interaction, "client")
+
+
+@tree.command(name="ticket", description="Open a private Rupzha support, report, or client ticket.")
+@discord.app_commands.describe(kind="Ticket type.")
+@discord.app_commands.choices(kind=[
+    discord.app_commands.Choice(name="Support", value="support"),
+    discord.app_commands.Choice(name="Report", value="report"),
+    discord.app_commands.Choice(name="Client", value="client"),
+])
+async def ticket(interaction: discord.Interaction, kind: discord.app_commands.Choice[str]):
+    await interaction.response.defer(ephemeral=True)
+    try:
+        channel, error = await create_ticket_channel(interaction, kind.value)
+    except discord.Forbidden:
+        await interaction.followup.send("I can't create the private ticket channel with my current permissions.", ephemeral=True)
+        return
+    if error:
+        if channel:
+            await interaction.followup.send(f"{error} {channel.mention}", ephemeral=True)
+        else:
+            await interaction.followup.send(error, ephemeral=True)
+        return
+    await interaction.followup.send(f"Ticket created: {channel.mention}", ephemeral=True)
+
+
+@tree.command(name="ticket-close", description="Close the current Rupzha ticket.")
+async def ticket_close(interaction: discord.Interaction):
+    if interaction.guild is None or interaction.channel is None:
+        await interaction.response.send_message("This command must be used inside a ticket.", ephemeral=True)
+        return
+    current = ticket_service.get_by_channel(interaction.channel.id)
+    if current is None:
+        await interaction.response.send_message("This is not a Rupzha ticket channel.", ephemeral=True)
+        return
+    if interaction.user.id != current.opener_id and not _staff_check(interaction):
+        await interaction.response.send_message("Only the ticket opener or staff can close this ticket.", ephemeral=True)
+        return
+    ticket_service.close_ticket(current.ticket_id)
+    await interaction.channel.set_permissions(interaction.guild.default_role, view_channel=False, send_messages=False, reason="RupZha ticket closed")
+    await interaction.response.send_message(f"Ticket **{current.ticket_id}** closed.")
+
+
+@tree.command(name="ticket-reopen", description="Reopen the current Rupzha ticket for staff.")
+@discord.app_commands.default_permissions(manage_channels=True)
+async def ticket_reopen(interaction: discord.Interaction):
+    if not _staff_check(interaction) or interaction.channel is None:
+        await interaction.response.send_message("Staff only, inside a ticket channel.", ephemeral=True)
+        return
+    current = ticket_service.get_by_channel(interaction.channel.id)
+    if current is None:
+        await interaction.response.send_message("This is not a Rupzha ticket channel.", ephemeral=True)
+        return
+    ticket_service.reopen_ticket(current.ticket_id)
+    opener = interaction.guild.get_member(current.opener_id)
+    if opener:
+        await interaction.channel.set_permissions(opener, view_channel=True, send_messages=True, read_message_history=True)
+    await interaction.response.send_message(f"Ticket **{current.ticket_id}** reopened.")
+
+
+bot.add_view(TicketPanelView())
 
 @tree.command(name="ping", description="Check Rupzha bot latency.")
 async def ping(interaction: discord.Interaction):
