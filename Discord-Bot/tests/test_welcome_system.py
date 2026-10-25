@@ -3,7 +3,7 @@ from types import SimpleNamespace
 
 import discord
 
-from bot import WELCOME, WELCOME_GIF_PATH, build_welcome_embed, build_static_welcome_embed, find_public_text_channel, welcome_panel_file
+from bot import WELCOME, WELCOME_GIF_PATH, build_welcome_embed, build_static_welcome_embed, find_public_text_channel, welcome_panel_file, is_static_welcome_message
 
 
 class WelcomeEmbedTests(unittest.TestCase):
@@ -44,9 +44,45 @@ class WelcomeEmbedTests(unittest.TestCase):
         self.assertEqual(embed.image.url, "attachment://rupzha-welcome.gif")
         self.assertEqual(embed.thumbnail.url, "https://cdn.discordapp.com/avatars/789/test.png")
 
-    def test_rupzha_welcome_gif_asset_exists(self):
+    def test_rupzha_welcome_gif_asset_is_animated_background(self):
         self.assertTrue(WELCOME_GIF_PATH.is_file())
         self.assertGreater(WELCOME_GIF_PATH.stat().st_size, 100_000)
+        import subprocess
+        result = subprocess.run(
+            ["identify", "-format", "%n %wx%h", str(WELCOME_GIF_PATH)],
+            check=True, capture_output=True, text=True,
+        )
+        import re
+        match = re.search(r"(\d+)\s+(1200x700)", result.stdout)
+        self.assertIsNotNone(match)
+        self.assertGreater(int(match.group(1)), 1)
+        self.assertEqual(match.group(2), "1200x700")
+
+    def test_static_welcome_message_detection_does_not_match_personalized_avatar_message(self):
+        static = SimpleNamespace(
+            author=SimpleNamespace(id=1),
+            content="",
+            pinned=True,
+            embeds=[SimpleNamespace(
+                title="✦・𝗪𝗘𝗟𝗖𝗢𝗠𝗘・✦",
+                thumbnail=None,
+                image=SimpleNamespace(url="attachment://rupzha-welcome.gif"),
+            )],
+            attachments=[SimpleNamespace(filename="rupzha-welcome.gif")],
+        )
+        personalized = SimpleNamespace(
+            author=SimpleNamespace(id=1),
+            content="",
+            pinned=False,
+            embeds=[SimpleNamespace(
+                title="✦ 𝗪𝗘𝗟𝗖𝗢𝗠𝗘 𝗧𝗢 𝗥𝗨𝗣𝗭𝗛𝗔 ✦",
+                thumbnail=SimpleNamespace(url="https://cdn.discordapp.com/avatars/789/test.png"),
+                image=SimpleNamespace(url="attachment://rupzha-welcome.gif"),
+            )],
+            attachments=[SimpleNamespace(filename="rupzha-welcome.gif")],
+        )
+        self.assertTrue(is_static_welcome_message(static))
+        self.assertFalse(is_static_welcome_message(personalized))
 
     def test_builds_when_optional_channels_are_missing(self):
         member = SimpleNamespace(

@@ -151,3 +151,23 @@ def test_third_party_bot_private_channels_are_hidden():
     assert policy["read_message_history"] is False
     assert policy["send_messages"] is False
     assert policy["use_application_commands"] is False
+
+
+def test_every_non_special_bot_gets_a_private_command_scope_policy():
+    special = set(bot.SPECIAL_BOT_CHANNEL_POLICIES)
+    assert {"Wick", "Ticket Tool", "Statbot", "Arcane", "Xenon", "carl-bot"} <= special
+    policy = bot.build_universal_bot_overwrite("Mimu", "🤖・・𝗠𝗶𝗺𝘂", "📢・・𝗔𝗻𝗻𝗼𝘂𝗻𝗰𝗲𝗺𝗲𝗻𝘁𝘀")
+    assert policy["view_channel"] is True
+    assert policy["read_message_history"] is True
+    assert policy["send_messages"] is False
+    assert policy["use_application_commands"] is False
+
+
+def test_every_bot_own_channel_is_fully_operational():
+    own = bot.build_universal_bot_overwrite("Mimu", "🤖・・𝗠𝗶𝗺𝘂", "🤖・・𝗠𝗶𝗺𝘂")
+    assert all(own[k] is True for k in ("view_channel", "read_message_history", "send_messages", "send_messages_in_threads", "use_application_commands", "add_reactions"))
+
+
+def test_special_bot_keeps_only_its_functional_channels_writable():
+    assert bot.SPECIAL_BOT_CHANNEL_POLICIES["Wick"] == {"📋・・𝗦𝗲𝗰𝘂𝗿𝗶𝘁𝘆・𝗟𝗼𝗴𝘀", "📋・・𝗔𝗻𝘁𝗶𝗥𝗮𝗶𝗱・𝗟𝗼𝗴𝘀"}
+    assert bot.SPECIAL_BOT_CHANNEL_POLICIES["Ticket Tool"] == {"🎫・・𝗧𝗶𝗰𝗸𝗲𝘁・𝗣𝗮𝗻𝗲𝗹"}

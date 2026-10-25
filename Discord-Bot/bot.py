@@ -131,6 +131,24 @@ THIRD_PARTY_BOT_CHANNEL_POLICIES = {
     for bot_name, channel_name in THIRD_PARTY_BOT_CHANNELS.items()
 }
 
+SPECIAL_BOT_CHANNEL_POLICIES = {
+    "Wick": {"📋・・𝗦𝗲𝗰𝘂𝗿𝗶𝘁𝘆・𝗟𝗼𝗴𝘀", "📋・・𝗔𝗻𝘁𝗶𝗥𝗮𝗶𝗱・𝗟𝗼𝗴𝘀"},
+    "Ticket Tool": {"🎫・・𝗧𝗶𝗰𝗸𝗲𝘁・𝗣𝗮𝗻𝗲𝗹"},
+    "Statbot": {"📊・・𝗦𝘁𝗮𝘁𝘀・𝗗𝗮𝘀𝗵𝗯𝗼𝗮𝗿𝗱", "📈・・𝗔𝗰𝘁𝗶𝘃𝗶𝘁𝘆・𝗦𝘁𝗮𝘁𝘀"},
+    "Arcane": {"🏆・・𝗟𝗲𝘃𝗲𝗹・𝗨𝗽𝘀"},
+    "Xenon": {"💾・・𝗕𝗮𝗰𝗸𝘂𝗽𝘀"},
+    "carl-bot": {"📋・・𝗖𝗮𝗿𝗹・𝗟𝗼𝗴𝘀"},
+}
+
+def build_universal_bot_overwrite(bot_name: str, own_channel_name: str, channel_name: str, is_private: bool = False):
+    allowed = channel_name == own_channel_name
+    visible = not is_private or allowed
+    return {
+        "allowed": allowed, "view_channel": visible, "read_message_history": visible,
+        "send_messages": allowed, "send_messages_in_threads": allowed,
+        "create_public_threads": allowed, "create_private_threads": False,
+        "use_application_commands": allowed, "add_reactions": allowed,
+    }
 
 def build_third_party_bot_overwrite(bot_name: str, own_channel_name: str, channel_name: str, is_private: bool = False):
     allowed = channel_name == own_channel_name
@@ -489,6 +507,18 @@ class OnboardingView(discord.ui.View):
         except discord.HTTPException:
             await interaction.response.send_message("Discord rejected the role update. Try again in a moment.", ephemeral=True)
 
+
+def is_static_welcome_message(message):
+    """Return True only for the persistent generic welcome board, never join messages."""
+    embeds = getattr(message, "embeds", None) or []
+    if not embeds:
+        return False
+    embed = embeds[0]
+    if getattr(embed, "title", None) != "✦・𝗪𝗘𝗟𝗖𝗢𝗠𝗘・✦":
+        return False
+    # A personalized join welcome has a member avatar thumbnail and a different title.
+    return not getattr(embed, "thumbnail", None)
+
 def build_static_welcome_embed():
     embed = discord.Embed(
         title="✦・𝗪𝗘𝗟𝗖𝗢𝗠𝗘・✦",
@@ -515,18 +545,17 @@ def welcome_panel_file():
 
 async def ensure_welcome_panel(channel):
     try:
-        async for message in channel.history(limit=50):
-            if message.author == bot.user and "<!-- RUPZHA_WELCOME_PANEL_V2 -->" in message.content:
+        async for message in channel.history(limit=100):
+            if is_static_welcome_message(message):
                 has_graphic = any(getattr(attachment, "filename", "") == "rupzha-welcome.gif" for attachment in message.attachments)
                 is_graphical_embed = bool(message.embeds and message.embeds[0].image.url == "attachment://rupzha-welcome.gif")
-                if message.content != "" or not has_graphic or not is_graphical_embed:
+                if not has_graphic or not is_graphical_embed:
                     await message.delete()
-                    message = None
-                else:
-                    if not message.pinned:
-                        await message.pin()
+                    continue
+                # Keep one canonical board; remove duplicates.
+                if message.pinned:
                     return message
-                break
+                await message.delete()
         message = await channel.send(embed=build_static_welcome_embed(), file=welcome_panel_file())
         await message.pin()
         return message
@@ -767,6 +796,47 @@ async def setup_server(guild):
             await channel.edit(overwrites=overwrites, reason="Rupzha channel lock policy")
         except discord.HTTPException as exc:
             print(f"WARN channel lock {channel.name}: {exc}")
+
+    # Reconcile every bot in the guild. Purpose-built integrations keep their functional channels; all other bots get one dedicated command channel.
+    bot_command_category = discord.utils.get(guild.categories, name="╭・𝗕𝗢𝗧・𝗖𝗢𝗠𝗠𝗔𝗡𝗗𝗦")
+    if not bot_command_category:
+        try:
+            bot_command_category = await guild.create_category("╭・𝗕𝗢𝗧・𝗖𝗢𝗠𝗠𝗔𝗡𝗗𝗦", reason="Rupzha universal bot isolation")
+        except discord.HTTPException as exc:
+            print(f"WARN universal bot category: {exc}")
+            bot_command_category = None
+    if bot_command_category:
+        try:
+            guild_bots = [m async for m in guild.fetch_members(limit=None) if m.bot and m.id != bot.user.id]
+        except discord.HTTPException as exc:
+            print(f"WARN universal bot member fetch: {exc}")
+            guild_bots = [m for m in guild.members if m.bot and m.id != bot.user.id]
+        for member in guild_bots:
+            allowed_channels = SPECIAL_BOT_CHANNEL_POLICIES.get(member.name)
+            if allowed_channels is None:
+                safe_name = "".join(ch for ch in member.name.lower() if ch.isalnum() or ch in "-_ ").strip().replace(" ", "-")
+                own_name = f"🤖・・{safe_name[:80] or str(member.id)}"
+                channel = discord.utils.get(guild.text_channels, name=own_name)
+                if not channel:
+                    try:
+                        channel = await guild.create_text_channel(own_name, category=bot_command_category, reason=f"Dedicated {member.name} bot channel")
+                    except discord.HTTPException as exc:
+                        print(f"WARN create bot channel {member.name}: {exc}")
+                        continue
+                allowed_channels = {channel.name}
+            role = member.top_role
+            if role.is_default():
+                continue
+            for channel in guild.text_channels:
+                private = bool(channel.category and channel.category.name in PRIVATE_WORKSPACE_CATEGORIES)
+                allowed = channel.name in allowed_channels
+                visible = allowed or not private
+                overwrite = discord.PermissionOverwrite(view_channel=visible, read_message_history=visible, send_messages=allowed, send_messages_in_threads=allowed, create_public_threads=allowed, create_private_threads=False, use_application_commands=allowed, add_reactions=allowed, embed_links=allowed, attach_files=allowed)
+                if channel.overwrites_for(role) != overwrite:
+                    try:
+                        await channel.set_permissions(role, overwrite=overwrite, reason="Rupzha universal bot isolation")
+                    except discord.HTTPException as exc:
+                        print(f"WARN bot permissions {member.name} #{channel.name}: {exc}")
 
     start = discord.utils.get(guild.categories, name="╭・𝗦𝗧𝗔𝗥𝗧 𝗛𝗘𝗥𝗘")
     if not start:
