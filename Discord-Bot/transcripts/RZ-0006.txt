@@ -1,0 +1,14 @@
+RupZha Ticket Transcript — RZ-0006
+Guild: 1554830636454514708
+Channel: 1564138125356175433
+Opener: 1522363013372448921
+Type: complaint
+Category: complaints
+Priority: normal
+Claimed by: 1322153095412846635
+Escalated: True
+Closed reason: bbj
+
+[2026-10-26T04:46:30.471000+00:00] RupZha#4564 (1563602683993264168): 
+[2026-10-26T04:47:12.467000+00:00] RupZha#4564 (1563602683993264168): Ticket **RZ-0006** closed. It will be archived now and deleted after 24 hours.
+[2026-10-26T04:47:13.352000+00:00] RupZha#4564 (1563602683993264168): 
