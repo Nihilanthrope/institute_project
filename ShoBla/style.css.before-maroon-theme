@@ -1,0 +1,332 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+    --maroon: #541b2a;
+    --maroon-deep: #36111b;
+    --maroon-soft: #6d2838;
+    --yellow: #d8ad4a;
+    --yellow-soft: #ecd58e;
+    --cream: #f7edda;
+    --cream-soft: #fff8ea;
+    --ink: #35151e;
+    --muted: #6f5559;
+    --line: rgba(216, 173, 74, .34);
+    --shadow: rgba(31, 8, 15, .22);
+}
+
+html { scroll-behavior: smooth; }
+body {
+    min-height: 100vh;
+    background: var(--ivory);
+    color: var(--ink);
+    font-family: Georgia, "Times New Roman", serif;
+}
+img { max-width: 100%; }
+
+/* HERO */
+.outer {
+    width: min(1420px, 92%);
+    margin: auto;
+    padding: 78px 40px 44px;
+    text-align: center;
+}
+.top-row { width: 285px; height: 108px; object-fit: contain; }
+.outer h1 {
+    margin-top: 28px;
+    color: var(--wine-dark);
+    font-size: 5.6rem;
+    font-weight: 400;
+    line-height: .98;
+    letter-spacing: -3px;
+}
+.outer::after {
+    content: "KULLU · HIMACHAL PRADESH · INDIA";
+    display: block;
+    margin-top: 28px;
+    color: var(--gold);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 4px;
+}
+
+.middle {
+    width: min(1420px, 94%);
+    height: 670px;
+    margin: 20px auto 78px;
+    display: grid;
+    grid-template-columns: 1.18fr .82fr 1fr .82fr;
+    gap: 10px;
+    padding: 10px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+}
+.gallery-img {
+    min-width: 0;
+    height: 100%;
+    background: url("image.png") center / cover no-repeat;
+    filter: saturate(.86) contrast(.98);
+}
+.gallery-img:nth-child(1) { border-radius: 2px 0 0 2px; }
+.gallery-img:nth-child(4) { border-radius: 0 2px 2px 0; }
+
+.description {
+    width: min(1050px, 84%);
+    margin: 0 auto 145px;
+    padding: 48px 72px 50px;
+    border-top: 1px solid var(--gold-soft);
+    border-bottom: 1px solid var(--gold-soft);
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.95;
+    text-align: center;
+}
+.description::before {
+    content: "SHOBLA ROYALE";
+    display: block;
+    margin-bottom: 17px;
+    color: var(--gold);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 4px;
+}
+
+/* SHARED EDITORIAL HEADER */
+.section-heading {
+    max-width: 920px;
+    margin: 0 auto 66px;
+    text-align: center;
+}
+.section-heading > p:first-child {
+    margin-bottom: 17px;
+    color: var(--gold);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 4px;
+}
+.section-heading h2 {
+    color: var(--wine-dark);
+    font-size: 4.45rem;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -2px;
+}
+.section-heading > span {
+    display: block;
+    width: 74px;
+    height: 1px;
+    margin: 25px auto;
+    background: var(--gold);
+}
+.section-intro {
+    max-width: 720px;
+    margin: auto;
+    color: var(--muted);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+/* ROOMS */
+.hotel-rooms, .cottages, .dining, .multiplex {
+    border-top: 1px solid var(--line);
+}
+.hotel-rooms { padding: 145px 4% 155px; }
+.room-grid {
+    width: min(1320px, 100%);
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px;
+}
+.room-card {
+    overflow: hidden;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    box-shadow: 0 22px 48px var(--shadow);
+}
+.room-card img {
+    display: block;
+    width: 100%;
+    height: 455px;
+    object-fit: cover;
+    filter: saturate(.9);
+}
+.room-info { padding: 34px 40px 38px; text-align: center; }
+.room-info h3 {
+    margin-bottom: 13px;
+    color: var(--wine);
+    font-size: 34px;
+    font-weight: 400;
+}
+.room-info > p {
+    min-height: 52px;
+    color: var(--muted);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    line-height: 1.8;
+}
+.room-details {
+    margin-top: 27px;
+    padding-top: 17px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--line);
+    color: var(--wine-dark);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+.room-details span + span { border-left: 1px solid var(--line); }
+
+/* COTTAGES */
+.cottages { padding: 145px 4% 160px; background: #efe5d6; }
+.cottage-grid {
+    width: min(1320px, 100%);
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+}
+.cottage-card {
+    overflow: hidden;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    box-shadow: 0 18px 38px var(--shadow);
+}
+.cottage-card img {
+    display: block;
+    width: 100%;
+    height: 315px;
+    object-fit: cover;
+    filter: saturate(.86);
+}
+.cottage-info { padding: 29px 28px 0; }
+.cottage-info h3 {
+    margin-bottom: 12px;
+    color: var(--wine);
+    font-size: 24px;
+    font-weight: 400;
+}
+.cottage-info > p {
+    min-height: 48px;
+    color: var(--muted);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    line-height: 1.75;
+}
+.cottage-details {
+    margin: 23px -28px 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--line);
+}
+.cottage-details span {
+    padding: 15px 5px;
+    color: var(--wine-dark);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-align: center;
+}
+.cottage-details span + span { border-left: 1px solid var(--line); }
+
+/* DINING */
+.dining { padding: 145px 4% 160px; }
+.dining-grid {
+    width: min(1320px, 100%);
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px;
+}
+.dining-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    box-shadow: 0 22px 48px var(--shadow);
+}
+.dining-card img {
+    display: block;
+    width: 100%;
+    height: 430px;
+    object-fit: cover;
+    filter: saturate(.84);
+}
+.dining-info { padding: 35px 42px 40px; text-align: center; }
+.dining-info h3 {
+    margin-bottom: 12px;
+    color: var(--wine);
+    font-size: 34px;
+    font-weight: 400;
+}
+.dining-info p {
+    max-width: 590px;
+    margin: auto;
+    color: var(--muted);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+/* MULTIPLEX */
+.multiplex {
+    padding: 135px 4% 150px;
+    background: var(--wine-dark);
+    color: #f7efe4;
+    text-align: center;
+}
+.multiplex .section-heading { max-width: 850px; }
+.multiplex .section-heading > p:first-child { color: var(--gold-soft); }
+.multiplex .section-heading h2 { color: #f8f0e5; font-size: 4.5rem; }
+.multiplex .section-heading > span { background: var(--gold-soft); }
+.multiplex .section-intro { color: #d7c9c1; }
+.multiplex-gallery {
+    width: min(1120px, 100%);
+    margin: 0 auto 48px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+.multiplex-gallery img {
+    display: block;
+    width: 100%;
+    aspect-ratio: .72;
+    object-fit: cover;
+    border: 1px solid rgba(200,177,138,.35);
+    filter: saturate(.82);
+}
+.multiplex-copy { width: min(880px, 100%); margin: auto; }
+.multiplex-copy > p {
+    color: #d7c9c1;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    line-height: 1.9;
+}
+.multiplex-button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 15px 35px;
+    border: 1px solid var(--gold-soft);
+    color: #fff8ed;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+/* SMALL LUXURY DETAILS */
+.hotel-rooms::before, .cottages::before, .dining::before, .multiplex::before {
+    content: "✦";
+    display: block;
+    width: 100%;
+    margin-top: -8px;
+    color: var(--gold);
+    font-size: 12px;
+    text-align: center;
+}

@@ -5,169 +5,397 @@
 }
 
 :root {
-    --cream: #f5ead8;
-    --surface: #fffaf2;
-    --accent: #7a4b2a;
-    --text: #2d241d;
-    --muted: #6d6258;
+    --maroon: #5a1c2d;
+    --maroon-deep: #3d1220;
+    --maroon-dark: #471525;
+    --maroon-card: #672438;
+    --maroon-soft: #743047;
+    --cream: #f8efd9;
+    --cream-soft: #fff7e7;
+    --yellow: #e1bd55;
+    --yellow-soft: #edd889;
+    --muted: #decfb7;
+    --line: rgba(237, 216, 137, .48);
+    --shadow: rgba(28, 7, 15, .3);
 }
+
+html { scroll-behavior: smooth; }
 
 body {
     min-height: 100vh;
-    background: var(--cream);
-    color: var(--text);
+    background: var(--maroon);
+    color: var(--cream);
     font-family: Georgia, "Times New Roman", serif;
 }
 
+img { max-width: 100%; }
+
+/* HERO */
 .outer {
-    width: min(1100px, 90%);
+    width: min(1420px, 92%);
     margin: auto;
-    padding: 32px 20px 20px;
+    padding: 78px 40px 44px;
     text-align: center;
 }
 
 .top-row {
-    width: 200px;
-    height: 100px;
+    width: 285px;
+    height: 108px;
     object-fit: contain;
+    filter: brightness(0) invert(1) sepia(.2);
 }
 
 .outer h1 {
-    margin-top: 10px;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    line-height: 1.1;
+    margin-top: 28px;
+    color: var(--cream-soft);
+    font-size: 5.6rem;
+    font-weight: 400;
+    line-height: .98;
+    letter-spacing: -3px;
+}
+
+.outer::after {
+    content: "KULLU · HIMACHAL PRADESH · INDIA";
+    display: block;
+    margin-top: 28px;
+    color: var(--yellow);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 4px;
 }
 
 .middle {
-    width: min(1100px, 90%);
-    height: min(580px, 55vw);
-    min-height: 320px;
-    margin: 40px auto;
-    display: flex;
-    gap: 20px;
+    width: min(1420px, 94%);
+    height: 670px;
+    margin: 20px auto 70px;
+    display: grid;
+    grid-template-columns: 1.18fr .82fr 1fr .82fr;
+    gap: 10px;
+    padding: 10px;
+    background: var(--maroon-deep);
+    border: 1px solid var(--line);
+    box-shadow: 0 25px 60px var(--shadow);
 }
 
 .gallery-img {
-    flex: 1;
     min-width: 0;
     height: 100%;
-    border-radius: 25px;
-    background-image: url("image.png");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    box-shadow: 0 12px 30px rgba(45, 36, 29, 0.12);
+    background: url("image.png") center / cover no-repeat;
+    filter: saturate(.82) contrast(1.02);
 }
+
+.gallery-img:nth-child(1) { border-radius: 2px 0 0 2px; }
+.gallery-img:nth-child(4) { border-radius: 0 2px 2px 0; }
 
 .description {
-    width: min(900px, 88%);
-    margin: 60px auto;
-    padding: 28px;
-    border-radius: 18px;
-    background: var(--surface);
-    text-align: center;
-    line-height: 1.7;
+    width: min(1050px, 84%);
+    margin: 0 auto 145px;
+    padding: 48px 72px 50px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
     color: var(--muted);
-    box-shadow: 0 8px 24px rgba(45, 36, 29, 0.08);
+    font-size: 17px;
+    line-height: 1.95;
+    text-align: center;
 }
 
-.sec-main {
-    width: min(1100px, 90%);
-    margin: 60px auto;
-    padding: 30px;
-    display: flex;
-    gap: 30px;
-    border-radius: 28px;
-    background: #8a5a3c;
+.description::before {
+    content: "SHOBLA ROYALE";
+    display: block;
+    margin-bottom: 17px;
+    color: var(--yellow);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 4px;
+}
+
+/* SHARED EDITORIAL HEADER */
+.section-heading {
+    max-width: 920px;
+    margin: 0 auto 66px;
+    text-align: center;
+}
+
+.section-heading > p:first-child {
+    margin-bottom: 17px;
+    color: var(--yellow);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 4px;
+}
+
+.section-heading h2 {
+    color: var(--cream-soft);
+    font-size: 4.45rem;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -2px;
+}
+
+.section-heading > span {
+    display: block;
+    width: 74px;
+    height: 2px;
+    margin: 25px auto;
+    background: var(--yellow);
+}
+
+.section-intro {
+    max-width: 720px;
+    margin: auto;
+    color: var(--muted);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+/* SHARED MAROON SECTIONS */
+.hotel-rooms,
+.cottages,
+.dining,
+.multiplex {
+    border-top: 1px solid var(--line);
+    background: var(--maroon);
+}
+
+.hotel-rooms { padding: 145px 4% 155px; }
+
+.room-grid {
+    width: min(1320px, 100%);
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px;
 }
 
 .room-card {
-    flex: 1;
-    min-width: 0;
     overflow: hidden;
-    border-radius: 22px;
-    background: var(--surface);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    background: var(--maroon-card);
+    border: 1px solid var(--line);
+    box-shadow: 0 22px 48px var(--shadow);
 }
 
-.room-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.2);
-}
-
-.room-img {
+.room-card img {
     display: block;
     width: 100%;
-    height: 420px;
+    height: 455px;
     object-fit: cover;
+    filter: saturate(.88);
+    border-bottom: 1px solid var(--line);
 }
 
 .room-info {
-    padding: 25px;
-    background: var(--surface);
+    padding: 34px 40px 38px;
+    text-align: center;
 }
 
-.room-info h2 {
-    margin-bottom: 12px;
-    font-size: 28px;
+.room-info h3 {
+    margin-bottom: 13px;
+    color: var(--cream-soft);
+    font-size: 34px;
+    font-weight: 400;
 }
 
-.room-description {
-    margin-bottom: 20px;
-    line-height: 1.6;
+.room-info > p {
+    min-height: 52px;
     color: var(--muted);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    line-height: 1.8;
 }
 
 .room-details {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+    margin-top: 27px;
+    padding-top: 17px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--line);
+    color: var(--yellow-soft);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
 }
 
-.room-details span {
-    padding: 8px 12px;
-    border-radius: 20px;
-    background: var(--cream);
+.room-details span + span { border-left: 1px solid var(--line); }
+
+/* COTTAGES */
+.cottages { padding: 145px 4% 160px; }
+
+.cottage-grid {
+    width: min(1320px, 100%);
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+}
+
+.cottage-card {
+    overflow: hidden;
+    background: var(--maroon-card);
+    border: 1px solid var(--line);
+    box-shadow: 0 18px 38px var(--shadow);
+}
+
+.cottage-card img {
+    display: block;
+    width: 100%;
+    height: 315px;
+    object-fit: cover;
+    filter: saturate(.84);
+    border-bottom: 1px solid var(--line);
+}
+
+.cottage-info { padding: 29px 28px 0; }
+
+.cottage-info h3 {
+    margin-bottom: 12px;
+    color: var(--cream-soft);
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.cottage-info > p {
+    min-height: 48px;
+    color: var(--muted);
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 13px;
+    line-height: 1.75;
 }
 
-.thred-main {
-    width: min(1100px, 90%);
-    margin: 60px auto;
-    padding: 40px 30px;
+.cottage-details {
+    margin: 23px -28px 0;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    border-radius: 28px;
-    background: #8a5a3c;
+    border-top: 1px solid var(--line);
 }
 
-.heading-two-main {
-    grid-column: 1 / -1;
+.cottage-details span {
+    padding: 15px 5px;
+    color: var(--yellow-soft);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
     text-align: center;
-    margin-bottom: 10px;
 }
 
-.heading-two-main h1 {
-    color: #fffaf2;
-    font-size: clamp(2rem, 4vw, 3rem);
+.cottage-details span + span { border-left: 1px solid var(--line); }
+
+/* DINING */
+.dining { padding: 145px 4% 160px; }
+
+.dining-grid {
+    width: min(1320px, 100%);
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px;
 }
 
-.sec-room-card-one,
-.sec-room-card-two,
-.sec-room-card-three {
-    min-height: 280px;
-    border-radius: 20px;
-    background-image: url("image.png");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+.dining-card {
+    background: var(--maroon-card);
+    border: 1px solid var(--line);
+    box-shadow: 0 22px 48px var(--shadow);
 }
 
-.sec-room-card-two {
-    background-position: 65% center;
+.dining-card img {
+    display: block;
+    width: 100%;
+    height: 430px;
+    object-fit: cover;
+    filter: saturate(.84);
+    border-bottom: 1px solid var(--line);
 }
 
-.sec-room-card-three {
-    background-position: 35% center;
+.dining-info {
+    padding: 35px 42px 40px;
+    text-align: center;
+}
+
+.dining-info h3 {
+    margin-bottom: 12px;
+    color: var(--cream-soft);
+    font-size: 34px;
+    font-weight: 400;
+}
+
+.dining-info p {
+    max-width: 590px;
+    margin: auto;
+    color: var(--muted);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+/* MULTIPLEX */
+.multiplex {
+    padding: 135px 4% 150px;
+    color: var(--cream);
+    text-align: center;
+}
+
+.multiplex .section-heading { max-width: 850px; }
+.multiplex .section-heading > p:first-child { color: var(--yellow); }
+.multiplex .section-heading h2 { color: var(--cream-soft); font-size: 4.5rem; }
+.multiplex .section-heading > span { background: var(--yellow); }
+.multiplex .section-intro { color: var(--muted); }
+
+.multiplex-gallery {
+    width: min(1120px, 100%);
+    margin: 0 auto 48px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.multiplex-gallery img {
+    display: block;
+    width: 100%;
+    aspect-ratio: .72;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    filter: saturate(.82);
+}
+
+.multiplex-copy { width: min(880px, 100%); margin: auto; }
+
+.multiplex-copy > p {
+    color: var(--muted);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+.multiplex-button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 15px 35px;
+    border: 1px solid var(--yellow);
+    background: var(--maroon-soft);
+    color: var(--cream-soft);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+/* SMALL LUXURY DETAILS */
+.hotel-rooms::before,
+.cottages::before,
+.dining::before,
+.multiplex::before {
+    content: "✦";
+    display: block;
+    width: 100%;
+    margin-top: -8px;
+    color: var(--yellow);
+    font-size: 12px;
+    text-align: center;
 }
