@@ -6,3 +6,16 @@ Discord-Bot/rupzha.db-shm
 Discord-Bot/__pycache__/
 Discord-Bot/tests/__pycache__/
 Discord-Bot/.pytest_cache/
+
+# Python environments and caches
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Build/dependency output
+node_modules/
+dist/
+
+# Logs
+*.log
