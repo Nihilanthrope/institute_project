@@ -30,7 +30,6 @@ body {
 
 img { max-width: 100%; }
 
-/* HERO */
 .outer {
     width: min(1420px, 92%);
     margin: auto;
@@ -67,10 +66,10 @@ img { max-width: 100%; }
 
 .middle {
     width: min(1420px, 94%);
-    height: 670px;
-    margin: 20px auto 70px;
+    height: 620px;
+    margin: 20px auto 80px;
     display: grid;
-    grid-template-columns: 1.18fr .82fr 1fr .82fr;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 10px;
     padding: 10px;
     background: var(--maroon-deep);
@@ -398,4 +397,9 @@ img { max-width: 100%; }
     color: var(--yellow);
     font-size: 12px;
     text-align: center;
+}
+.multiplex-gallery-6 {
+  flex-direction: column;
+  height: 560px;
+  width: 200pxed. Use TDD r ;
 }
