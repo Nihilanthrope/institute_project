@@ -436,6 +436,66 @@ img { max-width: 100%; }
     border-top: 1px solid var(--line);
     
 }
-.reviews-main{
-    
+.experiencesOuter{
+    height: 100vh;
+    width: 100%;
+    background-color:#eeebe0;;
+}
+.experiencesContainer{
+    height: 100%;
+    width: 80%;
+    margin: auto;
+}
+.experiencesRowTop{
+    height: auto;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    padding: 25px 130px;
+
+}
+.experiencesRowTop h6{
+    font-size: 15px;
+    letter-spacing: 2px;
+    color: #192f15;
+}
+.experiencesRowTop h1{
+    letter-spacing: -1px;
+    font-size: 75px;
+    color: #192f15;
+}
+.experiencesRowTop p{
+    font-size: 75px;
+    color: #192f15;
+}
+.divider{
+    height: 3px;
+    width: 70px;
+    margin: auto;
+    background-color: var(--maroon);
+}
+.experiencesRowTop p{
+    font-size: 20px;
+}
+
+.experiencesRowBottom{
+    height: 75%;
+    width: 100%;
+}
+.experiencesCallz{
+    height: 280px;
+    width:320px;
+    margin: 10px;
+    background-color: #e7e3d3;
+    float: left;
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 10px;
+
+}
+.experiencesCallz p{
+    color: #471525;
 }
