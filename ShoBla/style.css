@@ -46,9 +46,10 @@
 .secMainContainer{
     background-color: #e7e3d3;
     height: 90%;
-    width: 80%;
+    width: 100%;
     margin: auto;
-    padding: 0px 10px;
+    padding: 5px 36px;
+    
 }
 .secMainContainer h6{
     text-align: center;
@@ -66,23 +67,40 @@
     color: #192f15;
     background-color: #e7e3d3;
 }
-.secMainContainer div{
-    
+.divider{
+    margin: auto;
     height: 3px;
     width: 35px;
-    color: #192f15;
+    background-color: #192f15;
 }
 .secMainContainer p{
     text-align: center;
     font-size: 15px;
     letter-spacing: 2px;
     color: #192f15;
-    padding: 15px 0px;
+    padding: 15px 250px;
     background-color: #e7e3d3;
 }
-.secMainImg1{
-   float: left;
-   padding: 0px 210px;
+.secMainImg{
+   gap: 20px;
 }
+.secMainImg1{
+    border-radius: ;
+   float: left;
+   gap: 10px;
+   padding-bottom: 180px;
+   border: rgb(254, 254, 254) solid 10px;
+}
+.secMainImg2{
+   float: left;
+   gap: 10px;
+   padding-bottom: 180px;
+   border: rgb(250, 247, 247) solid 10px;
 
-
+}
+.secMainImg h4{
+    text-align: center;
+    color: #192f15;
+    font-size: 24px;
+    font-family: sans-serif2;
+}
