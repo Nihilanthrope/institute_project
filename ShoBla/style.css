@@ -1,501 +1,88 @@
-* {
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: #eeebe0;
 }
-
-:root {
-    --maroon: #5a1c2d;
-    --maroon-deep: #3d1220;
-    --maroon-dark: #471525;
-    --maroon-card: #672438;
-    --maroon-soft: #743047;
-    --cream: #f8efd9;
-    --cream-soft: #fff7e7;
-    --yellow: #e1bd55;
-    --yellow-soft: #edd889;
-    --muted: #decfb7;
-    --line: rgba(237, 216, 137, .48);
-    --shadow: rgba(28, 7, 15, .3);
-}
-
-html { scroll-behavior: smooth; }
-
-body {
-    min-height: 100vh;
-    background: var(--maroon);
-    color: var(--cream);
-    font-family: Georgia, "Times New Roman", serif;
-}
-
-img { max-width: 100%; }
-
-.outer {
-    width: min(1420px, 92%);
-    margin: auto;
-    padding: 78px 40px 44px;
-    text-align: center;
-}
-
-.top-row {
-    width: 285px;
-    height: 108px;
-    object-fit: contain;
-    filter: brightness(0) invert(1) sepia(.2);
-}
-
-.outer h1 {
-    margin-top: 28px;
-    color: var(--cream-soft);
-    font-size: 5.6rem;
-    font-weight: 400;
-    line-height: .98;
-    letter-spacing: -3px;
-}
-
-.outer::after {
-    content: "KULLU · HIMACHAL PRADESH · INDIA";
-    display: block;
-    margin-top: 28px;
-    color: var(--yellow);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 4px;
-}
-
-.middle {
-    width: min(1420px, 94%);
-    height: 620px;
-    margin: 20px auto 80px;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 10px;
-    padding: 10px;
-    background: var(--maroon-deep);
-    border: 1px solid var(--line);
-    box-shadow: 0 25px 60px var(--shadow);
-}
-
-.gallery-img {
-    min-width: 0;
-    height: 100%;
-    background: url("image.png") center / cover no-repeat;
-    filter: saturate(.82) contrast(1.02);
-}
-
-.gallery-img:nth-child(1) { border-radius: 2px 0 0 2px; }
-.gallery-img:nth-child(4) { border-radius: 0 2px 2px 0; }
-
-.description {
-    width: min(1050px, 84%);
-    margin: 0 auto 145px;
-    padding: 48px 72px 50px;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    color: var(--muted);
-    font-size: 17px;
-    line-height: 1.95;
-    text-align: center;
-}
-
-.description::before {
-    content: "SHOBLA ROYALE";
-    display: block;
-    margin-bottom: 17px;
-    color: var(--yellow);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 4px;
-}
-
-/* SHARED EDITORIAL HEADER */
-.section-heading {
-    max-width: 920px;
-    margin: 0 auto 66px;
-    text-align: center;
-}
-
-.section-heading > p:first-child {
-    margin-bottom: 17px;
-    color: var(--yellow);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 4px;
-}
-
-.section-heading h2 {
-    color: var(--cream-soft);
-    font-size: 4.45rem;
-    font-weight: 400;
-    line-height: 1;
-    letter-spacing: -2px;
-}
-
-.section-heading > span {
-    display: block;
-    width: 74px;
-    height: 2px;
-    margin: 25px auto;
-    background: var(--yellow);
-}
-
-.section-intro {
-    max-width: 720px;
-    margin: auto;
-    color: var(--muted);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    line-height: 1.9;
-}
-
-/* SHARED MAROON SECTIONS */
-.hotel-rooms,
-.cottages,
-.dining,
-.multiplex {
-    border-top: 1px solid var(--line);
-    background: var(--maroon);
-}
-
-.hotel-rooms { padding: 145px 4% 155px; }
-
-.room-grid {
-    width: min(1320px, 100%);
-    margin: auto;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 48px;
-}
-
-.room-card {
-    overflow: hidden;
-    background: var(--maroon-card);
-    border: 1px solid var(--line);
-    box-shadow: 0 22px 48px var(--shadow);
-}
-
-.room-card img {
-    display: block;
+.heroMainOutter{
+    height: 800px;
     width: 100%;
-    height: 455px;
-    object-fit: cover;
-    filter: saturate(.88);
-    border-bottom: 1px solid var(--line);
+    background-color:#eeebe0;
+    padding: 20px 0px;
 }
-
-.room-info {
-    padding: 34px 40px 38px;
+.containerFirstMainHeading{
+    padding: 60px 0px;
     text-align: center;
+    align-items: center;
 }
-
-.room-info h3 {
-    margin-bottom: 13px;
-    color: var(--cream-soft);
-    font-size: 34px;
-    font-weight: 400;
+.containerFirstMain h1{
+    letter-spacing: -1px;
+    color: #192f15;
 }
-
-.room-info > p {
-    min-height: 52px;
-    color: var(--muted);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 13px;
-    line-height: 1.8;
-}
-
-.room-details {
-    margin-top: 27px;
-    padding-top: 17px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    border-top: 1px solid var(--line);
-    color: var(--yellow-soft);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-}
-
-.room-details span + span { border-left: 1px solid var(--line); }
-
-/* COTTAGES */
-.cottages { padding: 145px 4% 160px; }
-
-.cottage-grid {
-    width: min(1320px, 100%);
-    margin: auto;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 30px;
-}
-
-.cottage-card {
-    overflow: hidden;
-    background: var(--maroon-card);
-    border: 1px solid var(--line);
-    box-shadow: 0 18px 38px var(--shadow);
-}
-
-.cottage-card img {
-    display: block;
-    width: 100%;
-    height: 315px;
-    object-fit: cover;
-    filter: saturate(.84);
-    border-bottom: 1px solid var(--line);
-}
-
-.cottage-info { padding: 29px 28px 0; }
-
-.cottage-info h3 {
-    margin-bottom: 12px;
-    color: var(--cream-soft);
-    font-size: 24px;
-    font-weight: 400;
-}
-
-.cottage-info > p {
-    min-height: 48px;
-    color: var(--muted);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 13px;
-    line-height: 1.75;
-}
-
-.cottage-details {
-    margin: 23px -28px 0;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    border-top: 1px solid var(--line);
-}
-
-.cottage-details span {
-    padding: 15px 5px;
-    color: var(--yellow-soft);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 1.4px;
-    text-align: center;
-}
-
-.cottage-details span + span { border-left: 1px solid var(--line); }
-
-/* DINING */
-.dining { padding: 145px 4% 160px; }
-
-.dining-grid {
-    width: min(1320px, 100%);
-    margin: auto;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 48px;
-}
-
-.dining-card {
-    background: var(--maroon-card);
-    border: 1px solid var(--line);
-    box-shadow: 0 22px 48px var(--shadow);
-}
-
-.dining-card img {
-    display: block;
-    width: 100%;
-    height: 430px;
-    object-fit: cover;
-    filter: saturate(.84);
-    border-bottom: 1px solid var(--line);
-}
-
-.dining-info {
-    padding: 35px 42px 40px;
-    text-align: center;
-}
-
-.dining-info h3 {
-    margin-bottom: 12px;
-    color: var(--cream-soft);
-    font-size: 34px;
-    font-weight: 400;
-}
-
-.dining-info p {
-    max-width: 590px;
-    margin: auto;
-    color: var(--muted);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 13px;
-    line-height: 1.8;
-}
-
-/* MULTIPLEX */
-.multiplex {
-    padding: 135px 4% 150px;
-    color: var(--cream);
-    text-align: center;
-}
-
-.multiplex .section-heading { max-width: 850px; }
-.multiplex .section-heading > p:first-child { color: var(--yellow); }
-.multiplex .section-heading h2 { color: var(--cream-soft); font-size: 4.5rem; }
-.multiplex .section-heading > span { background: var(--yellow); }
-.multiplex .section-intro { color: var(--muted); }
-
-.multiplex-gallery {
-    width: min(1120px, 100%);
-    margin: 0 auto 48px;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 12px;
-}
-
-.multiplex-gallery img {
-    display: block;
-    width: 100%;
-    aspect-ratio: .72;
-    object-fit: cover;
-    border: 1px solid var(--line);
-    filter: saturate(.82);
-}
-
-.multiplex-copy { width: min(880px, 100%); margin: auto; }
-
-.multiplex-copy > p {
-    color: var(--muted);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 13px;
-    line-height: 1.9;
-}
-
-.multiplex-button {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 15px 35px;
-    border: 1px solid var(--yellow);
-    background: var(--maroon-soft);
-    color: var(--cream-soft);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-decoration: none;
-    text-transform: uppercase;
-}
-
-/* SMALL LUXURY DETAILS */
-.hotel-rooms::before,
-.cottages::before,
-.dining::before,
-.multiplex::before {
-    content: "✦";
-    display: block;
-    width: 50%;
-    margin-top: -8px;
-    color: var(--yellow);
-    font-size: 12px;
-    text-align: center;
-}
-/* PAGE 6 — EXPLORE & EXPERIENCE */
-.Explore_Exp {
-    padding: 145px 4% 160px;
-    border-top: 1px solid var(--line);
-    background: var(--maroon);
-}
-
-.multiplex-gallery-6 {
-    width: min(1120px, 100%);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 28px;
-}
-
-.multiplex-gallery-6 > div {
-    min-width: 0;
-    overflow: hidden;
-    border: 1px solid var(--line);
-    background: var(--maroon-card);
-    box-shadow: 0 22px 48px var(--shadow);
-    border-radius: 22px;
-}
-
-.multiplex-gallery-6 img {
-    display: block;
-    width: 100%;
-    height: 430px;
-    object-fit: cover;
-    filter: saturate(.86);
-    border-radius: 22px;
-}
-.reviews{
-    text-align: center;
-    padding: 2%;
-    border-top: 1px solid var(--line);
-    
-}
-.experiencesOuter{
-    height: 100vh;
-    width: 100%;
-    background-color:#eeebe0;;
-}
-.experiencesContainer{
-    height: 100%;
+.mainContentImg{
+    padding: 10px 50px;
+    height: 40%;
     width: 80%;
     margin: auto;
+    
 }
-.experiencesRowTop{
-    height: auto;
-    width: 100%;
-    margin: auto;
+.mainContentImg img{
+    height: 100%;
+    align-items: center;
+    margin: 0px 10px;
+    border: maroon solid;
+    border-radius: 10px;
+}
+.mainContentImg p{
+    padding: 20px 43px;
     text-align: center;
-    padding: 25px 130px;
-
+    color: #192f15;
+    font-family: 18px sans-serif,;
 }
-.experiencesRowTop h6{
+.secMainOutter{
+    height: 800px;
+    width: 100%;
+}
+.secMainContainer{
+    background-color: #e7e3d3;
+    height: 90%;
+    width: 80%;
+    margin: auto;
+    padding: 0px 10px;
+}
+.secMainContainer h6{
+    text-align: center;
     font-size: 15px;
     letter-spacing: 2px;
     color: #192f15;
-}
-.experiencesRowTop h1{
-    letter-spacing: -1px;
-    font-size: 75px;
-    color: #192f15;
-}
-.experiencesRowTop p{
-    font-size: 75px;
-    color: #192f15;
-}
-.divider{
-    height: 3px;
-    width: 70px;
-    margin: auto;
-    background-color: var(--maroon);
-}
-.experiencesRowTop p{
-    font-size: 20px;
-}
-
-.experiencesRowBottom{
-    height: 75%;
-    width: 100%;
-}
-.experiencesCallz{
-    height: 280px;
-    width:320px;
-    margin: 10px;
+    padding: 15px 0px;
     background-color: #e7e3d3;
-    float: left;
-    padding: 10px;
-    padding-bottom: 0px;
-    padding-top: 0px;
+    
+}
+.secMainContainer h1{
+    font-size: 48px;
+    text-align: center;
+    letter-spacing: 2px;
+    color: #192f15;
+    background-color: #e7e3d3;
+}
+.secMainContainer div{
+    
+    height: 3px;
+    width: 35px;
+    color: #192f15;
+}
+.secMainContainer p{
     text-align: center;
     font-size: 15px;
-    border-radius: 10px;
+    letter-spacing: 2px;
+    color: #192f15;
+    padding: 15px 0px;
+    background-color: #e7e3d3;
+}
+.secMainImg1{
+   float: left;
+   padding: 0px 210px;
+}
 
-}
-.experiencesCallz p{
-    color: #471525;
-}
+
