@@ -1,79 +1,91 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     background-color: #eeebe0;
 }
-.heroMainOutter{
+
+.firstMainOutter {
     height: 800px;
     width: 100%;
-    background-color:#eeebe0;
+    background-color: #eeebe0;
     padding: 20px 0px;
 }
-.containerFirstMainHeading{
+
+.containerFirstMainHeading {
     padding: 60px 0px;
     text-align: center;
     align-items: center;
 }
-.containerFirstMain h1{
+
+.containerFirstMainHeading h1 {
     letter-spacing: -1px;
     color: #192f15;
 }
-.mainContentImg{
+
+.firstMainContentImg {
     padding: 10px 50px;
     height: 40%;
     width: 80%;
     margin: auto;
-    
+
 }
-.mainContentImg img{
+
+.firstMainContentImg img {
     height: 100%;
     align-items: center;
     margin: 0px 10px;
     border: maroon solid;
     border-radius: 10px;
 }
-.mainContentImg p{
+
+.firstMainContentImg p {
     padding: 20px 43px;
     text-align: center;
     color: #192f15;
-    font-family: 18px sans-serif,;
+    font-family: 18px sans-serif, ;
 }
-.secMainOutter{
+
+.secondMainOutter {
     height: 800px;
     width: 100%;
 }
-.secMainContainer{
+
+.secondMainContainer {
     background-color: #e7e3d3;
-    height: 90%;
+    height: 110%;
     width: 100%;
     margin: auto;
     padding: 5px 36px;
-    
+
 }
-.secMainContainer h6{
+
+.secondMainContainer h6 {
     text-align: center;
     font-size: 15px;
     letter-spacing: 2px;
     color: #192f15;
     padding: 15px 0px;
     background-color: #e7e3d3;
-    
+
 }
-.secMainContainer h1{
+
+.secondMainContainer h1 {
     font-size: 48px;
     text-align: center;
     letter-spacing: 2px;
     color: #192f15;
     background-color: #e7e3d3;
 }
-.divider{
+
+.Divider {
     margin: auto;
     height: 3px;
     width: 35px;
     background-color: #192f15;
 }
-.secMainContainer p{
+
+.secondMainContainer p {
     text-align: center;
     font-size: 15px;
     letter-spacing: 2px;
@@ -81,26 +93,357 @@
     padding: 15px 250px;
     background-color: #e7e3d3;
 }
-.secMainImg{
-   gap: 20px;
-}
-.secMainImg1{
-    border-radius: ;
-   float: left;
-   gap: 10px;
-   padding-bottom: 180px;
-   border: rgb(254, 254, 254) solid 10px;
-}
-.secMainImg2{
-   float: left;
-   gap: 10px;
-   padding-bottom: 180px;
-   border: rgb(250, 247, 247) solid 10px;
 
+.secondMainContent {
+    display: flex;
+    gap: 20px;
 }
-.secMainImg h4{
+
+.secondMainCard1 {
+    width: 50%;
+    height: 550px;
+    border-radius: 12px;
+    padding-bottom: 20px;
+    border: rgb(254, 254, 254) solid 10px;
+    background-color: white;
+    overflow: hidden;
+}
+
+.secondMainCard2 {
+    width: 50%;
+    height: 550px;
+    border-radius: 12px;
+    padding-bottom: 20px;
+    border: rgb(250, 247, 247) solid 10px;
+    background-color: white;
+    overflow: hidden;
+}
+
+.secondMainContent img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    display: block;
+}
+
+.secondMainContent h4 {
     text-align: center;
     color: #192f15;
     font-size: 24px;
     font-family: sans-serif2;
+    margin: 16px 0 8px;
+    background-color: white;
+}
+
+.secondMainContent p {
+    color: #192f15;
+    font-family: sans-serif2;
+    margin-bottom: 0;
+    padding: 0 20px;
+    background-color: white;
+}
+
+.secondMainText {
+    height: 40px;
+    width: 100%;
+    border-radius: 10px;
+    text-align: center;
+    letter-spacing: 2px;
+    padding: 10px;
+
+}
+
+.thirdMainOutter {
+    width: 90%;
+    margin: 20px auto;
+    padding: 45px 30px;
+    background-color: #192f15;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.thirdMainOutter div {
+    width: 30%;
+    background-color: #192f15;
+}
+
+.thirdMainOutter h4 {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 15px;
+    background-color: #192f15;
+}
+
+.thirdMainOutter p {
+    color: white;
+    font-size: 16px;
+    line-height: 1.8;
+    background-color: #192f15;
+}
+
+.fourthMainOutter {
+    height: 800px;
+    width: 80%;
+    margin: auto;
+    background-color: #e7e3d3;
+}
+
+.fourthMainHeading {
+    color: #192f15;
+    text-align: center;
+    padding: 10px 300px;
+    text-indent: 2px;
+}
+
+.fourthMainHeading h6 {
+    color: #192f15;
+    text-align: center;
+    text-indent: 2px;
+    font-size: 15px;
+}
+
+.fourthMainHeading h1 {
+    color: #192f15;
+    text-align: center;
+    padding: 10px;
+    text-indent: 2px;
+}
+
+.fourthMainContainerImg {
+    float: left;
+    width: 25%;
+    height: 50%;
+}
+
+/* Our Cottages */
+.fourthMainOutter {
+    height: auto;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 3% 60px;
+    background-color: #e7e3d3;
+}
+
+.containerFourthMain {
+    width: 100%;
+    max-width: 1250px;
+    margin: auto;
+    background-color: #e7e3d3;
+}
+
+.fourthMainHeading {
+    width: 100%;
+    padding: 10px 180px 35px;
+    color: #192f15;
+    text-align: center;
+    background-color: #e7e3d3;
+}
+
+.fourthMainHeading h6 {
+    bbackground-color: #e7e3d3;
+}
+
+.fourthMainHeading h1 {
+    background-color: #e7e3d3;
+}
+
+.fourthMainHeading p {
+    background-color: #e7e3d3;
+}
+
+.fourthMainHeading h1 {
+    font-size: 48px;
+    padding: 5px 0 12px;
+}
+
+.fourthMainHeading div {
+    height: 3px;
+    width: 65px;
+    margin: 0 auto 12px;
+    background-color: #192f15;
+}
+
+.fourthMainHeading p {
+    font-size: 17px;
+    line-height: 1.7;
+    padding: 0;
+}
+
+.fourthMainContent {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    background-color: #e7e3d3;
+}
+
+.fourthMainContainerImg {
+    float: none;
+    width: 33.333%;
+    height: auto;
+    padding: 8px 8px 15px;
+    border: 5px solid white;
+    border-radius: 18px;
+    background-color: white;
+    overflow: hidden;
+}
+
+.fourthMainContainerImg img {
+    display: block;
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.fourthMainContainerImg h4 {
+    margin: 14px 0 7px;
+    color: #192f15;
+    font-size: 25px;
+    text-align: center;
+    background-color: white;
+}
+
+.fourthMainContainerImg p {
+    min-height: 55px;
+    padding: 0 5px;
+    color: #77776f;
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: center;
+    background-color: white;
+}
+
+
+/* Cottages text */
+.fourthMainText {
+    height: 40px;
+    width: 100%;
+    border-radius: 10px;
+    text-align: center;
+    letter-spacing: 2px;
+    padding: 10px;
+}
+
+/* Dining section */
+.fifthMainOutter {
+    height: 800px;
+    width: 100%;
+}
+
+.fifthMainContainer {
+    background-color: #e7e3d3;
+    height: 110%;
+    width: 100%;
+    margin: auto;
+    padding: 5px 36px;
+}
+
+.fifthMainContainer h6 {
+    text-align: center;
+    font-size: 15px;
+    letter-spacing: 2px;
+    color: #192f15;
+    padding: 15px 0px;
+    background-color: #e7e3d3;
+}
+
+.fifthMainContainer h1 {
+    font-size: 48px;
+    text-align: center;
+    letter-spacing: 2px;
+    color: #192f15;
+    background-color: #e7e3d3;
+}
+
+.fifthMainContainer p {
+    text-align: center;
+    font-size: 15px;
+    letter-spacing: 2px;
+    color: #192f15;
+    padding: 15px 250px;
+    background-color: #e7e3d3;
+}
+
+.fifthMainContent {
+    display: flex;
+    gap: 20px;
+}
+
+.fifthMainCard1 {
+    width: 50%;
+    height: 550px;
+    border-radius: 12px;
+    padding-bottom: 20px;
+    border: rgb(254, 254, 254) solid 10px;
+    background-color: white;
+    overflow: hidden;
+}
+
+.fifthMainCard2 {
+    width: 50%;
+    height: 550px;
+    border-radius: 12px;
+    padding-bottom: 20px;
+    border: rgb(250, 247, 247) solid 10px;
+    background-color: white;
+    overflow: hidden;
+}
+
+.fifthMainContent img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    display: block;
+}
+
+.fifthMainContent h4 {
+    text-align: center;
+    color: #192f15;
+    font-size: 24px;
+    font-family: sans-serif2;
+    margin: 16px 0 8px;
+    background-color: white;
+}
+
+.fifthMainContent p {
+    color: #192f15;
+    font-family: sans-serif2;
+    margin-bottom: 0;
+    padding: 0 20px;
+    background-color: white;
+}
+
+.sixthMainContainer {
+    background-color: #e7e3d3;
+    height: 110%;
+    width: 100%;
+    margin: auto;
+    padding: 5px 36px;
+}
+
+.sixthMainContainer h6 {
+    text-align: center;
+    font-size: 15px;
+    letter-spacing: 2px;
+    color: #192f15;
+    padding: 15px 0px;
+    background-color: #e7e3d3;
+}
+
+.sixthMainContainer h1 {
+    font-size: 48px;
+    text-align: center;
+    letter-spacing: 2px;
+    color: #192f15;
+    background-color: #e7e3d3;
+}
+
+.sixthMainContainer p {
+    color: #192f15;
+    font-family: sans-serif2;
+    margin-bottom: 0;
+    padding: 0 20px;
+    background-color: white;
 }
