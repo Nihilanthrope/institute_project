@@ -456,18 +456,74 @@
 .sixthMainContent img{
     border-radius: 15px;
 }
+/* Things to do in Kullu */
 .seventhMainOutter{
-    height: 800px;
-    width: 80%;
-    background-color: #e7e3d3;
+    height: auto;
+    width: 100%;
+    background-color: #eeebe0;
     margin: auto;
-    border-radius: 10px;
-    
+    padding: 30px 4% 60px;
 }
 .seventhMainHeading {
     text-align: center;
+    color: #192f15;
+    padding: 40px 0px;
+    background-color: #eeebe0;
+}
+.seventhMainHeading h6 {
     font-size: 15px;
     letter-spacing: 2px;
     color: #192f15;
-    padding: 15px 0px;
+    padding: 0 0 12px;
+    background-color: #eeebe0;
+}
+.seventhMainHeading h1 {
+    font-size: 48px;
+    color: #192f15;
+    padding-bottom: 12px;
+    background-color: #eeebe0;
+}
+.seventhMainHeading p {
+    width: 65%;
+    margin: auto;
+    padding: 10px 0;
+    color: #192f15;
+    font-size: 17px;
+    line-height: 1.6;
+    text-align: center;
+    background-color: #eeebe0;
+}
+.seventhMainContent {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    background-color: #eeebe0;
+}
+.seventhMainImg1,
+.seventhMainImg2 {
+    width: 50%;
+    padding: 0 0 20px;
+    background-color: white;
+    border-radius: 15px;
+}
+.seventhMainContent img {
+    width: 100%;
+    height: 350px;
+    padding: 0;
+    border-radius: 15px;
+}
+.seventhMainContent h4 {
+    text-align: center;
+    color: #192f15;
+    font-size: 25px;
+    margin: 16px 0 8px;
+    background-color: white;
+}
+.seventhMainContent p {
+    color: #192f15;
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: center;
+    padding: 0 20px;
+    background-color: white;
 }
