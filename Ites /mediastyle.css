@@ -21,7 +21,7 @@
 }
 .text-tag{
     height: 80%;
-    width: 100px;
+    width: 50%;
     overflow: scroll;
     background-color: bisque;
 }
