@@ -1,0 +1,43 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+.outter{
+    height: 800px;
+    width: 100%;
+}
+.contaner{
+    height: 100%;
+    width: 80%;
+    margin: auto;
+}
+.heading{
+    width: 100%;
+    height: 60px;
+    text-align: center;
+    background-color: bisque;
+}
+.Box-main{
+    width: 100%;
+    height: 50%;
+    padding-top: 30px;
+    display: flex;
+    gap: 20px;
+}
+.one{
+    height: 80%;
+    width: 50%;
+    background-color: blanchedalmond;
+}
+.two{
+     height:80%;
+    width: 50%;
+    background-color: blanchedalmond;
+}
+.Heading-foot{
+    width: 100%;
+    height: 30%;
+    text-align: center;
+    background-color: bisque;
+}
