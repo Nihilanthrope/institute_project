@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #eeebe0;
+}
+
+.outter-heading {
+    width: 100%;
+    height: 140px;
+}
+
+.heading-upper-one {
+    width: 100%;
+    height: 40%;
+    background-color: #192f15;
+    padding: 8px 5%;
+    display: flex;
+    gap: 100px;
+}
+
+.heading-upper-one p {
+    background-color: #192f15;
+    color: white;
+    text-indent: 10px;
+    font-size: 20px;
+}
+
+.heading-upper-one img {
+    margin-top: 12px;
+    height: 40%;
+    width: 25px;
+    background-color: #192f15;
+    margin-left: 35px;
+}
