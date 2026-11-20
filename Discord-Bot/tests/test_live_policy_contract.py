@@ -493,6 +493,34 @@ def test_managed_bot_security_audit_flags_uneditable_admin_roles():
     )
     assert failures == ["bot-role:Hazy:managed-dangerous=administrator"]
 
+
+def test_configured_integration_bot_audit_includes_special_and_dedicated_bots():
+    from verify_full_upgrade import configured_integration_bot_names
+
+    names = configured_integration_bot_names(bot)
+    assert {"Koya", "Arcane", "carl-bot", "Ticket Tool", "Statbot", "OwO", "Pokétwo"} <= names
+
+
+def test_live_audit_marks_highest_rupzha_role_admin_for_manual_owner_fix():
+    from types import SimpleNamespace
+    from verify_full_upgrade import role_policy_failure
+    import discord
+
+    role = SimpleNamespace(id=123, permissions=discord.Permissions(administrator=True))
+    assert role_policy_failure("Rupzha Bot", role, discord.Permissions.none(), role) == \
+        "bot-role:administrator-enabled:manual-owner-fix"
+
+
+def test_ticket_panel_must_not_live_inside_private_ticket_rooms():
+    from types import SimpleNamespace
+    from verify_full_upgrade import ticket_panel_location_failure
+
+    private = SimpleNamespace(name="╭・𝗧𝗜𝗖𝗞𝗘𝗧・𝗥𝗢𝗢𝗠𝗦")
+    public = SimpleNamespace(name="╭・𝗦𝗧𝗔𝗥𝗧 𝗛𝗘𝗥𝗘")
+    assert ticket_panel_location_failure(SimpleNamespace(category=private), private.name) == \
+        "ticket-panel:inside-private-ticket-rooms"
+    assert ticket_panel_location_failure(SimpleNamespace(category=public), private.name) is None
+
 def test_every_bot_own_channel_is_fully_operational():
     own = bot.build_universal_bot_overwrite("Mimu", "🤖・・𝗠𝗶𝗺𝘂", "🤖・・𝗠𝗶𝗺𝘂")
     assert all(own[k] is True for k in ("view_channel", "read_message_history", "send_messages", "send_messages_in_threads", "use_application_commands", "add_reactions"))
@@ -514,12 +542,12 @@ def test_private_ticket_rooms_are_separate_from_public_ticket_panel():
     assert "╭・𝗧𝗜𝗖𝗞𝗘𝗧・𝗧𝗢𝗢𝗟" not in bot.CATEGORY_ACCESS_POLICY
     ticket_policy = bot.channel_policy_for_name("🎫・・𝗧𝗶𝗰𝗸𝗲𝘁・𝗣𝗮𝗻𝗲𝗹", bot.CHANNEL_LOCK_POLICY)
     assert "Ticket Tool" in ticket_policy["bot_roles"]
-    assert "RupZha" in ticket_policy["bot_roles"]
+    assert "Rupzha Bot" in ticket_policy["bot_roles"]
 
 
 def test_channel_policy_matches_emoji_prefixed_names():
     assert bot.channel_policy_for_name("🎫・・𝗧𝗶𝗰𝗸𝗲𝘁・𝗣𝗮𝗻𝗲𝗹", bot.CHANNEL_LOCK_POLICY) == {
-        "mode": "public_read_only_bot_write", "bot_roles": ["Ticket Tool", "RupZha"]
+        "mode": "public_read_only_bot_write", "bot_roles": ["Ticket Tool", "Rupzha Bot"]
     }
     assert bot.channel_policy_for_name("📋・・𝗦𝗲𝗰𝘂𝗿𝗶𝘁𝘆・𝗟𝗼𝗴𝘀", bot.CHANNEL_LOCK_POLICY) == {
         "mode": "restricted_bot_write", "bot_roles": ["Wick"]

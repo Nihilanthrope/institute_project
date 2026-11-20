@@ -140,7 +140,7 @@ CHANNEL_LOCK_POLICY = {
     "・𝗟𝗼𝗴𝘀": {"mode": "restricted_read_only"},
     "・𝗦𝗲𝗰𝘂𝗿𝗶𝘁𝘆・𝗟𝗼𝗴𝘀": {"mode": "restricted_bot_write", "bot_roles": ["Wick"]},
     "・𝗔𝗻𝘁𝗶𝗥𝗮𝗶𝗱・𝗟𝗼𝗴𝘀": {"mode": "restricted_bot_write", "bot_roles": ["Wick"]},
-    "・𝗧𝗶𝗰𝗸𝗲𝘁・𝗣𝗮𝗻𝗲𝗹": {"mode": "public_read_only_bot_write", "bot_roles": ["Ticket Tool", "RupZha"]},
+    "・𝗧𝗶𝗰𝗸𝗲𝘁・𝗣𝗮𝗻𝗲𝗹": {"mode": "public_read_only_bot_write", "bot_roles": ["Ticket Tool", "Rupzha Bot"]},
     "・𝗦𝘁𝗮𝘁𝘀・𝗗𝗮𝘀𝗵𝗯𝗼𝗮𝗿𝗱": {"mode": "restricted_bot_write", "bot_roles": ["Statbot"]},
     "・𝗔𝗰𝘁𝗶𝘃𝗶𝘁𝘆・𝗦𝘁𝗮𝘁𝘀": {"mode": "restricted_bot_write", "bot_roles": ["Statbot"]},
     "・𝗟𝗲𝘃𝗲𝗹・𝗨𝗽𝘀": {"mode": "public_read_only_bot_write", "bot_roles": ["Arcane"]},
@@ -851,6 +851,23 @@ async def ensure_ticket_panel(guild):
     channel = find_public_text_channel(guild, "・𝗧𝗶𝗰𝗸𝗲𝘁・𝗣𝗮𝗻𝗲𝗹")
     if channel is None:
         return None
+
+    # The panel is a public entry point, never a child of the private ticket-room
+    # category. Preserve its explicit channel overwrites while moving it; the
+    # channel-lock policy below reapplies the canonical public/read-only policy.
+    start_here = discord.utils.get(guild.categories, name="╭・𝗦𝗧𝗔𝗥𝗧 𝗛𝗘𝗥𝗘")
+    if start_here is not None and channel.category != start_here:
+        try:
+            await channel.edit(
+                category=start_here,
+                sync_permissions=False,
+                reason="RupZha: keep the public ticket panel outside private ticket rooms",
+            )
+            print(f"TICKET PANEL MOVED · #{channel.name} · public Start Here category")
+        except (discord.Forbidden, discord.HTTPException) as exc:
+            print(f"WARN ticket panel category move #{channel.name}: {exc}")
+            return None
+
     marker = "RUPZHA_TICKET_PANEL_V1"
     canonical = None
     try:
@@ -955,6 +972,12 @@ async def setup_server(guild):
             f"manage_roles={rupzha_bot_role.permissions.manage_roles} manage_channels={rupzha_bot_role.permissions.manage_channels} "
             f"manage_messages={rupzha_bot_role.permissions.manage_messages}"
         )
+        if rupzha_bot_role.id == me.top_role.id and rupzha_bot_role.permissions.administrator:
+            print(
+                "SECURITY BLOCKER · Rupzha Bot is its own highest role and currently has Administrator. "
+                "A server owner must disable Administrator in Server Settings > Roles; "
+                "the bot cannot edit its own highest role."
+            )
 
     # The bot only manages roles below its own role. Role ordering is intentionally not
     # mutated automatically here; Discord's role UI is safer for the final staff hierarchy.

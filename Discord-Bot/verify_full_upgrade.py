@@ -85,6 +85,33 @@ def should_reconcile_role(role) -> bool:
     return not getattr(role, "managed", False)
 
 
+def role_policy_failure(role_name, role, expected, bot_top_role=None):
+    if role.permissions.value == expected.value:
+        return None
+    if role_name == "Rupzha Bot" and bot_top_role is not None and role.id == bot_top_role.id:
+        if role.permissions.administrator:
+            return "bot-role:administrator-enabled:manual-owner-fix"
+        return "bot-role:top-role-permissions-mismatch:manual-owner-fix"
+    return f"role:{role_name}"
+
+
+def ticket_panel_location_failure(channel, private_category_name: str):
+    if channel is None:
+        return "ticket-panel:missing"
+    category = getattr(channel, "category", None)
+    if category is not None and getattr(category, "name", None) == private_category_name:
+        return "ticket-panel:inside-private-ticket-rooms"
+    return None
+
+
+def configured_integration_bot_names(bot_module) -> set[str]:
+    return (
+        set(bot_module.BOT_COMMAND_CHANNELS_BY_BOT)
+        | set(bot_module.DEDICATED_BOT_CHANNELS)
+        | set(bot_module.SPECIAL_BOT_CHANNEL_POLICIES)
+    )
+
+
 def build_report(guild, *, onboarding_enabled: bool | None = None) -> dict:
     import bot
 
@@ -102,12 +129,17 @@ def build_report(guild, *, onboarding_enabled: bool | None = None) -> dict:
         if dangerous_permission_names(role):
             failures.append(f"role:unexpected-power:{role.name}")
 
+    bot_top_role = getattr(getattr(guild, "me", None), "top_role", None)
     for role_name, expected in bot.ROLE_PERMISSION_POLICY.items():
         role = roles.get(role_name)
-        if role and role.permissions.value != expected.value:
-            failures.append(f"role:{role_name}")
+        if role:
+            failure = role_policy_failure(role_name, role, expected, bot_top_role)
+            if failure:
+                failures.append(failure)
 
-    failures.extend(managed_utility_bot_security_failures(roles, bot.BOT_COMMAND_CHANNELS_BY_BOT))
+    # Include utility, dedicated and integration bots. Managed roles are not
+    # editable by this bot, so findings remain explicit manual security blockers.
+    failures.extend(managed_utility_bot_security_failures(roles, configured_integration_bot_names(bot)))
 
     for category_name in REQUIRED_CATEGORIES:
         category = categories.get(category_name)
@@ -120,6 +152,11 @@ def build_report(guild, *, onboarding_enabled: bool | None = None) -> dict:
     for channel_name in REQUIRED_CHANNELS:
         if not any(_channel_tail(actual_name) == _channel_tail(channel_name) for actual_name in channels):
             failures.append(f"channel:{channel_name}:missing")
+
+    panel = next((c for c in guild.text_channels if _channel_tail(c.name) == _channel_tail("・𝗧𝗶𝗰𝗸𝗲𝘁・𝗣𝗮𝗻𝗲𝗹")), None)
+    panel_failure = ticket_panel_location_failure(panel, bot.TICKET_ROOMS_CATEGORY)
+    if panel_failure:
+        failures.append(panel_failure)
 
     # The utility-bot area has one shared room for general utilities plus
     # dedicated public rooms for OwO, Pokétwo, and Koya.
