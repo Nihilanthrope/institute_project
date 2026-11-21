@@ -2,34 +2,136 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body {
     background-color: #eeebe0;
 }
 
 .outter-heading {
     width: 100%;
-    height: 140px;
+    height: 105px;
 }
+
+/* Upper Header */
 
 .heading-upper-one {
     width: 100%;
-    height: 40%;
+    height: 35px;
     background-color: #192f15;
     padding: 8px 5%;
     display: flex;
-    gap: 100px;
+    justify-content: space-between;
+}
+
+.contact-info {
+    display: flex;
+    gap: 30px;
 }
 
 .heading-upper-one p {
     background-color: #192f15;
     color: white;
-    text-indent: 10px;
-    font-size: 20px;
+    font-size: 14px;
 }
 
-.heading-upper-one img {
-    margin-top: 12px;
-    height: 40%;
-    width: 25px;
+.heading-upper-one span {
+    color: #eeebe0;
+    margin-right: 5px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 18px;
+}
+
+.social-icons-header a {
+    color: #eeebe0;
+    text-decoration: none;
+}
+
+
+.heading-lower-one {
+    width: 100%;
+    height: 70px;
+    padding: 10px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.heading-lower-one img {
+    width: 145px;
+    height: auto;
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #192f15;
+    font-size: 13px;
+}
+.hero{
+    width: 100%;
+    height: 450PX;
+}
+.main-content-first-page{
+    width: 95%;
+    height: 100%;
+    margin: auto;
     background-color: #192f15;
-    margin-left: 35px;
+    border-radius: 20px;
+}
+.main-content-first-page img{
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+.sec-main-content{
+    width: 100%;
+    height: 800px;
+}
+.sec-main-container{
+    width: 80%;
+    height: 100%;
+    margin: auto;
+}
+.sec-main-heading{
+    margin: 0px 38.4%;
+}
+.sec-main-container h1{
+    margin:0px -1%;
+}
+.sec-main-heading-two{
+    text-align: center;
+    margin: 10px 37%;
+    color: #192f15;
+    font-size: 18px;
+}
+.sec-main-content-box{
+    height: 50%;
+    width: 100%;
+    display: flex;
+    gap: 10px;
+}
+.sec-main-content-box-1 img{
+    height: 100%;
+    width: 100%;
+   
+}
+.sec-main-content-box-2 img{
+    height: 100%;
+    width: 100%;
+}
+.sec-main-content-box-3  img{
+    height: 100%;
+    width: 100%;
+}
+.sec-main-content-box-4 img {
+    height: 100%;
+    width: 100%;
 }
