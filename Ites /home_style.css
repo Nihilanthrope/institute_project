@@ -54,13 +54,6 @@ div{
     background-color: black;
     float: left;
 }
-
-body {
-  font-family:"Inter",sans-serif;
-  margin:0; 
-  background:#f8fafc; 
-  color:#0f172a;
-}
 main {
   max-width:760px; 
   margin:0 auto; 
